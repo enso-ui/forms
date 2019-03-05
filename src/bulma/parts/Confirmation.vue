@@ -1,6 +1,6 @@
 <template>
-    <modal v-on="$listeners"
-        :show="show">
+    <modal v-bind="$attrs"
+        v-on="$listeners">
         <div class="box">
             <h5 class="subtitle is-5">
                 {{ i18n(message) }}
@@ -15,6 +15,7 @@
                             {{ i18n("Cancel") }}
                         </button>
                         <button class="button is-danger has-margin-left-small"
+                            tabindex="1"
                             @click="$emit('commit')"
                             v-focus>
                             {{ i18n("Yes") }}
@@ -43,6 +44,10 @@ export default {
             type: String,
             default: null,
         },
+    },
+
+    mounted() {
+        this.$el.querySelector('.button.is-danger').focus();
     },
 };
 
