@@ -24,20 +24,6 @@ export default {
         data: null,
     }),
 
-    computed: {
-        requestParams() {
-            if (!this.params) {
-                return null;
-            }
-
-            if (this.method === 'get') {
-                return { params: this.params };
-            }
-
-            return this.params;
-        },
-    },
-
     created() {
         this.fetch();
     },
