@@ -1,6 +1,7 @@
 <template>
     <data-provider v-bind="$attrs"
-        method="get">
+        method="get"
+        ref="provider">
         <template v-slot:default="{ data }">
             <core-form v-bind="$attrs"
                 :data="data"
@@ -46,6 +47,10 @@ export default {
     },
 
     methods: {
+        fetch() {
+            return this.ready
+                && this.$refs.provider.fetch();
+        },
         field(field) {
             return this.ready
                 && this.$refs.coreForm.field(field);

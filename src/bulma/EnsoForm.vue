@@ -49,14 +49,13 @@ export default {
                 ? this.$refs.form.data
                 : [];
         },
-        errors() {
-            return this.ready
-                ? this.$refs.form.errors
-                : [];
-        },
     },
 
     methods: {
+        fetch() {
+            return this.ready
+                && this.$refs.form.fetch();
+        },
         field(field) {
             return this.ready
                 && this.$refs.form.field(field);
