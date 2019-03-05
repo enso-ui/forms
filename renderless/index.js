@@ -1,3 +1,3 @@
-import VueSelect from '../src/renderless/VueSelect.vue';
+import VueForm from '../src/renderless/VueForm.vue';
 
-export default VueSelect;
+export default VueForm;
