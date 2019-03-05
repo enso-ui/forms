@@ -11,9 +11,9 @@
                 <template v-slot:default>
                     <form-content v-if="ready">
                         <template v-for="field in customFields"
-                            v-slot:[field.name]>
+                            v-slot:[field.name]="props">
                             <slot :name="field.name"
-                                v-bind="fieldBindings(field)"/>
+                                v-bind="props"/>
                         </template>
                     </form-content>
                     <span v-else/>
@@ -44,25 +44,12 @@ export default {
                 ? this.$refs.coreForm.customFields
                 : [];
         },
-        tabbed() {
-            return this.ready
-                && this.$refs.coreForm.tabbed;
-        },
-        tabs() {
-            return this.ready
-                ? this.$refs.coreForm.tabs
-                : [];
-        },
     },
 
     methods: {
         field(field) {
             return this.ready
                 && this.$refs.coreForm.field(field);
-        },
-        fieldBindings(field) {
-            return this.ready
-                && this.$refs.coreForm.fieldBindings(field);
         },
         param(param) {
             return this.ready
@@ -71,10 +58,6 @@ export default {
         routeParam(param) {
             return this.ready
                 && this.$refs.coreForm.routeParam(param);
-        },
-        hasVisibleFields(section) {
-            return this.ready
-                && this.$refs.coreForm.hasVisibleFields(section);
         },
     },
 };

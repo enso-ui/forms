@@ -11,10 +11,7 @@
         <slot :name="field.name"
             v-if="field.meta.custom"/>
         <component :is="fieldType(field)"
-            :errors="errors"
-            :i18n="i18n"
-            :field="field"
-            :locale="locale"
+            v-on="fieldBindings(field)"
             v-else/>
         <p class="help is-danger"
             v-if="errors.has(field.name)">
@@ -55,7 +52,7 @@ export default {
         // WysiwygField,
     },
 
-    inject: ['fieldBindings', 'fieldType', 'errors', 'i18n', 'locale'],
+    inject: ['fieldBindings', 'fieldType', 'errors', 'i18n'],
 
     props: {
         field: {

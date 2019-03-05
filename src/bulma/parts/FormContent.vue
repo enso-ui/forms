@@ -10,7 +10,8 @@
                     :section="section">
                     <template v-for="field in customFields"
                         v-slot:[field.name]>
-                        <slot :name="field.name"/>
+                        <slot :name="field.name"
+                            v-bind="fieldBindings(field)"/>
                     </template>
                 </form-section>
             </template>
@@ -21,7 +22,7 @@
                     <slot name="actions"/>
                 </template>
             </form-actions>
-        </form>
+        </div></form></template></form-section></template></form>
     </div>
 </template>
 

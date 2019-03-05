@@ -17,9 +17,8 @@
                     :section="section"
                     v-if="hasVisibleFields(section)">
                     <template v-for="field in customFields"
-                        :slot="field.name">
-                        <slot :name="field.name"
-                            v-bind="fieldBindings(field)"/>
+                        v-slot:[field.name]>
+                        <slot :name="field.name"/>
                     </template>
                 </form-section>
             </template>

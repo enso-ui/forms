@@ -17,7 +17,6 @@
         :params="params"
         :pivot-params="pivotParams"
         :track-by="field.meta.trackBy || 'id'"
-        v-on="$listeners"
         @fetch="field.meta.options = $event"
         @input="errors.clear(field.name)"/>
 </template>

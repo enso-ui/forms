@@ -10,7 +10,6 @@
         :max="field.meta.max"
         :time="field.meta.time"
         :time-only="timeOnly"
-        v-on="$listeners"
         @input="errors.clear(field.name)"
         @keydown="$emit('update');"/>
 </template>
