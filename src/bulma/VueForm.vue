@@ -1,7 +1,7 @@
 <template>
     <data-provider v-bind="$attrs"
         method="get">
-        <template v-slot:default="{ data }">
+        <template v-slot:default="{ data, }">
             <core-form v-bind="$attrs"
                 :data="data"
                 v-on="$listeners"

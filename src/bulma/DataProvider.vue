@@ -21,8 +21,7 @@ export default {
 
     data: () => ({
         loading: false,
-        response: null,
-        errors: null,
+        data: null,
     }),
 
     computed: {
@@ -40,11 +39,11 @@ export default {
     },
 
     created() {
-        this.request();
+        this.fetch();
     },
 
     methods: {
-        request() {
+        fetch() {
             this.loading = true;
 
             axios.get(this.path, { params: this.params })
@@ -53,7 +52,6 @@ export default {
                     this.loading = false;
                     this.$emit('loaded', data);
                 }).catch((error) => {
-                    this.error = error;
                     this.$emit('error', error);
                     this.loading = false;
                     this.errorHandler(error);
@@ -63,10 +61,8 @@ export default {
 
     render() {
         return this.$scopedSlots.default({
-            request: this.request,
-            loading: this.loading,
             data: this.data,
-            error: this.error,
+            loading: this.loading,
         });
     },
 };
