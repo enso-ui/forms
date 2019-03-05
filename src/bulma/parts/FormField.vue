@@ -11,7 +11,7 @@
         <slot :name="field.name"
             v-if="field.meta.custom"/>
         <component :is="fieldType(field)"
-            v-on="fieldBindings(field)"
+            v-bind="fieldBindings(field)"
             v-else/>
         <p class="help is-danger"
             v-if="errors.has(field.name)">

@@ -22,7 +22,7 @@
                     <slot name="actions"/>
                 </template>
             </form-actions>
-        </div></form></template></form-section></template></form>
+        </form>
     </div>
 </template>
 

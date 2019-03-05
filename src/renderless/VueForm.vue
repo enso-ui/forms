@@ -36,11 +36,6 @@ export default {
     }),
 
     computed: {
-        customFields() {
-            return this.data.sections
-                .reduce((fields, section) => fields
-                    .concat(section.fields.filter(field => field.meta.custom)), []);
-        },
         formData() {
             return this.data.sections
                 .reduce((fields, section) => fields
@@ -54,16 +49,6 @@ export default {
             return this.data.sections
                 .reduce((fields, section) => fields
                     .concat(section.fields), []);
-        },
-        tabs() {
-            return this.data.tabs
-                ? this.data.sections.reduce((tabs, { tab }) => {
-                    if (!tabs.includes(tab)) {
-                        tabs.push(tab);
-                    }
-                    return tabs;
-                }, [])
-                : [];
         },
         submitPath() {
             return this.data.method === 'post'
@@ -102,13 +87,6 @@ export default {
     },
 
     methods: {
-        fetch() {
-            axios.get(this.path, { params: this.params })
-                .then(({ data }) => {
-                    this.data = data.form;
-                    this.$emit('loaded', data.form);
-                }).catch(error => this.errorHandler(error));
-        },
         show() {
             const { show } = this.data.actions;
 
@@ -175,6 +153,21 @@ export default {
                     this.loading = false;
                     this.handleError(error);
                 });
+        },
+        customFields() {
+            return this.data.sections
+                .reduce((fields, section) => fields
+                    .concat(section.fields.filter(field => field.meta.custom)), []);
+        },
+        tabs() {
+            return this.data.tabs
+                ? this.data.sections.reduce((tabs, { tab }) => {
+                    if (!tabs.includes(tab)) {
+                        tabs.push(tab);
+                    }
+                    return tabs;
+                }, [])
+                : [];
         },
         columnSize(columns) {
             return `is-${parseInt(12 / columns, 10)}`;

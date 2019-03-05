@@ -11,7 +11,7 @@
                 ? columnSize(section.columns)
                 : `is-${field.column}`"
             :key="field.name">
-            <form-field v-bind="fieldBindings(field)"
+            <form-field :field="field"
                 v-on="$listeners">
                 <template v-slot:[field.name]
                     v-if="field.meta.custom">
@@ -31,7 +31,7 @@ export default {
 
     components: { FormField, Divider },
 
-    inject: ['data', 'fieldBindings', 'i18n', 'errors', 'sectionFields', 'columnSize'],
+    inject: ['data', 'i18n', 'errors', 'sectionFields', 'columnSize'],
 
     props: {
         section: {

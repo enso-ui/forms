@@ -1,7 +1,7 @@
 <template>
     <data-provider v-bind="$attrs"
         method="get">
-        <template v-slot:default="{ data, }">
+        <template v-slot:default="{ data }">
             <core-form v-bind="$attrs"
                 :data="data"
                 v-on="$listeners"
@@ -9,14 +9,13 @@
                 ref="coreForm"
                 v-if="data">
                 <template v-slot:default>
-                    <form-content v-if="ready">
+                    <form-content>
                         <template v-for="field in customFields"
                             v-slot:[field.name]="props">
                             <slot :name="field.name"
                                 v-bind="props"/>
                         </template>
                     </form-content>
-                    <span v-else/>
                 </template>
             </core-form>
             <span v-else/>
@@ -41,7 +40,7 @@ export default {
     computed: {
         customFields() {
             return this.ready
-                ? this.$refs.coreForm.customFields
+                ? this.$refs.coreForm.customFields()
                 : [];
         },
     },
