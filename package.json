@@ -1,0 +1,60 @@
+{
+  "name": "@enso-ui/forms",
+  "version": "1.0.0",
+  "description": "Forms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enso-ui/forms.git"
+  },
+  "keywords": [
+    "form",
+    "forms",
+    "json",
+    "renderless",
+    "bulma",
+    "vue"
+  ],
+  "author": "Adrian Ocneanu <aocneanu@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enso-ui/forms/issues"
+  },
+  "homepage": "https://github.com/enso-ui/forms#readme",
+  "devDependencies": {
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "cross-env": "^5.1.6",
+    "eslint": "^5.0.1",
+    "eslint-plugin-vue": "^5.0.0",
+    "laravel-mix": "3.0.0",
+    "node-sass": "^4.11.0",
+    "webpack-cli": "^3.2.1"
+  },
+  "dependencies": {
+    "@enso-ui/datepicker": "^1.0.5",
+    "@enso-ui/directives": "^1.0.1",
+    "@enso-ui/divider": "^1.0.0",
+    "@enso-ui/modal": "^1.0.4",
+    "@enso-ui/money": "^1.0.0",
+    "@enso-ui/select": "^1.0.2",
+    "@enso-ui/switch": "^1.0.2",
+    "@enso-ui/tabs": "^1.0.5",
+    "@fortawesome/fontawesome-free": "^5.2.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.2",
+    "@fortawesome/free-solid-svg-icons": "^5.2.0",
+    "@fortawesome/vue-fontawesome": "^0.1.1",
+    "accounting-js": "^1.1.1",
+    "bulma": "^0.7.2",
+    "dropzone": "^5.5.1",
+    "lodash": "^4.17.10",
+    "tiptap": "^1.13.0",
+    "tiptap-extensions": "^1.13.0",
+    "v-tooltip": "^2.0.0-rc.33",
+    "vue": "^2.5.16",
+    "vuex": "^3.1.0"
+  }
+}
