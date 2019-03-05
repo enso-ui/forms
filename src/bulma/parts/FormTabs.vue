@@ -11,12 +11,12 @@
         <tab keep-alive
             :id="tab"
             :key="tab"
-            v-for="tab in tabs">
+            v-for="tab in tabs()">
             <template v-for="(section, index) in sections(tab)">
                 <form-section :key="index"
                     :section="section"
                     v-if="hasVisibleFields(section)">
-                    <template v-for="field in customFields"
+                    <template v-for="field in customFields()"
                         v-slot:[field.name]>
                         <slot :name="field.name"/>
                     </template>

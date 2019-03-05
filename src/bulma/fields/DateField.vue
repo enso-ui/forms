@@ -1,15 +1,9 @@
 <template>
     <datepicker v-model="field.value"
-        :disabled="field.meta.disabled"
-        :format="field.meta.format"
         :is-danger="errors.has(field.name)"
         :locale="locale"
-        :placeholder="i18n(field.meta.placeholder)"
-        :week-numbers="field.meta.weekNumbers"
-        :min="field.meta.min"
-        :max="field.meta.max"
-        :time="field.meta.time"
-        :time-only="timeOnly"
+        v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
+        v-on="$listeners"
         @input="errors.clear(field.name)"
         @keydown="$emit('update');"/>
 </template>

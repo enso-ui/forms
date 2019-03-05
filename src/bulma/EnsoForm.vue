@@ -41,7 +41,7 @@ export default {
         ...mapGetters('preferences', ['lang']),
         customFields() {
             return this.ready
-                ? this.$refs.form.customFields()
+                ? this.$refs.form.customFields
                 : [];
         },
         data() {

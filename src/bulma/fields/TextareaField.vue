@@ -1,14 +1,10 @@
 <template>
     <div class="control has-icons-right">
-        <textarea :class="[
-                'textarea',
-                { 'is-danger': errors.has(field.name) },
-                { 'fixed': !field.meta.resize }
-            ]"
-            :disabled="field.meta.disabled"
+        <textarea class="textarea"
+            :class="[{ 'is-danger': errors.has(field.name) }, { 'fixed': !field.meta.resize }]"
             v-model="field.value"
-            :placeholder="i18n(field.meta.placeholder)"
-            :rows="field.meta.rows"
+            v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
+            v-on="$listeners"
             @input="errors.clear(field.name)"/>
         <error-icon v-if="errors.has(field.name)"/>
     </div>

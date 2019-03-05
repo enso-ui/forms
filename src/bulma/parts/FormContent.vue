@@ -8,7 +8,7 @@
                 v-else>
                 <form-section :key="index"
                     :section="section">
-                    <template v-for="field in customFields"
+                    <template v-for="field in customFields()"
                         v-slot:[field.name]>
                         <slot :name="field.name"
                             v-bind="fieldBindings(field)"/>
