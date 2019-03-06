@@ -2,6 +2,7 @@
     <vue-form :i18n="__"
         :locale="lang"
         :path="path"
+        v-bind="$attrs"
         v-on="$listeners"
         @ready="ready = true"
         ref="form">

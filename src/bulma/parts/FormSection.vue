@@ -2,7 +2,8 @@
     <div class="columns is-multiline has-margin-bottom-large">
         <div class="column is-12"
             v-if="section.divider">
-            <divider :title="i18n(section.title)"
+            <divider class="has-margin-bottom-medium"
+                :title="i18n(section.title)"
                 :placement="data.dividerTitlePlacement"/>
         </div>
         <div v-for="field in sectionFields(section)"
