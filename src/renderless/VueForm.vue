@@ -4,6 +4,8 @@ import Errors from '../classes/Errors';
 export default {
     name: 'CoreEnsoForm',
 
+    inject: ['errorHandler'],
+
     props: {
         errorHandler: {
             type: Function,
@@ -147,7 +149,7 @@ export default {
                         return;
                     }
 
-                    this.handleError(error);
+                    this.errorHandler(error);
                 });
         },
         destroy() {
@@ -168,7 +170,7 @@ export default {
                     }
                 }).catch((error) => {
                     this.loading = false;
-                    this.handleError(error);
+                    this.errorHandler(error);
                 });
         },
         customFields() {

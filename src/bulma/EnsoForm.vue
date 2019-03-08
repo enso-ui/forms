@@ -1,5 +1,6 @@
 <template>
-    <vue-form :i18n="__"
+    <vue-form :error-handler="errorHandler"
+        :i18n="i18n"
         :locale="lang"
         :path="path"
         v-bind="$attrs"
@@ -22,6 +23,8 @@ import VueForm from './VueForm.vue';
 
 export default {
     name: 'EnsoForm',
+
+    inject: ['errorHandler', 'i18n'],
 
     components: { VueForm },
 
