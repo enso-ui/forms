@@ -34,8 +34,8 @@ export default {
     name: 'FormTabs',
 
     inject: [
-        'data', 'errorCount', 'fieldBindings', 'hasVisibleFields',
-        'i18n', 'sections', 'customFields', 'tabs',
+        'errorCount', 'fieldBindings', 'hasVisibleFields', 'i18n',
+        'sections', 'customFields', 'tabs',
     ],
 
     components: { Tabs, Tab, FormSection },

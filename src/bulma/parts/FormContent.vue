@@ -3,8 +3,8 @@
         <form-header/>
         <form class="is-marginless">
             <form-tabs v-on="$listeners"
-                v-if="data.tabs"/>
-            <template v-for="(section, index) in data.sections"
+                v-if="state.data.tabs"/>
+            <template v-for="(section, index) in state.data.sections"
                 v-else>
                 <form-section :key="index"
                     :section="section">
@@ -39,7 +39,7 @@ export default {
         FormHeader, FormTabs, FormActions, FormSection,
     },
 
-    inject: ['data', 'fieldBindings', 'customFields'],
+    inject: ['state', 'fieldBindings', 'customFields'],
 };
 </script>
 

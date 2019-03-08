@@ -102,7 +102,7 @@ export default {
 
     components: { Confirmation },
 
-    inject: ['data', 'errors', 'i18n', 'submit', 'show', 'create', 'destroy'],
+    inject: ['state', 'errors', 'i18n', 'submit', 'show', 'create', 'destroy'],
 
     data: () => ({
         confirmation: false,
@@ -111,7 +111,7 @@ export default {
 
     computed: {
         actions() {
-            return this.data.actions;
+            return this.state.data.actions;
         },
     },
 };
