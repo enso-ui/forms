@@ -1,12 +1,12 @@
 <template>
     <h5 class="title is-5 form-title"
-        v-if="data.icon || data.title">
+        v-if="state.data.icon || state.data.title">
         <span class="icon"
-            v-if="data.icon">
-            <fa :icon="data.icon"/>
+            v-if="state.data.icon">
+            <fa :icon="state.data.icon"/>
         </span>
-        <span v-if="data.title">
-            {{ i18n(data.title) }}
+        <span v-if="state.data.title">
+            {{ i18n(state.data.title) }}
         </span>
     </h5>
 </template>
@@ -15,7 +15,7 @@
 export default {
     name: 'FormHeader',
 
-    inject: ['data'],
+    inject: ['state'],
 };
 </script>
 

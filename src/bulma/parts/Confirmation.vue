@@ -15,7 +15,6 @@
                             {{ i18n("Cancel") }}
                         </button>
                         <button class="button is-danger has-margin-left-small"
-                            tabindex="1"
                             @click="$emit('commit')"
                             v-focus>
                             {{ i18n("Yes") }}

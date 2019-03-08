@@ -2,8 +2,9 @@
     <div class="columns is-multiline has-margin-bottom-large">
         <div class="column is-12"
             v-if="section.divider">
-            <divider :title="i18n(section.title)"
-                :placement="data.dividerTitlePlacement"/>
+            <divider class="has-margin-bottom-medium"
+                :title="i18n(section.title)"
+                :placement="state.data.dividerTitlePlacement"/>
         </div>
         <div v-for="field in sectionFields(section)"
             class="column"
@@ -31,7 +32,7 @@ export default {
 
     components: { FormField, Divider },
 
-    inject: ['data', 'i18n', 'errors', 'sectionFields', 'columnSize'],
+    inject: ['state', 'i18n', 'errors', 'sectionFields', 'columnSize'],
 
     props: {
         section: {

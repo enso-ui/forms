@@ -1,38 +1,29 @@
 <template>
-    <data-provider v-bind="$attrs"
-        method="get"
-        ref="provider">
-        <template v-slot:default="{ data }">
-            <core-form v-bind="$attrs"
-                :data="data"
-                v-on="$listeners"
-                @ready="ready = true"
-                ref="coreForm"
-                v-if="data">
-                <template v-slot:default>
-                    <form-content>
-                        <template v-for="field in customFields"
-                            v-slot:[field.name]="props">
-                            <slot :name="field.name"
-                                v-bind="props"/>
-                        </template>
-                    </form-content>
+    <core-form v-bind="$attrs"
+        v-on="$listeners"
+        @ready="ready = true"
+        ref="coreForm">
+        <template v-slot:default
+            v-if="ready">
+            <form-content>
+                <template v-for="field in customFields"
+                    v-slot:[field.name]="props">
+                    <slot :name="field.name"
+                        v-bind="props"/>
                 </template>
-            </core-form>
-            <span v-else/>
+            </form-content>
         </template>
-    </data-provider>
+    </core-form>
 </template>
 
 <script>
-import DataProvider from './DataProvider.vue';
 import CoreForm from '../renderless/VueForm.vue';
 import FormContent from './parts/FormContent.vue';
 
 export default {
     name: 'VueForm',
 
-    components: { DataProvider, CoreForm, FormContent },
+    components: { CoreForm, FormContent },
 
     data: () => ({
         ready: false,
@@ -44,12 +35,17 @@ export default {
                 ? this.$refs.coreForm.customFields()
                 : [];
         },
+        data() {
+            return this.ready
+                ? this.$refs.coreForm.state.data
+                : [];
+        },
     },
 
     methods: {
         fetch() {
             return this.ready
-                && this.$refs.provider.fetch();
+                && this.$refs.coreForm.fetch();
         },
         field(field) {
             return this.ready

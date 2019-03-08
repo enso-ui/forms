@@ -4,11 +4,9 @@ import Errors from '../classes/Errors';
 export default {
     name: 'CoreForm',
 
+    inject: ['errorHandler'],
+
     props: {
-        data: {
-            type: Object,
-            required: true,
-        },
         errorHandler: {
             type: Function,
             default: (error) => {
@@ -35,11 +33,15 @@ export default {
 
     data: () => ({
         errors: new Errors(),
+        loading: false,
+        state: {
+            data: null,
+        },
     }),
 
     computed: {
         formData() {
-            return this.data.sections
+            return this.state.data.sections
                 .reduce((fields, section) => fields
                     .concat(section.fields), [])
                 .reduce((object, field) => {
@@ -48,20 +50,20 @@ export default {
                 }, { _params: this.params });
         },
         flatten() {
-            return this.data.sections
+            return this.state.data.sections
                 .reduce((fields, section) => fields
                     .concat(section.fields), []);
         },
         submitPath() {
-            return this.data.method === 'post'
-                ? this.data.actions.store.path
-                : this.data.actions.update.path;
+            return this.state.data.method === 'post'
+                ? this.state.data.actions.store.path
+                : this.state.data.actions.update.path;
         },
     },
 
     provide() {
         return {
-            data: this.data,
+            state: this.state,
             errors: this.errors,
             errorCount: this.errorCount,
             fieldBindings: this.fieldBindings,
@@ -84,33 +86,48 @@ export default {
         };
     },
 
-    mounted() {
-        this.$emit('ready');
+    created() {
+        this.fetch();
     },
 
     methods: {
+        fetch() {
+            this.loading = true;
+
+            axios.get(this.path, { params: this.params })
+                .then(({ data }) => {
+                    this.state.data = data.form;
+                    this.loading = false;
+                    this.$emit('ready');
+                    this.$emit('loaded', data);
+                }).catch((error) => {
+                    this.$emit('error', error);
+                    this.loading = false;
+                    this.errorHandler(error);
+                });
+        },
         show() {
-            const { show } = this.data.actions;
+            const { show } = this.state.data.actions;
 
             this.$emit('show');
 
             this.$router.push({
                 name: show.route,
-                params: this.data.routeParams,
+                params: this.state.data.routeParams,
             });
         },
         create() {
             this.$emit('create');
 
             this.$router.push({
-                name: this.data.actions.create.route,
-                params: this.data.routeParams,
+                name: this.state.data.actions.create.route,
+                params: this.state.data.routeParams,
             });
         },
         submit() {
             this.loading = true;
 
-            axios[this.data.method](this.submitPath, this.formData)
+            axios[this.state.data.method](this.submitPath, this.formData)
                 .then(({ data }) => {
                     this.loading = false;
                     this.$toastr.success(data.message);
@@ -119,7 +136,7 @@ export default {
                     if (data.redirect) {
                         this.$router.push({
                             name: data.redirect,
-                            params: { ...data.param, ...this.data.routeParams },
+                            params: { ...data.param, ...this.state.data.routeParams },
                         });
                     }
                 }).catch((error) => {
@@ -132,14 +149,14 @@ export default {
                         return;
                     }
 
-                    this.handleError(error);
+                    this.errorHandler(error);
                 });
         },
         destroy() {
             this.modal = false;
             this.loading = true;
 
-            axios.delete(this.data.actions.destroy.path)
+            axios.delete(this.state.data.actions.destroy.path)
                 .then(({ data }) => {
                     this.loading = false;
                     this.$toastr.success(data.message);
@@ -148,22 +165,22 @@ export default {
                     if (data.redirect) {
                         this.$router.push({
                             name: data.redirect,
-                            params: this.data.routeParams,
+                            params: this.state.data.routeParams,
                         });
                     }
                 }).catch((error) => {
                     this.loading = false;
-                    this.handleError(error);
+                    this.errorHandler(error);
                 });
         },
         customFields() {
-            return this.data.sections
+            return this.state.data.sections
                 .reduce((fields, section) => fields
                     .concat(section.fields.filter(field => field.meta.custom)), []);
         },
         tabs() {
-            return this.data.tabs
-                ? this.data.sections.reduce((tabs, { tab }) => {
+            return this.state.data.tabs
+                ? this.state.data.sections.reduce((tabs, { tab }) => {
                     if (!tabs.includes(tab)) {
                         tabs.push(tab);
                     }
@@ -184,18 +201,18 @@ export default {
             }, []).filter(({ name }) => this.errors.has(name)).length;
         },
         sections(tab) {
-            return this.data.sections
+            return this.state.data.sections
                 .filter(section => section.tab === tab);
         },
         field(field) {
-            return this.flatten()
+            return this.flatten
                 .find(item => item.name === field);
         },
         param(param) {
-            return this.data.params[param];
+            return this.state.data.params[param];
         },
         routeParam(param) {
-            return this.data.routeParams[param];
+            return this.state.data.routeParams[param];
         },
         hasVisibleFields(section) {
             return section.fields
