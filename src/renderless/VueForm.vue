@@ -2,6 +2,8 @@
 import Errors from '../classes/Errors';
 
 export default {
+    name: 'CoreForm',
+
     props: {
         data: {
             type: Object,

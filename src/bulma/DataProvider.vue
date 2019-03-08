@@ -2,6 +2,9 @@
 const { axios } = window;
 
 export default {
+
+    name: 'DataProvider',
+
     props: {
         errorHandler: {
             type: Function,

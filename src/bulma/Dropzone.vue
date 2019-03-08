@@ -10,6 +10,9 @@ import Dropzone from 'dropzone';
 Dropzone.autoDiscover = false;
 
 export default {
+
+    name: 'Dropzone',
+
     props: {
         options: {
             type: Object,

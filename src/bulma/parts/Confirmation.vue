@@ -33,6 +33,8 @@ import { focus } from '@enso-ui/directives';
 import { Modal } from '@enso-ui/modal/bulma';
 
 export default {
+    name: 'Confirmation',
+
     directives: { focus },
 
     components: { Modal },

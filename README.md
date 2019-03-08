@@ -43,7 +43,7 @@ import { EnsoForm, VueForm } from '@enso-ui/forms/bulma';
 - `TimeField`,
 
 `@enso-ui/forms/renderless`:
-- `VueForm`,
+- `CoreForm`,
 
 ## Contributions
 
