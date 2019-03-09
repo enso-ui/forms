@@ -7,6 +7,7 @@
                 :placement="state.data.dividerTitlePlacement"/>
         </div>
         <slot :name="section.slot"
+            :section="section"
             v-if="section.columns === 'slot'"/>
         <div v-for="field in sectionFields(section)"
             class="column"

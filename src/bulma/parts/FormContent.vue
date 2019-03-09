@@ -13,10 +13,10 @@
                         <slot :name="field.name"
                             v-bind="fieldBindings(field)"/>
                     </template>
-                    <template v-for="section in customSections()"
-                        v-slot:[section.slot]>
+                    <template v-if="section.columns === 'slot'"
+                        v-slot:[section.slot]="props">
                         <slot :name="section.slot"
-                            :section="section"/>
+                            v-bind="props"/>
                     </template>
                 </form-section>
             </template>

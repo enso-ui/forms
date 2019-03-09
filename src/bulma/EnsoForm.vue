@@ -13,9 +13,9 @@
                 v-bind="props"/>
         </template>
         <template v-for="section in customSections"
-            v-slot:[section.slot]>
+            v-slot:[section.slot]="props">
             <slot :name="section.slot"
-                :section="section"/>
+                v-bind="props"/>
         </template>
         <template v-slot:actions>
             <slot name="actions"/>
