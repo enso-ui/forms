@@ -5,8 +5,7 @@
         @init="$refs.editor.setContent(typeof value === 'string' ? value : '')"
         @update="$emit('input', $event.getHTML())"
         ref="editor">
-        <div slot="menubar"
-            slot-scope="{ nodes, marks, focus }"
+        <div v-slot:menubar="{ nodes, marks, focus }"
             class="menubar">
             <div v-if="nodes && marks">
                 <a :class="[
@@ -161,8 +160,7 @@
             </div>
         </div>
 
-        <div slot="menububble"
-            slot-scope="{ marks, focus }"
+        <div v-slot:menububble="{ marks, focus }"
             class="bubble">
             <template v-if="marks">
                 <form class="link-form"
@@ -184,8 +182,7 @@
             </template>
         </div>
 
-        <div slot="content"
-            slot-scope="props"
+        <div v-slot:content="props"
             :class="['content wysiwyg-content', { 'is-danger': hasError }]"/>
     </editor>
 </template>
