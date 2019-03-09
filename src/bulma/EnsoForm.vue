@@ -12,7 +12,14 @@
             <slot :name="field.name"
                 v-bind="props"/>
         </template>
-        <slot v-slot:actions name="actions"/>
+        <template v-for="section in customSections"
+            v-slot:[section.slot]>
+            <slot :name="section.slot"
+                :section="section"/>
+        </template>
+        <template v-slot:actions>
+            <slot name="actions"/>
+        </template>
     </vue-form>
 </template>
 
@@ -46,6 +53,11 @@ export default {
         customFields() {
             return this.ready
                 ? this.$refs.form.customFields
+                : [];
+        },
+        customSections() {
+            return this.ready
+                ? this.$refs.form.customSections
                 : [];
         },
         data() {

@@ -13,12 +13,16 @@
                         <slot :name="field.name"
                             v-bind="fieldBindings(field)"/>
                     </template>
+                    <template v-for="section in customSections()"
+                        v-slot:[section.slot]>
+                        <slot :name="section.slot"
+                            :section="section"/>
+                    </template>
                 </form-section>
             </template>
-            <slot name="body"/>
             <form-actions class="has-margin-top-large"
                 v-on="$listeners">
-                <template slot="actions">
+                <template v-slot:actions>
                     <slot name="actions"/>
                 </template>
             </form-actions>
@@ -39,7 +43,7 @@ export default {
         FormHeader, FormTabs, FormActions, FormSection,
     },
 
-    inject: ['state', 'fieldBindings', 'customFields'],
+    inject: ['state', 'fieldBindings', 'customFields', 'customSections'],
 };
 </script>
 

@@ -2,7 +2,7 @@
 import Errors from '../classes/Errors';
 
 export default {
-    name: 'CoreEnsoForm',
+    name: 'CoreForm',
 
     inject: ['errorHandler'],
 
@@ -63,26 +63,27 @@ export default {
 
     provide() {
         return {
-            state: this.state,
+            columnSize: this.columnSize,
+            create: this.create,
+            customFields: this.customFields,
+            customSections: this.customSections,
+            destroy: this.destroy,
             errors: this.errors,
             errorCount: this.errorCount,
             fieldBindings: this.fieldBindings,
+            fieldType: this.fieldType,
+            focusError: this.focusError,
+            hasVisibleFields: this.hasVisibleFields,
+            i18n: this.i18n,
+            locale: this.locale,
+            params: this.params,
             sections: this.sections,
-            columnSize: this.columnSize,
+            show: this.show,
+            state: this.state,
             sectionFields: this.sectionFields,
+            submit: this.submit,
             tabbed: this.tabbed,
             tabs: this.tabs,
-            locale: this.locale,
-            i18n: this.i18n,
-            hasVisibleFields: this.hasVisibleFields,
-            customFields: this.customFields,
-            params: this.params,
-            focusError: this.focusError,
-            submit: this.submit,
-            show: this.show,
-            create: this.create,
-            destroy: this.destroy,
-            fieldType: this.fieldType,
         };
     },
 
@@ -177,6 +178,10 @@ export default {
             return this.state.data.sections
                 .reduce((fields, section) => fields
                     .concat(section.fields.filter(field => field.meta.custom)), []);
+        },
+        customSections() {
+            return this.state.data.sections
+                .filter(({ columns }) => columns === 'slot');
         },
         tabs() {
             return this.state.data.tabs
