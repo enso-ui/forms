@@ -27,7 +27,6 @@
 </template>
 
 <script>
-
 import { focus } from '@enso-ui/directives';
 import { Modal } from '@enso-ui/modal/bulma';
 
@@ -51,5 +50,4 @@ export default {
         this.$el.querySelector('.button.is-danger').focus();
     },
 };
-
 </script>

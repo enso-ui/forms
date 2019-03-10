@@ -24,16 +24,15 @@
 </template>
 
 <script>
-
 import { mapGetters } from 'vuex';
 import VueForm from './VueForm.vue';
 
 export default {
     name: 'EnsoForm',
 
-    inject: ['errorHandler', 'i18n'],
-
     components: { VueForm },
+
+    inject: ['errorHandler', 'i18n'],
 
     props: {
         path: {
@@ -86,5 +85,4 @@ export default {
         },
     },
 };
-
 </script>

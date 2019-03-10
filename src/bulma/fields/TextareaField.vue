@@ -11,7 +11,6 @@
 </template>
 
 <script>
-
 import ErrorIcon from '../parts/ErrorIcon.vue';
 
 export default {
@@ -28,7 +27,6 @@ export default {
         },
     },
 };
-
 </script>
 
 <style lang="scss" scoped>

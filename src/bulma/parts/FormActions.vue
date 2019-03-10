@@ -88,7 +88,6 @@
 </template>
 
 <script>
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faTrashAlt, faEye, faPlus, faCheck, faArrowLeft,
@@ -115,5 +114,4 @@ export default {
         },
     },
 };
-
 </script>

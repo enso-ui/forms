@@ -21,7 +21,6 @@
 </template>
 
 <script>
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { VTooltip } from 'v-tooltip';
@@ -32,7 +31,7 @@ import DateField from '../fields/DateField.vue';
 import TimeField from '../fields/TimeField.vue';
 import SelectField from '../fields/SelectField.vue';
 import TextareaField from '../fields/TextareaField.vue';
-// import WysiwygField from '../fields/WysiwygField.vue';
+import WysiwygField from '../fields/WysiwygField.vue';
 
 library.add(faInfoCircle);
 
@@ -49,7 +48,7 @@ export default {
         DateField,
         TimeField,
         TextareaField,
-        // WysiwygField,
+        WysiwygField,
     },
 
     inject: ['fieldBindings', 'fieldType', 'errors', 'i18n'],

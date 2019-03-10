@@ -7,8 +7,7 @@
 </template>
 
 <script>
-
-import Wysiwyg from '../Wysiwyg.vue';
+import Wysiwyg from '@enso-ui/wysiwyg/bulma';
 
 export default {
     name: 'WysiwygField',
@@ -24,5 +23,4 @@ export default {
         },
     },
 };
-
 </script>

@@ -33,11 +33,11 @@ import FormSection from './FormSection.vue';
 export default {
     name: 'FormTabs',
 
-    inject: [
-        'errorCount', 'fieldBindings', 'hasVisibleFields', 'i18n',
-        'sections', 'customFields', 'tabs',
-    ],
-
     components: { Tabs, Tab, FormSection },
+
+    inject: [
+        'errorCount', 'fieldBindings', 'hasVisibleFields',
+        'i18n', 'sections', 'customFields', 'tabs',
+    ],
 };
 </script>
