@@ -102,7 +102,6 @@ export default {
                     this.$emit('ready');
                     this.$emit('loaded', data);
                 }).catch((error) => {
-                    this.$emit('error', error);
                     this.loading = false;
                     this.errorHandler(error);
                 });
