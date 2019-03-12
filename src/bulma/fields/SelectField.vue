@@ -8,7 +8,8 @@
         v-bind="field.meta"
         v-on="$listeners"
         @fetch="field.meta.options = $event"
-        @input="errors.clear(field.name)"/>
+        @input="errors.clear(field.name)"
+        ref="select"/>
 </template>
 
 <script>
@@ -43,6 +44,12 @@ export default {
         pivotParams: {
             type: Object,
             default: () => ({}),
+        },
+    },
+
+    methods: {
+        clear() {
+            this.$refs.select.clear();
         },
     },
 };
