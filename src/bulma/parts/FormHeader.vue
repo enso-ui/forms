@@ -15,7 +15,7 @@
 export default {
     name: 'FormHeader',
 
-    inject: ['state'],
+    inject: ['state', 'i18n'],
 };
 </script>
 

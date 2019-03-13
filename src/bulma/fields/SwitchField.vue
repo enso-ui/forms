@@ -27,3 +27,9 @@ export default {
     },
 };
 </script>
+
+<style>
+    .field .vue-switch {
+        margin-top: 0.4em;
+    }
+</style>
