@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import CoreForm from '../renderless/VueForm.vue';
+import CoreForm from '../renderless/CoreForm.vue';
 import FormContent from './parts/FormContent.vue';
 
 export default {

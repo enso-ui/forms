@@ -1,3 +1,3 @@
-import VueForm from '../src/renderless/VueForm.vue';
+import CoreForm from '../src/renderless/CoreForm.vue';
 
-export default VueForm;
+export default CoreForm;
