@@ -82,7 +82,7 @@
         <confirmation :show="confirmation"
             :message="actions.destroy.button.message"
             @close="confirmation = false"
-            @commit="destroy()"
+            @commit="confirmation = false; destroy()"
             v-if="confirmation && actions.destroy"/>
     </div>
 </template>
