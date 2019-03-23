@@ -131,7 +131,7 @@ export default {
                 .then(({ data }) => {
                     this.loading = false;
                     this.$toastr.success(data.message);
-                    this.$emit('submit');
+                    this.$emit('submit', data);
 
                     if (data.redirect) {
                         this.$router.push({
