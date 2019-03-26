@@ -13,6 +13,7 @@
             :errors="errors"
             :i18n="i18n"
             :locale="locale"
+            v-bind="$attrs"
             v-on="$listeners"/>
         <p class="help is-danger"
             v-if="errors.has(field.name)">
