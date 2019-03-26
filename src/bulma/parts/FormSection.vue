@@ -16,13 +16,11 @@
                 : `is-${field.column}`"
             :key="field.name"
             v-else>
+            <slot :name="field.name"
+                v-if="field.meta.custom"/>
             <form-field :field="field"
-                v-on="$listeners">
-                <template v-slot:[field.name]
-                    v-if="field.meta.custom">
-                    <slot :name="field.name"/>
-                </template>
-            </form-field>
+                v-on="$listeners"
+                v-else/>
         </div>
     </div>
 </template>

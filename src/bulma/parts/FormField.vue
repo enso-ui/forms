@@ -8,11 +8,12 @@
                 <fa icon="info-circle" size="xs"/>
             </span>
         </label>
-        <slot :name="field.name"
-            v-if="field.meta.custom"/>
         <component :is="fieldType(field)"
-            v-bind="fieldBindings(field)"
-            v-else/>
+            :field="field"
+            :errors="errors"
+            :i18n="i18n"
+            :locale="locale"
+            v-on="$listeners"/>
         <p class="help is-danger"
             v-if="errors.has(field.name)">
             {{ errors.get(field.name) }}
@@ -51,7 +52,7 @@ export default {
         WysiwygField,
     },
 
-    inject: ['fieldBindings', 'fieldType', 'errors', 'i18n'],
+    inject: ['fieldType', 'errors', 'i18n', 'locale', 'state'],
 
     props: {
         field: {
