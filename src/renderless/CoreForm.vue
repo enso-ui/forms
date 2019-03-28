@@ -81,6 +81,7 @@ export default {
             show: this.show,
             state: this.state,
             sectionFields: this.sectionFields,
+            sectionCustomFields: this.sectionCustomFields,
             submit: this.submit,
             tabbed: this.tabbed,
             tabs: this.tabs,
@@ -197,6 +198,9 @@ export default {
         },
         sectionFields(section) {
             return section.fields.filter(field => !field.meta.hidden);
+        },
+        sectionCustomFields(section) {
+            return section.fields.filter(field => !field.meta.hidden && field.meta.custom);
         },
         errorCount(tab) {
             return this.sections(tab).reduce((fields, section) => {

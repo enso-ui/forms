@@ -13,8 +13,9 @@
             <template v-for="(section, index) in state.data.sections"
                 v-else>
                 <form-section :key="index"
-                    :section="section">
-                    <template v-for="field in customFields()"
+                    :section="section"
+                    v-if="hasVisibleFields(section)">
+                    <template v-for="field in sectionCustomFields(section)"
                         v-slot:[field.name]>
                         <slot :name="field.name"
                             v-bind="fieldBindings(field)"/>
@@ -49,7 +50,9 @@ export default {
         FormHeader, FormTabs, FormActions, FormSection,
     },
 
-    inject: ['state', 'fieldBindings', 'customFields', 'customSections'],
+    inject: [
+        'state', 'fieldBindings', 'customFields', 'sectionCustomFields', 'hasVisibleFields',
+    ],
 };
 </script>
 

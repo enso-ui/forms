@@ -16,9 +16,10 @@
                 <form-section :key="index"
                     :section="section"
                     v-if="hasVisibleFields(section)">
-                    <template v-for="field in customFields()"
+                    <template v-for="field in sectionCustomFields(section)"
                         v-slot:[field.name]>
-                        <slot :name="field.name"/>
+                        <slot :name="field.name"
+                            v-bind="fieldBindings(field)"/>
                     </template>
                 </form-section>
             </template>
@@ -37,7 +38,7 @@ export default {
 
     inject: [
         'errorCount', 'fieldBindings', 'hasVisibleFields',
-        'i18n', 'sections', 'customFields', 'tabs',
+        'i18n', 'sections', 'sectionCustomFields', 'tabs',
     ],
 };
 </script>
