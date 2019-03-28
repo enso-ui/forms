@@ -50,7 +50,7 @@
         <slot name="actions"/>
         <a :class="[
                 'button is-pulled-right',
-                actions.store.button.class, { 'is-loading': loading }
+                actions.store.button.class, { 'is-loading': state.loading }
             ]"
             :disabled="actions.store.forbidden || errors.any()"
             @click="submit"
@@ -65,7 +65,7 @@
         </a>
         <a :class="[
                 'button is-pulled-right',
-                actions.update.button.class, { 'is-loading': loading }
+                actions.update.button.class, { 'is-loading': state.loading }
             ]"
             :disabled="actions.update.forbidden || errors.any()"
             @click="submit"
@@ -105,7 +105,6 @@ export default {
 
     data: () => ({
         confirmation: false,
-        loading: false,
     }),
 
     computed: {

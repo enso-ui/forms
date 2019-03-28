@@ -33,8 +33,8 @@ export default {
 
     data: () => ({
         errors: new Errors(),
-        loading: false,
         state: {
+            loading: false,
             data: null,
         },
     }),
@@ -94,16 +94,16 @@ export default {
 
     methods: {
         fetch() {
-            this.loading = true;
+            this.state.loading = true;
 
             axios.get(this.path, { params: this.params })
                 .then(({ data }) => {
                     this.state.data = data.form;
-                    this.loading = false;
+                    this.state.loading = false;
                     this.$emit('ready');
                     this.$emit('loaded', data);
                 }).catch((error) => {
-                    this.loading = false;
+                    this.state.loading = false;
                     this.errorHandler(error);
                 });
         },
@@ -126,11 +126,11 @@ export default {
             });
         },
         submit() {
-            this.loading = true;
+            this.state.loading = true;
 
             axios[this.state.data.method](this.submitPath, this.formData)
                 .then(({ data }) => {
-                    this.loading = false;
+                    this.state.loading = false;
                     this.$toastr.success(data.message);
                     this.$emit('submit', data);
 
@@ -142,7 +142,7 @@ export default {
                     }
                 }).catch((error) => {
                     const { status, data } = error.response;
-                    this.loading = false;
+                    this.state.loading = false;
 
                     if (status === 422) {
                         this.errors.set(data.errors);
@@ -155,11 +155,11 @@ export default {
         },
         destroy() {
             this.modal = false;
-            this.loading = true;
+            this.state.loading = true;
 
             axios.delete(this.state.data.actions.destroy.path)
                 .then(({ data }) => {
-                    this.loading = false;
+                    this.state.loading = false;
                     this.$toastr.success(data.message);
                     this.$emit('destroy');
 
@@ -170,7 +170,7 @@ export default {
                         });
                     }
                 }).catch((error) => {
-                    this.loading = false;
+                    this.state.loading = false;
                     this.errorHandler(error);
                 });
         },
