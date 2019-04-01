@@ -53,6 +53,11 @@ export default {
                 ? this.$refs.coreForm.state.data
                 : [];
         },
+        errors() {
+            return this.ready
+                ? this.$refs.coreForm.errors
+                : [];
+        },
     },
 
     methods: {

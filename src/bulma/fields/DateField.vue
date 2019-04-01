@@ -2,6 +2,7 @@
     <datepicker v-model="field.value"
         :is-danger="errors.has(field.name)"
         :locale="locale"
+        :time-only="timeOnly"
         v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
         v-on="$listeners"
         @input="errors.clear(field.name)"

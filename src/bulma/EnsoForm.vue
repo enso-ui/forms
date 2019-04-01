@@ -64,6 +64,11 @@ export default {
                 ? this.$refs.form.data
                 : [];
         },
+        errors() {
+            return this.ready
+                ? this.$refs.form.errors
+                : [];
+        },
     },
 
     methods: {
