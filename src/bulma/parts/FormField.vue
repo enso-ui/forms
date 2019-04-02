@@ -14,6 +14,7 @@
             :i18n="i18n"
             :locale="locale"
             v-bind="$attrs"
+            @changed="autosave"
             v-on="$listeners"/>
         <p class="help is-danger"
             v-if="errors.has(field.name)">
@@ -23,6 +24,7 @@
 </template>
 
 <script>
+import debounce from 'lodash/debounce';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { VTooltip } from 'v-tooltip';
@@ -53,12 +55,24 @@ export default {
         WysiwygField,
     },
 
-    inject: ['fieldType', 'errors', 'i18n', 'locale', 'state'],
+    inject: ['fieldType', 'errors', 'i18n', 'locale', 'state', 'submit'],
 
     props: {
         field: {
             type: Object,
             required: true,
+        },
+    },
+
+    created() {
+        this.autosave = debounce(this.autosave, this.state.data.debounce);
+    },
+
+    methods: {
+        autosave() {
+            if (this.state.data.autosave) {
+                this.submit();
+            }
         },
     },
 };

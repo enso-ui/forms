@@ -3,8 +3,7 @@
         v-model="field.value"
         :disabled="field.meta.disabled || field.meta.readonly"
         v-on="$listeners"
-        @click="$emit('update')"
-        @input="errors.clear(field.name)"/>
+        @input="errors.clear(field.name); $emit('changed')"/>
 </template>
 
 <script>

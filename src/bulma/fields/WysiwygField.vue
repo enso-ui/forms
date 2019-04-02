@@ -3,7 +3,7 @@
         :readonly="field.meta.readonly"
         :has-error="errors.has(field.name)"
         v-on="$listeners"
-        @input="errors.clear(field.name)"/>
+        @input="errors.clear(field.name); $emit('changed')"/>
 </template>
 
 <script>

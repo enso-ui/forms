@@ -131,7 +131,11 @@ export default {
             axios[this.state.data.method](this.submitPath, this.formData)
                 .then(({ data }) => {
                     this.state.loading = false;
-                    this.$toastr.success(data.message);
+
+                    if (data.message) {
+                        this.$toastr.success(data.message);
+                    }
+
                     this.$emit('submit', data);
 
                     if (data.redirect) {
