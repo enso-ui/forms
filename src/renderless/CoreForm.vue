@@ -21,6 +21,10 @@ export default {
             type: String,
             default: 'en',
         },
+        isRTL: {
+            type: Boolean,
+            default: false,
+        },
         params: {
             type: Object,
             default: null,
@@ -75,6 +79,7 @@ export default {
             focusError: this.focusError,
             hasVisibleFields: this.hasVisibleFields,
             i18n: this.i18n,
+            isRTL: this.isRTL,
             locale: this.locale,
             params: this.params,
             sections: this.sections,

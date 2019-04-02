@@ -1,6 +1,7 @@
 <template>
     <vue-form :error-handler="errorHandler"
         :i18n="i18n"
+        :isRTL="isRTL"
         :locale="lang"
         :path="path"
         v-bind="$attrs"
@@ -48,7 +49,7 @@ export default {
     }),
 
     computed: {
-        ...mapGetters('preferences', ['lang']),
+        ...mapGetters('preferences', ['lang','isRTL']),
         customFields() {
             return this.ready
                 ? this.$refs.form.customFields

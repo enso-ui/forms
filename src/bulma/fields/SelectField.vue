@@ -2,6 +2,7 @@
     <vue-select v-model="field.value"
         :has-error="errors.has(field.name)"
         :i18n="i18n"
+        :isRTL="isRTL"
         :params="params"
         :pivot-params="pivotParams"
         :custom-params="customParams"
@@ -32,6 +33,10 @@ export default {
         i18n: {
             type: Function,
             required: true,
+        },
+        isRTL: {
+            type: Boolean,
+            default: false,
         },
         customParams: {
             type: Object,

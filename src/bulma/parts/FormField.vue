@@ -12,6 +12,7 @@
             :field="field"
             :errors="errors"
             :i18n="i18n"
+            :isRTL="isRTL"
             :locale="locale"
             v-bind="$attrs"
             v-on="$listeners"/>
@@ -53,7 +54,7 @@ export default {
         WysiwygField,
     },
 
-    inject: ['fieldType', 'errors', 'i18n', 'locale', 'state'],
+    inject: ['fieldType', 'errors', 'i18n', 'locale', 'state', 'isRTL'],
 
     props: {
         field: {
