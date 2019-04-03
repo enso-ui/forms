@@ -21,6 +21,10 @@ export default {
             type: String,
             default: 'en',
         },
+        template: {
+            type: Object,
+            default: null,
+        },
         params: {
             type: Object,
             default: null,
@@ -89,10 +93,20 @@ export default {
     },
 
     created() {
-        this.fetch();
+        this.init();
     },
 
     methods: {
+        init() {
+            if (this.template) {
+                this.state.data = this.template;
+                this.$emit('ready');
+
+                return;
+            }
+
+            this.fetch();
+        },
         fetch() {
             this.state.loading = true;
 
