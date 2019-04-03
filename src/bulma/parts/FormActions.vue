@@ -49,7 +49,7 @@
         </a>
         <slot name="actions"/>
         <a :class="[
-                'button',(isRTL ? ' is-pulled-left': ' is-pulled-right'),
+                'button is-pulled-right',
                 actions.store.button.class, { 'is-loading': state.loading }
             ]"
             :disabled="actions.store.forbidden || errors.any()"
@@ -64,7 +64,7 @@
             <span class="is-hidden"/>
         </a>
         <a :class="[
-                'button',(isRTL ? ' is-pulled-left': ' is-pulled-right'),
+                'button is-pulled-right',
                 actions.update.button.class, { 'is-loading': state.loading }
             ]"
             :disabled="actions.update.forbidden || errors.any()"
@@ -101,7 +101,7 @@ export default {
 
     components: { Confirmation },
 
-    inject: ['state', 'errors', 'i18n', 'submit', 'show', 'create', 'destroy', 'isRTL'],
+    inject: ['state', 'errors', 'i18n', 'submit', 'show', 'create', 'destroy'],
 
     data: () => ({
         confirmation: false,
