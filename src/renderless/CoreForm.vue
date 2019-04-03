@@ -25,6 +25,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        template: {
+            type: Object,
+            default: null,
+        },
         params: {
             type: Object,
             default: null,
@@ -94,10 +98,20 @@ export default {
     },
 
     created() {
-        this.fetch();
+        this.init();
     },
 
     methods: {
+        init() {
+            if (this.template) {
+                this.state.data = this.template;
+                this.$emit('ready');
+
+                return;
+            }
+
+            this.fetch();
+        },
         fetch() {
             this.state.loading = true;
 
@@ -136,7 +150,11 @@ export default {
             axios[this.state.data.method](this.submitPath, this.formData)
                 .then(({ data }) => {
                     this.state.loading = false;
-                    this.$toastr.success(data.message);
+
+                    if (data.message) {
+                        this.$toastr.success(data.message);
+                    }
+
                     this.$emit('submit', data);
 
                     if (data.redirect) {

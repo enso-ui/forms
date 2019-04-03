@@ -4,8 +4,7 @@
             v-model="field.value"
             v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
             v-on="$listeners"
-            @input="errors.clear(field.name)"
-            @keydown="$emit('update');"/>
+            @input="errors.clear(field.name); $emit('changed')"/>
             <error-icon v-if="errors.has(field.name)"/>
     </div>
 </template>

@@ -9,7 +9,7 @@
         v-bind="field.meta"
         v-on="$listeners"
         @fetch="field.meta.options = $event"
-        @input="errors.clear(field.name)"
+        @input="errors.clear(field.name); $emit('changed')"
         ref="select"/>
 </template>
 
@@ -49,6 +49,12 @@ export default {
         pivotParams: {
             type: Object,
             default: () => ({}),
+        },
+    },
+
+    computed: {
+        selection() {
+            return this.$refs.select.selection;
         },
     },
 
