@@ -54,7 +54,7 @@
             ]"
             :disabled="actions.store.forbidden || errors.any()"
             @click="submit"
-            v-if="actions.store">
+            v-if="actions.store && !state.data.autosave">
             <span class="is-hidden-mobile">
                 {{ i18n(actions.store.button.label) }}
             </span>
@@ -69,7 +69,7 @@
             ]"
             :disabled="actions.update.forbidden || errors.any()"
             @click="submit"
-            v-if="actions.update">
+            v-if="actions.update && !state.data.autosave">
             <span class="is-hidden-mobile">
                 {{ i18n(actions.update.button.label) }}
             </span>
