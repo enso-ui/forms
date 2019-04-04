@@ -5,7 +5,7 @@
         ref="coreForm">
         <template v-slot:default
             v-if="ready">
-            <form-content>
+            <form-content v-on="$listeners">
                 <template v-for="field in customFields"
                     v-slot:[field.name]="props">
                     <slot :name="field.name"
