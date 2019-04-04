@@ -45,9 +45,7 @@ export default {
 
     computed: {
         formData() {
-            return this.state.data.sections
-                .reduce((fields, section) => fields
-                    .concat(section.fields), [])
+            return this.flatten
                 .reduce((object, field) => {
                     object[field.name] = field.value;
                     return object;
@@ -178,7 +176,11 @@ export default {
             axios.delete(this.state.data.actions.destroy.path)
                 .then(({ data }) => {
                     this.state.loading = false;
-                    this.$toastr.success(data.message);
+
+                    if (data.message) {
+                        this.$toastr.success(data.message);
+                    }
+
                     this.$emit('destroy');
 
                     if (data.redirect) {

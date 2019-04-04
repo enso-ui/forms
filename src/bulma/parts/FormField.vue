@@ -1,6 +1,7 @@
 <template>
     <div class="field">
-        <label class="label">
+        <label class="label"
+            v-if="state.data.labels">
             {{ i18n(field.label) }}
             <span class="icon is-small has-text-info"
                 v-tooltip="i18n(field.meta.tooltip)"
@@ -66,6 +67,10 @@ export default {
 
     created() {
         this.autosave = debounce(this.autosave, this.state.data.debounce);
+
+        if (!this.state.data.labels && !this.field.meta.placeholder) {
+            this.field.meta.placeholder = this.field.label;
+        }
     },
 
     methods: {
