@@ -48,7 +48,7 @@
             <span class="is-hidden"/>
         </a>
         <slot name="actions"/>
-        <a :class="[
+        <button :class="[
                 'button is-pulled-right',
                 actions.store.button.class, { 'is-loading': state.loading }
             ]"
@@ -62,8 +62,8 @@
                 <fa :icon="actions.store.button.icon"/>
             </span>
             <span class="is-hidden"/>
-        </a>
-        <a :class="[
+        </button>
+        <button :class="[
                 'button is-pulled-right',
                 actions.update.button.class, { 'is-loading': state.loading }
             ]"
@@ -77,7 +77,7 @@
                 <fa :icon="actions.update.button.icon"/>
             </span>
             <span class="is-hidden"/>
-        </a>
+        </button>
         <div class="is-clearfix"/>
         <confirmation :show="confirmation"
             :message="actions.destroy.button.message"
