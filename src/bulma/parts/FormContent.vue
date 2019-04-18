@@ -1,7 +1,7 @@
 <template>
     <div>
         <form-header/>
-        <form class="is-marginless" @submit.prevent="">
+        <form class="is-marginless" @submit.prevent>
             <form-tabs v-on="$listeners"
                 v-if="state.data.tabs">
                 <template v-for="field in customFields()"
