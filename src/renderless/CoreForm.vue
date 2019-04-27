@@ -248,7 +248,7 @@ export default {
         },
         focusError() {
             this.$el.querySelector('.help.is-danger')
-                .scrollIntoView({ behavior: 'smooth' });
+                .scrollIntoView({ behavior: 'smooth', block: 'center' });
         },
         fieldBindings(field) {
             return {
