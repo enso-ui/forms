@@ -12,9 +12,8 @@
             <span class="is-hidden"/>
         </a>
         <a :class="['button', actions.destroy.button.class]"
-            :disabled="actions.destroy.forbidden"
-            @click="confirmation = !actions.destroy.forbidden"
-            v-if="actions.destroy">
+            @click="confirmation = true"
+            v-if="!actions.destroy.forbidden && actions.destroy">
             <span class="is-hidden-mobile">
                 {{ i18n(actions.destroy.button.label) }}
             </span>
@@ -52,9 +51,13 @@
                 'button is-pulled-right',
                 actions.store.button.class, { 'is-loading': state.loading }
             ]"
-            :disabled="actions.store.forbidden || errors.any()"
+            :disabled="errors.any()"
             @click="submit"
-            v-if="actions.store && !state.data.autosave">
+            v-if="
+                !actions.store.forbidden
+                && actions.store
+                && !state.data.autosave
+            ">
             <span class="is-hidden-mobile">
                 {{ i18n(actions.store.button.label) }}
             </span>
@@ -67,9 +70,13 @@
                 'button is-pulled-right',
                 actions.update.button.class, { 'is-loading': state.loading }
             ]"
-            :disabled="actions.update.forbidden || errors.any()"
+            :disabled="errors.any()"
             @click="submit"
-            v-if="actions.update && !state.data.autosave">
+            v-if="
+                !actions.update.forbidden
+                && actions.update
+                && !state.data.autosave
+            ">
             <span class="is-hidden-mobile">
                 {{ i18n(actions.update.button.label) }}
             </span>
