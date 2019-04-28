@@ -13,7 +13,7 @@
         </a>
         <a :class="['button', actions.destroy.button.class]"
             @click="confirmation = true"
-            v-if="!actions.destroy.forbidden && actions.destroy">
+            v-if="actions.destroy && !actions.destroy.forbidden">
             <span class="is-hidden-mobile">
                 {{ i18n(actions.destroy.button.label) }}
             </span>
@@ -23,9 +23,8 @@
             <span class="is-hidden"/>
         </a>
         <a :class="['button', actions.show.button.class]"
-            :disabled="actions.show.forbidden"
-            @click="!actions.show.forbidden ? show() : null"
-            v-if="actions.show">
+            @click="show()"
+            v-if="actions.show && !actions.show.forbidden">
             <span class="is-hidden-mobile">
                 {{ i18n(actions.show.button.label) }}
             </span>
@@ -35,9 +34,8 @@
             <span class="is-hidden"/>
         </a>
         <a :class="['button', actions.create.button.class]"
-            :disabled="actions.create.forbidden"
-            @click="!actions.create.forbidden ? create() : null"
-            v-if="actions.create">
+            @click="create()"
+            v-if="actions.create && !actions.create.forbidden">
             <span class="is-hidden-mobile">
                 {{ i18n(actions.create.button.label) }}
             </span>
@@ -52,10 +50,10 @@
                 actions.store.button.class, { 'is-loading': state.loading }
             ]"
             :disabled="errors.any()"
-            @click="submit"
+            @click="submit()"
             v-if="
-                !actions.store.forbidden
-                && actions.store
+                actions.store
+                && !actions.store.forbidden
                 && !state.data.autosave
             ">
             <span class="is-hidden-mobile">
@@ -71,10 +69,10 @@
                 actions.update.button.class, { 'is-loading': state.loading }
             ]"
             :disabled="errors.any()"
-            @click="submit"
+            @click="submit()"
             v-if="
-                !actions.update.forbidden
-                && actions.update
+                actions.update
+                && !actions.update.forbidden
                 && !state.data.autosave
             ">
             <span class="is-hidden-mobile">
