@@ -157,6 +157,7 @@ export default {
                         });
                     }
                 }).catch((error) => {
+                    this.$emit('error', error);
                     const { status, data } = error.response;
                     this.state.loading = false;
 

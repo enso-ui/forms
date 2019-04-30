@@ -76,6 +76,10 @@ export default {
             return this.ready
                 && this.$refs.form.fetch();
         },
+        submit() {
+            return this.ready
+                && this.$refs.form.submit();
+        },
         field(field) {
             return this.ready
                 && this.$refs.form.field(field);

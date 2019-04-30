@@ -65,6 +65,10 @@ export default {
             return this.ready
                 && this.$refs.coreForm.fetch();
         },
+        submit() {
+            return this.ready
+                && this.$refs.coreForm.submit();
+        },
         field(field) {
             return this.ready
                 && this.$refs.coreForm.field(field);
