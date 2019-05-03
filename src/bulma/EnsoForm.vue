@@ -64,6 +64,11 @@ export default {
                 ? this.$refs.form.data
                 : [];
         },
+        formData() {
+            return this.ready
+                ? this.$refs.form.formData
+                : [];
+        },
         errors() {
             return this.ready
                 ? this.$refs.form.errors

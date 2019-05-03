@@ -53,6 +53,11 @@ export default {
                 ? this.$refs.coreForm.state.data
                 : [];
         },
+        formData() {
+            return this.ready
+                ? this.$refs.coreForm.formData
+                : [];
+        },
         errors() {
             return this.ready
                 ? this.$refs.coreForm.errors
