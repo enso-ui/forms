@@ -15,7 +15,7 @@
                 v-else>
                 <form-section :key="index"
                     :section="section"
-                    v-if="hasVisibleFields(section)">
+                    v-if="hasVisibleFields(section) || section.columns === 'slot'">
                     <template v-for="field in sectionCustomFields(section)"
                         v-slot:[field.name]>
                         <slot :name="field.name"
