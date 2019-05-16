@@ -10,21 +10,24 @@
                     <slot :name="field.name"
                         v-bind="fieldBindings(field)"/>
                 </template>
+                <template v-for="section in customSections()"
+                    v-slot:[section.slot]>
+                    <slot :name="section.slot"
+                        :section="section"/>
+                </template>
             </form-tabs>
             <template v-for="(section, index) in state.data.sections"
                 v-else>
+                <slot :name="section.slot"
+                    :section="section"
+                    v-if="section.columns === 'slot'"/>
                 <form-section :key="index"
                     :section="section"
-                    v-if="hasVisibleFields(section) || section.columns === 'slot'">
+                    v-else-if="hasVisibleFields(section)">
                     <template v-for="field in sectionCustomFields(section)"
                         v-slot:[field.name]>
                         <slot :name="field.name"
                             v-bind="fieldBindings(field)"/>
-                    </template>
-                    <template v-if="section.columns === 'slot'"
-                        v-slot:[section.slot]="props">
-                        <slot :name="section.slot"
-                            v-bind="props"/>
                     </template>
                 </form-section>
             </template>
@@ -52,7 +55,7 @@ export default {
     },
 
     inject: [
-        'state', 'fieldBindings', 'customFields', 'sectionCustomFields', 'hasVisibleFields',
+        'state', 'fieldBindings', 'customSections', 'customFields', 'sectionCustomFields', 'hasVisibleFields',
     ],
 };
 </script>

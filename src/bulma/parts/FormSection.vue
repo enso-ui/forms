@@ -6,9 +6,6 @@
                 :title="i18n(section.title)"
                 :placement="state.data.dividerTitlePlacement"/>
         </div>
-        <slot :name="section.slot"
-            :section="section"
-            v-if="section.columns === 'slot'"/>
         <div v-for="field in sectionFields(section)"
             class="column"
             :class="section.columns !== 'custom'

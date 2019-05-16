@@ -13,9 +13,11 @@
             :key="tab"
             v-for="tab in tabs()">
             <template v-for="(section, index) in sections(tab)">
+                <slot :name="section.slot"
+                    v-if="section.columns === 'slot'"/>
                 <form-section :key="index"
                     :section="section"
-                    v-if="hasVisibleFields(section) || section.columns === 'slot'">
+                    v-else-if="hasVisibleFields(section)">
                     <template v-for="field in sectionCustomFields(section)"
                         v-slot:[field.name]>
                         <slot :name="field.name"
