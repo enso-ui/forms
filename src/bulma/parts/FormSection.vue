@@ -11,8 +11,7 @@
             :class="section.columns !== 'custom'
                 ? columnSize(section.columns)
                 : `is-${field.column}`"
-            :key="field.name"
-            v-else>
+            :key="field.name">
             <slot :name="field.name"
                 v-if="field.meta.custom"/>
             <form-field :field="field"
