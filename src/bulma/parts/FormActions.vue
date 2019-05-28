@@ -11,6 +11,7 @@
                 v-if="actions.destroy && !actions.destroy.forbidden"/>
             <action tag="a"
                 :button="actions.show.button"
+                @click="show()"
                 v-if="actions.show && !actions.show.forbidden"/>
             <action tag="a"
                 :button="actions.create.button"
