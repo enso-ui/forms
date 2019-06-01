@@ -48,7 +48,7 @@ export default {
     }),
 
     computed: {
-        ...mapGetters('preferences', ['lang']),
+        ...mapGetters('preferences', ['lang', 'bookmarks']),
         ...mapGetters('bookmarks', ['state']),
         customFields() {
             return this.ready
@@ -85,6 +85,10 @@ export default {
     watch: {
         formData: {
             handler(formData) {
+                if (!this.bookmarks) {
+                    return;
+                }
+
                 if (this.dirty) {
                     this.updateState({ bookmark: this.$route, data: formData });
                     return;
@@ -95,7 +99,7 @@ export default {
             deep: true,
         },
         dirty(dirty) {
-            if (!dirty) {
+            if (!dirty && this.bookmarks) {
                 this.updateState({ bookmark: this.$route });
             }
         },
@@ -105,6 +109,11 @@ export default {
         ...mapMutations('bookmarks', ['updateState']),
         init() {
             this.ready = true;
+
+            if (!this.bookmarks) {
+                return;
+            }
+
             const state = this.state(this.$route);
 
             if (state) {
