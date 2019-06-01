@@ -58,10 +58,15 @@ export default {
                 ? this.$refs.coreForm.formData
                 : [];
         },
+        dirty() {
+            return this.ready
+                ? this.$refs.coreForm.dirty()
+                : false;
+        },
         errors() {
             return this.ready
                 ? this.$refs.coreForm.errors
-                : [];
+                : null;
         },
     },
 
@@ -85,6 +90,11 @@ export default {
         routeParam(param) {
             return this.ready
                 && this.$refs.coreForm.routeParam(param);
+        },
+        fill(state) {
+            return this.ready
+                ? this.$refs.coreForm.fill(state)
+                : null;
         },
     },
 };

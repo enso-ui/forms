@@ -71,6 +71,7 @@ export default {
             customFields: this.customFields,
             customSections: this.customSections,
             dirty: this.dirty,
+            undo: this.undo,
             destroy: this.destroy,
             errors: this.errors,
             errorCount: this.errorCount,
@@ -100,7 +101,6 @@ export default {
         init() {
             if (this.template) {
                 this.state.data = this.template;
-                // this.setOriginal();
                 this.$emit('ready');
 
                 return;
@@ -154,6 +154,8 @@ export default {
                 }
 
                 this.$emit('submit', data);
+
+                this.setOriginal();
 
                 if (data.redirect) {
                     this.$router.push({
@@ -291,8 +293,14 @@ export default {
                 throw new Error(`Misconfigured field "${this.field.name}"`);
             }
         },
+        fill(data) {
+            Object.keys(data).forEach(key => this.field(key).value = data[key]);
+        },
         setOriginal() {
             this.original = JSON.stringify(this.formData);
+        },
+        undo() {
+            this.fill(JSON.parse(this.original));
         },
         dirty() {
             return this.original

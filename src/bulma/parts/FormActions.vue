@@ -22,17 +22,27 @@
         <div class="level-right">
             <div class="level-item"
                 v-if="errors.any()">
-                <span class="tag is-bold is-danger is-small">
-                    {{ i18n('errors') }}
-                    <a class="delete is-small"
-                        @click="errors.empty()"/>
-                </span>
+                <a class="button is-small is-bold is-danger"
+                    @click="errors.empty()">
+                    <span>
+                        {{ i18n('errors') }}
+                    </span>
+                    <span class="icon is-small">
+                        <fa icon="times"/>
+                    </span>
+                </a>
             </div>
             <div class="level-item"
                 v-else-if="dirty()">
-                <span class="tag is-bold is-warning is-small">
-                    {{ i18n('changed') }}
-                </span>
+                <a class="button is-small is-bold is-warning"
+                    @click="undo()">
+                    <span>
+                        {{ i18n('changes') }}
+                    </span>
+                    <span class="icon is-small">
+                        <fa icon="undo"/>
+                    </span>
+                </a>
             </div>
             <action tag="button"
                 :button="actions.store.button"
@@ -58,19 +68,19 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faTrashAlt, faEye, faPlus, faCheck, faArrowLeft,
+    faTrashAlt, faEye, faPlus, faCheck, faArrowLeft, faTimes, faUndo,
 } from '@fortawesome/free-solid-svg-icons';
 import Action from './Action.vue';
 import Confirmation from './Confirmation.vue';
 
-library.add(faTrashAlt, faEye, faPlus, faCheck, faArrowLeft);
+library.add(faTrashAlt, faEye, faPlus, faCheck, faArrowLeft, faTimes, faUndo);
 
 export default {
     name: 'FormActions',
 
     components: { Action, Confirmation },
 
-    inject: ['state', 'dirty', 'errors', 'i18n', 'submit', 'show', 'create', 'destroy'],
+    inject: ['state', 'dirty', 'errors', 'undo', 'i18n', 'submit', 'show', 'create', 'destroy'],
 
     data: () => ({
         confirmation: false,
