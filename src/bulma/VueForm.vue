@@ -96,6 +96,11 @@ export default {
                 ? this.$refs.coreForm.fill(state)
                 : null;
         },
+        setOriginal() {
+            return this.ready
+                ? this.$refs.coreForm.setOriginal()
+                : null;
+        },
     },
 };
 </script>
