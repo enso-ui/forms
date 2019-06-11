@@ -41,6 +41,10 @@ export default {
                 return route(this.$route.name, this.$route.params, false);
             },
         },
+        disableState: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     data: () => ({
@@ -85,7 +89,7 @@ export default {
     watch: {
         formData: {
             handler(formData) {
-                if (!this.bookmarks) {
+                if (this.disableState || !this.bookmarks) {
                     return;
                 }
 
@@ -99,7 +103,7 @@ export default {
             deep: true,
         },
         dirty(dirty) {
-            if (!dirty && this.bookmarks) {
+            if (!this.disableState && !dirty && this.bookmarks) {
                 this.updateState({ bookmark: this.$route });
             }
         },
@@ -110,7 +114,7 @@ export default {
         init() {
             this.ready = true;
 
-            if (!this.bookmarks) {
+            if (this.disableState || !this.bookmarks) {
                 return;
             }
 
@@ -143,11 +147,6 @@ export default {
         fill(state) {
             return this.ready
                 ? this.$refs.form.fill(state)
-                : null;
-        },
-        setOriginal() {
-            return this.ready
-                ? this.$refs.form.setOriginal()
                 : null;
         },
     },
