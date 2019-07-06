@@ -6,7 +6,8 @@
             <span class="icon is-small has-text-info"
                 v-tooltip="i18n(field.meta.tooltip)"
                 v-if="field.meta.tooltip">
-                <fa icon="info-circle" size="xs"/>
+                <fa icon="info-circle"
+                    size="xs"/>
             </span>
         </label>
         <component :is="fieldType(field)"
