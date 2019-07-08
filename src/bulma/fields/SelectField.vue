@@ -57,6 +57,9 @@ export default {
         clear() {
             this.$refs.select.clear();
         },
+        fetch() {
+            this.$refs.select.fetch();
+        },
     },
 };
 </script>

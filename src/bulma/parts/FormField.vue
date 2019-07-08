@@ -17,7 +17,8 @@
             :locale="locale"
             v-bind="$attrs"
             @changed="autosave"
-            v-on="$listeners"/>
+            v-on="$listeners"
+            ref="field"/>
         <p class="help is-danger"
             v-if="errors.has(field.name)">
             {{ errors.get(field.name) }}
