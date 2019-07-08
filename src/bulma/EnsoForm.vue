@@ -93,12 +93,15 @@ export default {
                     return;
                 }
 
-                if (this.dirty) {
-                    this.updateState({ bookmark: this.$route, data: formData });
+                if (!this.dirty) {
+                    this.updateState({ bookmark: this.$route });
                     return;
                 }
 
-                this.updateState({ bookmark: this.$route });
+                this.updateState({
+                    bookmark: this.$route,
+                    data: JSON.parse(JSON.stringify(formData)),
+                });
             },
             deep: true,
         },
