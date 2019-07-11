@@ -301,6 +301,7 @@ export default {
         },
         undo() {
             this.fill(JSON.parse(this.original));
+            this.$emit('undo');
         },
         dirty() {
             return this.original
