@@ -307,26 +307,15 @@ export default {
                 && JSON.stringify(this.formData) !== this.original;
         },
         hideTab(tab){
-            return this.ready
-                ? this.sections(tab).forEach(section => section.fields.forEach(field => field.meta.hidden = true))
-                : null;
+            this.sections(tab).forEach(section => section.fields.forEach(field => this.field(field.name).meta.hidden = true));
+            this.$forceUpdate();
         },
         showTab(tab){
-            return this.ready
-                ? this.sections(tab).forEach(section => section.fields.forEach(field => field.meta.hidden = false))
-                : null;
+            this.sections(tab).forEach(section => section.fields.forEach(field => this.field(field.name).meta.hidden = false));
+            this.$forceUpdate();
         },
     },
-
-    watch:{
-        'state.data.sections': {
-            handler: function(val){
-                this.$forceUpdate();
-            },
-            deep: true
-        }
-    },
-
+    
     render() {
         return this.$slots.default;
     },
