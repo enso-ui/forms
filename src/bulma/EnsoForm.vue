@@ -152,6 +152,10 @@ export default {
                 ? this.$refs.form.fill(state)
                 : null;
         },
+        setOriginal() {
+            return this.ready
+                && this.$refs.form.setOriginal();
+        },
     },
 };
 </script>
