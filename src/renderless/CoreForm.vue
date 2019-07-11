@@ -213,9 +213,9 @@ export default {
         },
         tabs() {
             return this.state.data.tabs
-                ? this.state.data.sections.reduce((tabs, { tab }) => {
-                    if (!tabs.includes(tab)) {
-                        tabs.push(tab);
+                ? this.state.data.sections.reduce((tabs, section) => {
+                    if (!tabs.includes(section.tab) && this.hasVisibleFields(section)) {
+                        tabs.push(section.tab);
                     }
                     return tabs;
                 }, [])
