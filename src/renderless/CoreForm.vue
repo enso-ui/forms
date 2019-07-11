@@ -306,6 +306,25 @@ export default {
             return this.original
                 && JSON.stringify(this.formData) !== this.original;
         },
+        hideTab(tab){
+            return this.ready
+                ? this.sections(tab).forEach(section => section.fields.forEach(field => field.meta.hidden = true))
+                : null;
+        },
+        showTab(tab){
+            return this.ready
+                ? this.sections(tab).forEach(section => section.fields.forEach(field => field.meta.hidden = false))
+                : null;
+        },
+    },
+
+    watch:{
+        'state.data.sections': {
+            handler: function(val){
+                this.$forceUpdate();
+            },
+            deep: true
+        }
     },
 
     render() {
