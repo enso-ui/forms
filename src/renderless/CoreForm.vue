@@ -318,7 +318,7 @@ export default {
             this.$forceUpdate();
         },
     },
-    
+
     render() {
         return this.$slots.default;
     },
