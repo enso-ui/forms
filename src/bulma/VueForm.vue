@@ -101,12 +101,12 @@ export default {
                 ? this.$refs.coreForm.setOriginal()
                 : null;
         },
-        hideTab(tab){
+        hideTab(tab) {
             return this.ready
                 ? this.$refs.coreForm.hideTab(tab)
                 : null;
         },
-        showTab(tab){
+        showTab(tab) {
             return this.ready
                 ? this.$refs.coreForm.showTab(tab)
                 : null;
