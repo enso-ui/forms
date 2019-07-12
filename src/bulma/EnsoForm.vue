@@ -156,12 +156,12 @@ export default {
             return this.ready
                 && this.$refs.form.setOriginal();
         },
-        hideTab(tab){
+        hideTab(tab) {
             return this.ready
                 ? this.$refs.form.hideTab(tab)
                 : null;
         },
-        showTab(tab){
+        showTab(tab) {
             return this.ready
                 ? this.$refs.form.showTab(tab)
                 : null;
