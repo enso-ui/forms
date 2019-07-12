@@ -294,7 +294,7 @@ export default {
             }
         },
         fill(data) {
-            Object.keys(data).forEach(key => this.field(key).value = data[key]);
+            Object.keys(data).forEach(key => (this.field(key).value = data[key]));
         },
         setOriginal() {
             this.original = JSON.stringify(this.formData);
@@ -307,14 +307,14 @@ export default {
             return this.original
                 && JSON.stringify(this.formData) !== this.original;
         },
-        hideTab(tab){
+        hideTab(tab) {
             this.sections(tab).forEach(({ fields }) => fields
-                .forEach(({ name }) => this.field(name).meta.hidden = true));
+                .forEach(({ name }) => (this.field(name).meta.hidden = true)));
             this.$forceUpdate();
         },
-        showTab(tab){
+        showTab(tab) {
             this.sections(tab).forEach(({ fields }) => fields
-                .forEach(({ name }) => this.field(name).meta.hidden = false));
+                .forEach(({ name }) => (this.field(name).meta.hidden = false)));
             this.$forceUpdate();
         },
     },
