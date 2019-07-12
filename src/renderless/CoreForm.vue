@@ -308,11 +308,13 @@ export default {
                 && JSON.stringify(this.formData) !== this.original;
         },
         hideTab(tab){
-            this.sections(tab).forEach(section => section.fields.forEach(field => this.field(field.name).meta.hidden = true));
+            this.sections(tab).forEach(({ fields }) => fields
+                .forEach(({ name }) => this.field(name).meta.hidden = true));
             this.$forceUpdate();
         },
         showTab(tab){
-            this.sections(tab).forEach(section => section.fields.forEach(field => this.field(field.name).meta.hidden = false));
+            this.sections(tab).forEach(({ fields }) => fields
+                .forEach(({ name }) => this.field(name).meta.hidden = false));
             this.$forceUpdate();
         },
     },
