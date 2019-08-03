@@ -101,7 +101,7 @@ export default {
         init() {
             if (this.template) {
                 this.state.data = this.template;
-                this.$emit('ready');
+                this.$emit('ready', { form: this });
 
                 return;
             }
@@ -116,7 +116,7 @@ export default {
                     this.state.data = data.form;
                     this.setOriginal();
                     this.state.loading = false;
-                    this.$emit('ready');
+                    this.$emit('ready', { form: this });
                     this.$emit('loaded', data);
                 }).catch((error) => {
                     this.state.loading = false;
