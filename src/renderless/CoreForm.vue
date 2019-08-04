@@ -7,6 +7,10 @@ export default {
     inject: ['errorHandler'],
 
     props: {
+        disableState: {
+            type: Boolean,
+            default: false,
+        },
         errorHandler: {
             type: Function,
             default: (error) => {
@@ -304,7 +308,7 @@ export default {
             this.$emit('undo');
         },
         dirty() {
-            return this.original
+            return !this.disableState && this.original
                 && JSON.stringify(this.formData) !== this.original;
         },
         hideTab(tab) {

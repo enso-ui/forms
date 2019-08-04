@@ -3,6 +3,7 @@
         :i18n="i18n"
         :locale="lang"
         :path="path"
+        :disable-state="disableState"
         v-bind="$attrs"
         v-on="$listeners"
         @ready="init"
@@ -165,7 +166,7 @@ export default {
             return this.ready
                 ? this.$refs.form.showTab(tab)
                 : null;
-        }
+        },
     },
 };
 </script>
