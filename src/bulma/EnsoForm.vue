@@ -33,13 +33,13 @@ export default {
 
     components: { VueForm },
 
-    inject: ['errorHandler', 'i18n'],
+    inject: ['errorHandler', 'i18n', 'route'],
 
     props: {
         path: {
             type: String,
             default() {
-                return route(this.$route.name, this.$route.params, false);
+                return this.route(this.$route.name, this.$route.params, false);
             },
         },
         disableState: {

@@ -259,8 +259,11 @@ export default {
                 .some(field => !field.meta.hidden);
         },
         focusError() {
-            this.$el.querySelector('.help.is-danger')
-                .scrollIntoView({ behavior: 'smooth', block: 'center' });
+            const firstError = this.$el.querySelector('.help.is-danger');
+
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         },
         fieldBindings(field) {
             return {
