@@ -4,8 +4,6 @@ import Errors from '../classes/Errors';
 export default {
     name: 'CoreForm',
 
-    inject: ['errorHandler'],
-
     props: {
         disableState: {
             type: Boolean,
