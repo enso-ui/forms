@@ -286,6 +286,8 @@ export default {
                 }
             case 'select':
                 return 'select-field';
+            case 'dropdown':
+                return 'dropdown-field';
             case 'textarea':
                 return 'textarea-field';
             case 'datepicker':
