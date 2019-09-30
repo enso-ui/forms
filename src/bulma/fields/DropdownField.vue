@@ -46,11 +46,7 @@ export default {
             return this.enums[this.field.meta.options]._keys();
         }
     },
-
-    created() {
-        this.selected = this.field.value;
-    },
-
+    
     methods: {
         label(item) {
             return this.enums[this.field.meta.options]._get(item);
