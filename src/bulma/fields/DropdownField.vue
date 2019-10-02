@@ -1,5 +1,5 @@
 <template>
-    <dropdown class="min-width" 
+    <dropdown class="dropdown-field" 
         v-bind="$attrs"
         v-on="$listeners"
         ref="dropdown">
@@ -59,7 +59,7 @@ export default {
 };
 </script>
 <style lang="scss">
-    .min-width {
+    .dropdown-field {
         .dropdown-trigger.trigger-selector {
             min-width: 7em;
         }
