@@ -1,4 +1,4 @@
-# Form
+# Forms
 
 ![NPM License](https://img.shields.io/npm/l/@enso-ui/forms.svg)
 ![npm download](https://img.shields.io/npm/dm/@enso-ui/forms.svg)
@@ -16,34 +16,9 @@ Unless where specified otherwise, the components can be used outside of the Enso
 
 For live examples and demos, you may visit [laravel-enso.com](https://www.laravel-enso.com)
 
-Check the full documentation at  [docs.laravel-enso.com](https://docs.laravel-enso.com).
+### Installation, Configuration & Usage
 
-### Installation
-
-Install the package:
-```
-npm i @enso-ui/forms
-```
-Import the desired forms(s):
-```js
-import { EnsoForm, VueForm } from '@enso-ui/forms/bulma';
-```
-
-### Exports
-
-`@enso-ui/forms/bulma`:
-- `VueForm`,
-- `EnsoForm`,
-- `DateField`,
-- `InputField`,
-- `MoneyField`,
-- `SelectField`,
-- `SwitchField`,
-- `TextareaField`,
-- `TimeField`,
-
-`@enso-ui/forms/renderless`:
-- `CoreForm`,
+Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/frontend/forms.html)
 
 ## Contributions
 
