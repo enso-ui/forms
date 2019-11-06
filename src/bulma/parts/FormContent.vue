@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import FormHeader from './FormHeader.vue';
 import FormTabs from './FormTabs.vue';
+import FormHeader from './FormHeader.vue';
 import FormActions from './FormActions.vue';
 import FormSection from './FormSection.vue';
 
