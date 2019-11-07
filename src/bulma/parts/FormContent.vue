@@ -33,8 +33,9 @@
             </template>
             <form-actions class="has-margin-top-large"
                 v-on="$listeners">
-                <template v-slot:actions>
-                    <slot name="actions"/>
+                <template v-for="actions in ['actions-right', 'actions-left']"
+                          v-slot:[actions]>
+                    <slot :name="actions"/>
                 </template>
             </form-actions>
         </form>

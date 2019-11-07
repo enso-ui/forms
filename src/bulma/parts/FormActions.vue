@@ -17,7 +17,7 @@
                 :button="actions.create.button"
                 @click="create()"
                 v-if="actions.create && !actions.create.forbidden"/>
-            <slot name="actions"/>
+            <slot name="actions-left"/>
         </div>
         <div class="level-right">
             <div class="level-item"
@@ -44,6 +44,7 @@
                     </span>
                 </a>
             </div>
+            <slot name="actions-right"/>
             <action tag="button"
                 :button="actions.store.button"
                 :disabled="errors.any()"
