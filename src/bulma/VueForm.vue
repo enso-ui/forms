@@ -16,8 +16,9 @@
                     <slot :name="section.slot"
                         v-bind="props"/>
                 </template>
-                <template v-slot:actions>
-                    <slot name="actions"/>
+                <template v-for="actions in ['actions-right', 'actions-left']"
+                          v-slot:[actions]>
+                    <slot :name="actions"/>
                 </template>
             </form-content>
         </template>
