@@ -1,5 +1,6 @@
 <template>
     <datepicker v-model="field.value"
+        :alt-input="!!field.meta.altFormat"
         :is-danger="errors.has(field.name)"
         :locale="locale"
         :time-only="timeOnly"
