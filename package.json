@@ -39,7 +39,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.2.0",
     "@fortawesome/vue-fontawesome": "^0.1.1",
     "accounting-js": "^1.1.1",
-    "bulma": "^0.7.2",
+    "bulma": "^0.8.0",
     "dropzone": "^5.5.1",
     "lodash": "^4.17.10",
     "tiptap": "^1.14.0",
