@@ -1,6 +1,8 @@
 <template>
     <wysiwyg v-model="field.value"
-        :readonly="field.meta.readonly"
+        :api-key="field.meta.apiKey"
+        v-bind="field.meta"
+        :plugins="field.meta.plugins"
         :has-error="errors.has(field.name)"
         v-on="$listeners"
         @input="errors.clear(field.name); $emit('changed')"/>
