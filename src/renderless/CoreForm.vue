@@ -122,7 +122,7 @@ export default {
                     this.$emit('loaded', data);
                 }).catch((error) => {
                     this.state.loading = false;
-                    this.$emit('fetch-error');
+                    this.$emit('template-fetch-error');
                     this.errorHandler(error);
                 });
         },
