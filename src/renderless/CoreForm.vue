@@ -161,10 +161,10 @@ export default {
                 this.setOriginal();
 
                 if (data.redirect) {
-                    this.$router.push({
+                    this.$nextTick(() => this.$router.push({
                         name: data.redirect,
                         params: { ...data.param, ...this.state.data.routeParams },
-                    });
+                    }));
                 }
             }).catch((error) => {
                 this.$emit('error', error);
