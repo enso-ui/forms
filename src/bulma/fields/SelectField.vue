@@ -2,7 +2,7 @@
     <vue-select v-model="field.value"
         :has-error="errors.has(field.name)"
         :i18n="i18n"
-        :params="field.meta.params || params"
+        :params="params"
         :pivot-params="pivotParams"
         :custom-params="customParams"
         v-bind="field.meta"
