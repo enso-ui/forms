@@ -23,6 +23,7 @@
             v-if="errors.has(field.name)">
             {{ errors.get(field.name) }}
         </p>
+        <slot/>
     </div>
 </template>
 
