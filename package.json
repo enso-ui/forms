@@ -1,6 +1,6 @@
 {
   "name": "@enso-ui/forms",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Forms",
   "main": "index.js",
   "scripts": {
