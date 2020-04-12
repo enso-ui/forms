@@ -42,8 +42,6 @@
     "bulma": "^0.8.0",
     "dropzone": "^5.5.1",
     "lodash": "^4.17.10",
-    "tiptap": "^1.14.0",
-    "tiptap-extensions": "^1.13.0",
     "v-tooltip": "^2.0.0-rc.33",
     "vue": "^2.5.16",
     "vuex": "^3.1.0"
