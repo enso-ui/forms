@@ -3,6 +3,7 @@
         :api-key="field.meta.apiKey"
         v-bind="field.meta"
         :plugins="field.meta.plugins"
+        :toolbar="field.meta.toolbar"
         :has-error="errors.has(field.name)"
         v-on="$listeners"
         @input="errors.clear(field.name); $emit('changed')"/>
