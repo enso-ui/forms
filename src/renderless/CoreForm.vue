@@ -1,5 +1,5 @@
 <script>
-import Errors from '../classes/Errors';
+import Errors from '@enso-ui/laravel-validation';
 
 export default {
     name: 'CoreForm',
@@ -11,7 +11,7 @@ export default {
         },
         errorHandler: {
             type: Function,
-            default: (error) => {
+            default: error => {
                 throw error;
             },
         },
@@ -120,7 +120,7 @@ export default {
                     this.state.loading = false;
                     this.$emit('ready', { form: this });
                     this.$emit('loaded', data);
-                }).catch((error) => {
+                }).catch(error => {
                     this.state.loading = false;
                     this.$emit('template-fetch-error');
                     this.errorHandler(error);
@@ -166,7 +166,7 @@ export default {
                         params: { ...data.param, ...this.state.data.routeParams },
                     }));
                 }
-            }).catch((error) => {
+            }).catch(error => {
                 this.$emit('error', error);
                 const { status, data } = error.response;
                 this.state.loading = false;
@@ -200,7 +200,7 @@ export default {
                             params: this.state.data.routeParams,
                         });
                     }
-                }).catch((error) => {
+                }).catch(error => {
                     this.state.loading = false;
                     this.errorHandler(error);
                 });
