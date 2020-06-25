@@ -1,5 +1,5 @@
 <template>
-    <div :class="['control', { 'has-icons-right': errors.has(field.name) }]">
+    <div :class="['control', { 'has-icons-right': errors.has(field.name) || password }]">
         <input :class="['input', { 'is-danger': errors.has(field.name) }]"
             v-model.number="field.value"
             :type="field.meta.content"
@@ -14,17 +14,20 @@
             v-on="$listeners"
             @input="errors.clear(field.name); $emit('changed')"
             v-else>
+        <reveal-password :meta="field.meta"
+            v-if="password && field.value"/>
         <error-icon v-if="errors.has(field.name)"/>
     </div>
 </template>
 
 <script>
 import ErrorIcon from '../parts/ErrorIcon.vue';
+import RevealPassword from '../parts/RevealPassword.vue';
 
 export default {
     name: 'InputField',
 
-    components: { ErrorIcon },
+    components: { ErrorIcon, RevealPassword },
 
     props: {
         errors: {
@@ -40,5 +43,10 @@ export default {
             required: true,
         },
     },
+
+    data: v => ({
+        password: v.field.meta.content === 'password',
+    }),
+
 };
 </script>
