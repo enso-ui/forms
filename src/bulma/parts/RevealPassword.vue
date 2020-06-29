@@ -1,5 +1,5 @@
 <template>
-    <span class="icon reveal-password is-small is-right is-clickable has-text-info"
+    <span class="icon reveal-password is-naked is-small is-right is-clickable has-text-info"
         @click="toggle">
         <fa icon="eye"
             v-if="hidden"/>
@@ -32,8 +32,8 @@ export default {
         toggle() {
             this.hidden = !this.hidden;
             this.meta.content = this.meta.content === 'password' ? 'text' : 'password';
-        }
-    }
+        },
+    },
 };
 </script>
 
