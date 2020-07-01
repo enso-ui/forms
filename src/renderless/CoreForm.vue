@@ -152,10 +152,6 @@ export default {
             ).then(({ data }) => {
                 this.state.loading = false;
 
-                if (data.message) {
-                    this.$toastr.success(data.message);
-                }
-
                 this.$emit('submit', data);
 
                 this.setOriginal();
@@ -188,11 +184,7 @@ export default {
                 .then(({ data }) => {
                     this.state.loading = false;
 
-                    if (data.message) {
-                        this.$toastr.success(data.message);
-                    }
-
-                    this.$emit('destroy');
+                    this.$emit('destroy', data);
 
                     if (data.redirect) {
                         this.$router.push({
