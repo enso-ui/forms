@@ -6,6 +6,8 @@
         :disable-state="disableState"
         v-bind="$attrs"
         v-on="$listeners"
+        @submit="toastr"
+        @destroy="toastr"
         @ready="init"
         ref="form">
         <template v-for="field in customFields"
@@ -167,6 +169,11 @@ export default {
             return this.ready
                 ? this.$refs.form.showTab(tab)
                 : null;
+        },
+        toastr(data) {
+            if (data.message) {
+                this.$toastr.success(data.message)
+            }
         },
     },
 };
