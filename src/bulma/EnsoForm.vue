@@ -36,7 +36,7 @@ export default {
 
     components: { VueForm },
 
-    inject: ['errorHandler', 'i18n', 'route'],
+    inject: ['errorHandler', 'i18n', 'route', 'toastr'],
 
     props: {
         path: {
@@ -172,7 +172,7 @@ export default {
         },
         toastr(data) {
             if (data.message) {
-                this.$toastr.success(data.message)
+                this.toastr.success(data.message)
             }
         },
     },

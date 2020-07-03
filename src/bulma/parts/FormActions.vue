@@ -58,8 +58,7 @@
                 @click="submit()"
                 v-else-if="actions.update && !actions.update.forbidden && !state.data.autosave"/>
         </div>
-        <confirmation :show="confirmation"
-            :message="actions.destroy.button.message"
+        <confirmation :message="actions.destroy.button.message"
             @close="confirmation = false"
             @commit="confirmation = false; destroy()"
             v-if="confirmation && actions.destroy"/>
