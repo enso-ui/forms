@@ -15,7 +15,7 @@
             @input="errors.clear(field.name); $emit('changed')"
             v-else>
         <reveal-password :meta="field.meta"
-            v-if="password && field.value"/>
+            v-if="reveal"/>
         <error-icon v-if="errors.has(field.name)"/>
     </div>
 </template>
@@ -48,5 +48,10 @@ export default {
         password: v.field.meta.content === 'password',
     }),
 
+    computed: {
+        reveal() {
+            return this.password && this.field.value && this.field.meta.reveal;
+        }
+    },
 };
 </script>
