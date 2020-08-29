@@ -50,7 +50,10 @@ export default {
         formData() {
             return this.state.data && this.flatten
                 .reduce((object, field) => {
-                    object[field.name] = field.value;
+                    if (this.postable(field)) {
+                        object[field.name] = field.value;
+                    }
+
                     return object;
                 }, {});
         },
@@ -268,7 +271,7 @@ export default {
             switch (field.meta.type) {
             case 'input':
                 switch (field.meta.content) {
-                case 'text': case 'number': case 'email': case 'password':
+                case 'text': case 'number': case 'email': case 'password': case 'encrypt':
                     return 'input-field';
                 case 'checkbox':
                     return 'switch-field';
@@ -314,6 +317,10 @@ export default {
             this.sections(tab).forEach(({ fields }) => fields
                 .forEach(({ name }) => (this.field(name).meta.hidden = false)));
             this.$forceUpdate();
+        },
+        postable(field) {
+            return field.meta.content !== 'encrypt'
+                || field.value !== field.meta.initialValue;
         },
     },
 
