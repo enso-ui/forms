@@ -9,7 +9,7 @@
             v-if="field.meta.content === 'number'">
         <input :class="['input', { 'is-danger': errors.has(field.name) }]"
             v-model="field.value"
-            :type="field.meta.content"
+            :type="type"
             v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
             v-on="$listeners"
             @input="errors.clear(field.name); $emit('changed')"
@@ -49,9 +49,14 @@ export default {
     }),
 
     computed: {
+        type() {
+            return this.field.meta.content === 'encrypt'
+                ? 'password'
+                : this.field.meta.content;
+        },
         reveal() {
             return this.password && this.field.value && this.field.meta.reveal;
-        }
+        },
     },
 };
 </script>
