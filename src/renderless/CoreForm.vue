@@ -249,7 +249,7 @@ export default {
             return this.state.data.routeParams[param];
         },
         hasVisibleFields(section) {
-            return section.fields
+            return section.slot || section.fields
                 .some(field => !field.meta.hidden);
         },
         focusError() {
