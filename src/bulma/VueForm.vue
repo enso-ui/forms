@@ -111,7 +111,17 @@ export default {
             return this.ready
                 ? this.$refs.coreForm.showTab(tab)
                 : null;
-        }
+        },
+        hideField(field) {
+            return this.ready
+                ? this.$refs.coreForm.hideField(field)
+                : null;
+        },
+        showField(field) {
+            return this.ready
+                ? this.$refs.coreForm.showField(field)
+                : null;
+        },
     },
 };
 </script>

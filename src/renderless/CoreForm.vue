@@ -310,13 +310,25 @@ export default {
         },
         hideTab(tab) {
             this.sections(tab).forEach(({ fields }) => fields
-                .forEach(({ name }) => (this.field(name).meta.hidden = true)));
+                .forEach(({ name }) => (this.hideField(name, false))));
             this.$forceUpdate();
         },
         showTab(tab) {
             this.sections(tab).forEach(({ fields }) => fields
-                .forEach(({ name }) => (this.field(name).meta.hidden = false)));
+                .forEach(({ name }) => (this.showField(name, false))));
             this.$forceUpdate();
+        },
+        hideField(fieldName, forceUpdate = true) {
+            this.field(fieldName).meta.hidden = true;
+            if(forceUpdate) {
+              this.$forceUpdate();
+            }
+        },
+        showField(fieldName, forceUpdate = true) {
+            this.field(fieldName).meta.hidden = false;
+            if(forceUpdate) {
+              this.$forceUpdate();
+            }
         },
         postable(field) {
             return field.meta.content !== 'encrypt'
