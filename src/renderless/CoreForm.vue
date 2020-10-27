@@ -62,6 +62,18 @@ export default {
                 .reduce((fields, section) => fields
                     .concat(section.fields), []);
         },
+        submitData() {
+            return this.formData && Object.keys(this.formData)
+                .reduce((data, key) => {
+                    if (key.includes('.')) {
+                        this.transformNested(data, key);
+                    } else {
+                        data[key] = this.formData[key];
+                    }
+
+                    return data;
+                }, {});
+        },
         submitPath() {
             return this.state.data && this.state.data.method === 'post'
                 ? this.state.data.actions.store.path
@@ -151,7 +163,7 @@ export default {
             this.state.loading = true;
 
             axios[this.state.data.method](
-                this.submitPath, { ...this.formData, _params: this.params },
+                this.submitPath, { ...this.submitData, _params: this.params },
             ).then(({ data }) => {
                 this.state.loading = false;
 
@@ -208,6 +220,22 @@ export default {
         customSections() {
             return this.state.data.sections
                 .filter(({ columns }) => columns === 'slot');
+        },
+        transformNested(data, key) {
+            const segments = key.split('.');
+            let node = data;
+
+            do {
+                const attribute = segments.shift();
+
+                if (!(attribute in node)) {
+                    node[attribute] = segments.length === 0
+                        ? this.formData[key]
+                        : {};
+                }
+
+                node = node[attribute];
+            } while (segments.length > 0);
         },
         tabs() {
             return this.state.data.tabs
