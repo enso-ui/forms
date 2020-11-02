@@ -320,14 +320,16 @@ export default {
         },
         hideField(fieldName, forceUpdate = true) {
             this.field(fieldName).meta.hidden = true;
-            if(forceUpdate) {
-              this.$forceUpdate();
+
+            if (forceUpdate) {
+                this.$forceUpdate();
             }
         },
         showField(fieldName, forceUpdate = true) {
             this.field(fieldName).meta.hidden = false;
-            if(forceUpdate) {
-              this.$forceUpdate();
+
+            if (forceUpdate) {
+                this.$forceUpdate();
             }
         },
         postable(field) {
