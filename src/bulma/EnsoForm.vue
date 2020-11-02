@@ -170,6 +170,16 @@ export default {
                 ? this.$refs.form.showTab(tab)
                 : null;
         },
+        hideField(field) {
+            return this.ready
+                ? this.$refs.form.hideField(field)
+                : null;
+        },
+        showField(field) {
+            return this.ready
+                ? this.$refs.form.showField(field)
+                : null;
+        },
         success(data) {
             if (data.message) {
                 this.toastr.success(data.message)
