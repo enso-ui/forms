@@ -9,7 +9,9 @@
                 <template v-for="field in customFields"
                     v-slot:[field.name]="props">
                     <slot :name="field.name"
-                        v-bind="props"/>
+                        v-bind="props">
+                        <form-field v-bind="props"/>
+                    </slot>
                 </template>
                 <template v-for="section in customSections"
                     v-slot:[section.slot]="props">
@@ -28,11 +30,12 @@
 <script>
 import CoreForm from '../renderless/CoreForm.vue';
 import FormContent from './parts/FormContent.vue';
+import FormField from './parts/FormField.vue';
 
 export default {
     name: 'VueForm',
 
-    components: { CoreForm, FormContent },
+    components: { CoreForm, FormContent, FormField },
 
     data: () => ({
         ready: false,
