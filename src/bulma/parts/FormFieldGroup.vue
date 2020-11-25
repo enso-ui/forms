@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { VTooltip } from 'v-tooltip';
