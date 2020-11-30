@@ -83,7 +83,7 @@ export default {
 
     provide() {
         return {
-            columnSize: this.columnSize,
+            fieldChunks: this.fieldChunks,
             create: this.create,
             customFields: this.customFields,
             customSections: this.customSections,
@@ -102,7 +102,6 @@ export default {
             sections: this.sections,
             show: this.show,
             state: this.state,
-            sectionFields: this.sectionFields,
             sectionCustomFields: this.sectionCustomFields,
             submit: this.submit,
             tabbed: this.tabbed,
@@ -247,12 +246,6 @@ export default {
                 }, [])
                 : [];
         },
-        columnSize(columns) {
-            return `is-${parseInt(12 / columns, 10)}`;
-        },
-        sectionFields(section) {
-            return section.fields.filter(field => !field.meta.hidden);
-        },
         sectionCustomFields(section) {
             return section.fields.filter(field => !field.meta.hidden && field.meta.custom);
         },
@@ -363,6 +356,24 @@ export default {
         postable(field) {
             return field.meta.content !== 'encrypt'
                 || field.value !== field.meta.initialValue;
+        },
+        fieldChunks(section) {
+            if (section.columns === 'custom') {
+                return [section.fields];
+            }
+
+            const count = Math.ceil(section.fields.length / section.columns);
+            const chunks = [];
+
+            for (let chunk = 0; chunk < count; chunk++) {
+                chunks.push([]);
+                for (let field = 0; field < section.columns; field++) {
+                    chunks[chunk][field] = section.fields[chunk * section.columns + field]
+                        ?? { name: `dummy-${field}`, dummy: true };
+                }
+            }
+
+            return chunks;
         },
     },
 

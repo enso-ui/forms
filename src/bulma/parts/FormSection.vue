@@ -1,22 +1,25 @@
 <template>
-    <div class="columns is-multiline has-margin-bottom-large">
+    <div>
         <div class="column is-12"
             v-if="section.divider">
             <divider class="has-margin-bottom-medium"
                 :title="i18n(section.title)"
                 :placement="state.data.dividerTitlePlacement"/>
         </div>
-        <div v-for="field in sectionFields(section)"
-            class="column"
-            :class="section.columns !== 'custom'
-                ? columnSize(section.columns)
-                : `is-${field.column}`"
-            :key="field.name">
-            <slot :name="field.name"
-                v-if="field.meta.custom"/>
-            <form-field :field="field"
-                v-on="$listeners"
-                v-else/>
+        <div class="columns has-margin-bottom-large is-multiline"
+            v-for="(fields, index) in fieldChunks(section)"
+            :key="`chunk-${index}`">
+            <div v-for="field in fields"
+                class="column"
+                :class="section.columns === 'custom' && `is-${field.column}`"
+                :key="field.name">
+                <template v-if="field.dummy"/>
+                <slot :name="field.name"
+                    v-else-if="field.meta.custom"/>
+                <form-field :field="field"
+                    v-on="$listeners"
+                    v-else/>
+            </div>
         </div>
     </div>
 </template>
@@ -30,7 +33,7 @@ export default {
 
     components: { FormField, Divider },
 
-    inject: ['state', 'i18n', 'errors', 'sectionFields', 'columnSize'],
+    inject: ['state', 'i18n', 'fieldChunks'],
 
     props: {
         section: {
