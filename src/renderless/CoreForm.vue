@@ -46,6 +46,10 @@ export default {
         original: null,
     }),
 
+    watch: {
+        path: 'fetch',
+    },
+
     computed: {
         formData() {
             return this.state.data && this.flatten
