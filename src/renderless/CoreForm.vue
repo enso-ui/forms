@@ -352,20 +352,14 @@ export default {
             this.$forceUpdate();
         },
         hideSection(section, forceUpdate = true) {
-            section.meta = {
-                ...section.meta,
-                hidden: true,
-            };
+            section.hidden = true;
 
             if (forceUpdate) {
                 this.$forceUpdate();
             }
         },
         showSection(section, forceUpdate = true) {
-            section.meta = {
-                ...section.meta,
-                hidden: false,
-            };
+            section.hidden = false;
 
             if (forceUpdate) {
                 this.$forceUpdate();
