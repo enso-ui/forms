@@ -285,7 +285,7 @@ export default {
                 .some(field => !field.meta.hidden);
         },
         isSectionVisible(section) {
-            return !section?.meta?.hidden && this.hasVisibleFields(section);
+            return !section?.hidden && this.hasVisibleFields(section);
         },
         focusError() {
             const firstError = this.$el.querySelector('.help.is-danger');
