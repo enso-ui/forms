@@ -99,7 +99,7 @@ export default {
             fieldBindings: this.fieldBindings,
             fieldType: this.fieldType,
             focusError: this.focusError,
-            hasVisibleFields: this.hasVisibleFields,
+            isSectionVisible: this.isSectionVisible,
             i18n: this.i18n,
             locale: this.locale,
             params: this.params,
@@ -244,7 +244,7 @@ export default {
         tabs() {
             return this.state.data.tabs
                 ? this.state.data.sections.reduce((tabs, section) => {
-                    if (!tabs.includes(section.tab) && this.hasVisibleFields(section)) {
+                    if (!tabs.includes(section.tab)  && this.isSectionVisible(section)) {
                         tabs.push(section.tab);
                     }
                     return tabs;
@@ -283,6 +283,9 @@ export default {
         hasVisibleFields(section) {
             return section.slot || section.fields
                 .some(field => !field.meta.hidden);
+        },
+        isSectionVisible(section) {
+            return !section?.meta?.hidden && this.hasVisibleFields(section);
         },
         focusError() {
             const firstError = this.$el.querySelector('.help.is-danger');
@@ -341,14 +344,32 @@ export default {
                 && JSON.stringify(this.formData) !== this.original;
         },
         hideTab(tab) {
-            this.sections(tab).forEach(({ fields }) => fields
-                .forEach(({ name }) => (this.hideField(name, false))));
+            this.sections(tab).forEach((section) => (this.hideSection(section, false)));
             this.$forceUpdate();
         },
         showTab(tab) {
-            this.sections(tab).forEach(({ fields }) => fields
-                .forEach(({ name }) => (this.showField(name, false))));
+            this.sections(tab).forEach((section) => (this.showSection(section, false)));
             this.$forceUpdate();
+        },
+        hideSection(section, forceUpdate = true) {
+            section.meta = {
+                ...section.meta,
+                hidden: true,
+            };
+
+            if (forceUpdate) {
+                this.$forceUpdate();
+            }
+        },
+        showSection(section, forceUpdate = true) {
+            section.meta = {
+                ...section.meta,
+                hidden: false,
+            };
+
+            if (forceUpdate) {
+                this.$forceUpdate();
+            }
         },
         hideField(fieldName, forceUpdate = true) {
             this.field(fieldName).meta.hidden = true;
