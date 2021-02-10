@@ -244,7 +244,7 @@ export default {
         tabs() {
             return this.state.data.tabs
                 ? this.state.data.sections.reduce((tabs, section) => {
-                    if (!tabs.includes(section.tab)  && this.isSectionVisible(section)) {
+                    if (!tabs.includes(section.tab) && this.isSectionVisible(section)) {
                         tabs.push(section.tab);
                     }
                     return tabs;
