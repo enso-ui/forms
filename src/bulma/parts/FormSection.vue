@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="column is-12"
+        <div class="section-divider"
             v-if="section.divider">
             <divider class="has-margin-bottom-medium"
                 :title="i18n(section.title)"
@@ -43,3 +43,9 @@ export default {
     },
 };
 </script>
+<style>
+.section-divider {
+    width: 100%;
+    padding: 0.75rem;
+}
+</style>
