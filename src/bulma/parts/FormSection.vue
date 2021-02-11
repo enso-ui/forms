@@ -1,22 +1,24 @@
 <template>
-    <div class="columns is-multiline has-margin-bottom-large">
-        <div class="column is-12"
-            v-if="section.divider">
-            <divider class="has-margin-bottom-medium"
-                :title="i18n(section.title)"
-                :placement="state.data.dividerTitlePlacement"/>
-        </div>
-        <div v-for="field in sectionFields(section)"
-            class="column"
-            :class="section.columns !== 'custom'
-                ? columnSize(section.columns)
-                : `is-${field.column}`"
-            :key="field.name">
-            <slot :name="field.name"
-                v-if="field.meta.custom"/>
-            <form-field :field="field"
-                v-on="$listeners"
-                v-else/>
+    <div class="section-wrapper">
+        <divider class="mt-5 mb-5"
+            :title="i18n(section.title)"
+            :placement="state.data.dividerTitlePlacement"
+            v-if="section.divider"/>
+        <div class="columns has-margin-bottom-large is-multiline"
+            v-for="row in rows"
+            :key="`${section.id}-${row}`">
+            <div class="column"
+                v-for="column in columns"
+                :class="cssClass(row, column)"
+                :key="index(row, column)">
+                <template v-if="index(row, column) < section.fields.length">
+                    <slot :name="section.fields[index(row, column)].name"
+                        v-if="section.fields[index(row, column)].meta.custom"/>
+                    <form-field :field="section.fields[index(row, column)]"
+                        v-on="$listeners"
+                        v-else/>
+                </template>
+            </div>
         </div>
     </div>
 </template>
@@ -30,7 +32,7 @@ export default {
 
     components: { FormField, Divider },
 
-    inject: ['state', 'i18n', 'errors', 'sectionFields', 'columnSize'],
+    inject: ['state', 'i18n'],
 
     props: {
         section: {
@@ -38,5 +40,38 @@ export default {
             required: true,
         },
     },
+
+    computed: {
+        columns() {
+            const { columns, fields } = this.section;
+
+            return columns === 'custom' ? fields.length : columns;
+        },
+        rows() {
+            const { columns, fields } = this.section;
+
+            return columns === 'custom' ? 1 : Math.ceil(fields.length / columns);
+        },
+    },
+
+    methods: {
+        cssClass(row, column) {
+            const { columns, fields } = this.section;
+
+            return columns === 'custom'
+                ? `is-${fields[this.index(row, column)].column}`
+                : null;
+        },
+        index(row, column) {
+            return (row - 1) * this.columns + column - 1;
+        },
+    }
 };
 </script>
+
+<style>
+.section-divider {
+    width: 100%;
+    padding: 0.75rem;
+}
+</style>

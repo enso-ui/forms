@@ -87,7 +87,6 @@ export default {
 
     provide() {
         return {
-            columnSize: this.columnSize,
             create: this.create,
             customFields: this.customFields,
             customSections: this.customSections,
@@ -105,7 +104,6 @@ export default {
             sections: this.sections,
             show: this.show,
             state: this.state,
-            sectionFields: this.sectionFields,
             sectionCustomFields: this.sectionCustomFields,
             submit: this.submit,
             tabbed: this.tabbed,
@@ -249,12 +247,6 @@ export default {
                     return tabs;
                 }, [])
                 : [];
-        },
-        columnSize(columns) {
-            return `is-${parseInt(12 / columns, 10)}`;
-        },
-        sectionFields(section) {
-            return section.fields.filter(field => !field.meta.hidden);
         },
         sectionCustomFields(section) {
             return section.fields.filter(field => !field.meta.hidden && field.meta.custom);
