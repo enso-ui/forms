@@ -23,10 +23,6 @@ export default {
             type: String,
             default: 'en',
         },
-        template: {
-            type: Object,
-            default: null,
-        },
         params: {
             type: Object,
             default: null,
@@ -35,22 +31,27 @@ export default {
             type: String,
             required: true,
         },
+        template: {
+            type: Object,
+            default: null,
+        },
     },
 
     data: () => ({
         errors: new Errors(),
+        original: null,
         state: {
             loading: false,
             data: null,
         },
-        original: null,
     }),
 
-    watch: {
-        path: 'fetch',
-    },
-
     computed: {
+        flatten() {
+            return this.state.data && this.state.data.sections
+                .reduce((fields, section) => fields
+                    .concat(section.fields), []);
+        },
         formData() {
             return this.state.data && this.flatten
                 .reduce((object, field) => {
@@ -60,11 +61,6 @@ export default {
 
                     return object;
                 }, {});
-        },
-        flatten() {
-            return this.state.data && this.state.data.sections
-                .reduce((fields, section) => fields
-                    .concat(section.fields), []);
         },
         submitData() {
             return this.formData && Object.keys(this.formData)
@@ -85,29 +81,33 @@ export default {
         },
     },
 
+    watch: {
+        path: 'fetch',
+    },
+
     provide() {
         return {
             create: this.create,
             customFields: this.customFields,
             customSections: this.customSections,
-            dirty: this.dirty,
-            undo: this.undo,
             destroy: this.destroy,
-            errors: this.errors,
+            dirty: this.dirty,
             errorCount: this.errorCount,
+            errors: this.errors,
             fieldBindings: this.fieldBindings,
             fieldType: this.fieldType,
             focusError: this.focusError,
             i18n: this.i18n,
             locale: this.locale,
             params: this.params,
+            sectionCustomFields: this.sectionCustomFields,
             sections: this.sections,
             show: this.show,
             state: this.state,
-            sectionCustomFields: this.sectionCustomFields,
             submit: this.submit,
             tabbed: this.tabbed,
             tabs: this.tabs,
+            undo: this.undo,
         };
     },
 
@@ -116,42 +116,6 @@ export default {
     },
 
     methods: {
-        init() {
-            if (this.template) {
-                this.state.data = this.template;
-                this.$emit('ready', { form: this });
-
-                return;
-            }
-
-            this.fetch();
-        },
-        fetch() {
-            this.state.loading = true;
-
-            axios.get(this.path, { params: this.params })
-                .then(({ data }) => {
-                    this.state.data = data.form;
-                    this.setOriginal();
-                    this.state.loading = false;
-                    this.$emit('ready', { form: this });
-                    this.$emit('loaded', data);
-                }).catch(error => {
-                    this.state.loading = false;
-                    this.$emit('template-fetch-error');
-                    this.errorHandler(error);
-                });
-        },
-        show() {
-            const { show } = this.state.data.actions;
-
-            this.$emit('show');
-
-            this.$router.push({
-                name: show.route,
-                params: this.state.data.routeParams,
-            });
-        },
         create() {
             this.$emit('create');
 
@@ -160,37 +124,18 @@ export default {
                 params: this.state.data.routeParams,
             });
         },
-        submit() {
-            this.state.loading = true;
-
-            axios[this.state.data.method](
-                this.submitPath, { ...this.submitData, _params: this.params },
-            ).then(({ data }) => {
-                this.state.loading = false;
-
-                this.$emit('submit', data);
-
-                this.setOriginal();
-
-                if (data.redirect) {
-                    this.$nextTick(() => this.$router.push({
-                        name: data.redirect,
-                        params: { ...data.param, ...this.state.data.routeParams },
-                    }));
-                }
-            }).catch(error => {
-                this.$emit('error', error);
-                const { status, data } = error.response;
-                this.state.loading = false;
-
-                if (status === 422) {
-                    this.errors.set(data.errors);
-                    this.$nextTick(this.focusError);
-                    return;
-                }
-
-                this.errorHandler(error);
-            });
+        customFields() {
+            return this.state.data.sections
+                .reduce((fields, section) => fields.concat(section.fields
+                    .filter(field => field.meta.custom)), []);
+        },
+        customSections() {
+            return this.state.data.sections
+                .filter(({ columns }) => columns === 'slot');
+        },
+        dirty() {
+            return !this.disableState && this.original
+                && JSON.stringify(this.formData) !== this.original;
         },
         destroy() {
             this.modal = false;
@@ -198,8 +143,6 @@ export default {
 
             axios.delete(this.state.data.actions.destroy.path)
                 .then(({ data }) => {
-                    this.state.loading = false;
-
                     this.$emit('destroy', data);
 
                     if (data.redirect) {
@@ -208,48 +151,8 @@ export default {
                             params: this.state.data.routeParams,
                         });
                     }
-                }).catch(error => {
-                    this.state.loading = false;
-                    this.errorHandler(error);
-                });
-        },
-        customFields() {
-            return this.state.data.sections
-                .reduce((fields, section) => fields
-                    .concat(section.fields.filter(field => field.meta.custom)), []);
-        },
-        customSections() {
-            return this.state.data.sections
-                .filter(({ columns }) => columns === 'slot');
-        },
-        transformNested(data, key) {
-            const segments = key.split('.');
-            let node = data;
-
-            do {
-                const attribute = segments.shift();
-
-                if (!(attribute in node)) {
-                    node[attribute] = segments.length === 0
-                        ? this.formData[key]
-                        : {};
-                }
-
-                node = node[attribute];
-            } while (segments.length > 0);
-        },
-        tabs() {
-            return this.state.data.tabs
-                ? this.state.data.sections.reduce((tabs, section) => {
-                    if (!tabs.includes(section.tab) && !section.hidden) {
-                        tabs.push(section.tab);
-                    }
-                    return tabs;
-                }, [])
-                : [];
-        },
-        sectionCustomFields(section) {
-            return section.fields.filter(field => !field.meta.hidden && field.meta.custom);
+                }).catch(this.errorHandler)
+                .finally(() => (this.state.loading = false));
         },
         errorCount(tab) {
             return this.sections(tab).reduce((fields, section) => {
@@ -257,26 +160,30 @@ export default {
                 return fields;
             }, []).filter(({ name }) => this.errors.has(name)).length;
         },
-        sections(tab) {
-            return this.state.data.sections
-                .filter(section => section.tab === tab);
+        init() {
+            if (this.template) {
+                this.state.data = this.template;
+                this.$emit('ready', { form: this });
+            } else {
+                this.fetch();
+            }
+        },
+        fetch() {
+            this.state.loading = true;
+
+            axios.get(this.path, { params: this.params })
+                .then(({ data }) => {
+                    this.state.data = data.form;
+                    this.setOriginal();
+                    this.$emit('ready', { form: this });
+                    this.$emit('loaded', data);
+                }).catch(error => {
+                    this.$emit('template-fetch-error');
+                    this.errorHandler(error);
+                }).finally(() => (this.state.loading = false));
         },
         field(field) {
-            return this.flatten
-                .find(item => item.name === field);
-        },
-        param(param) {
-            return this.state.data.params[param];
-        },
-        routeParam(param) {
-            return this.state.data.routeParams[param];
-        },
-        focusError() {
-            const firstError = this.$el.querySelector('.help.is-danger');
-
-            if (firstError) {
-                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
+            return this.flatten.find(item => item.name === field);
         },
         fieldBindings(field) {
             return {
@@ -316,38 +223,105 @@ export default {
         fill(data) {
             Object.keys(data).forEach(key => (this.field(key).value = data[key]));
         },
+        focusError() {
+            const firstError = this.$el.querySelector('.help.is-danger');
+
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        },
+        param(param) {
+            return this.state.data.params[param];
+        },
+        postable(field) {
+            return field.meta.content !== 'encrypt'
+                || field.value !== field.meta.initialValue;
+        },
+        routeParam(param) {
+            return this.state.data.routeParams[param];
+        },
+        sectionCustomFields(section) {
+            return section.fields
+                .filter(field => !field.meta.hidden && field.meta.custom);
+        },
+        sections(tab) {
+            return this.state.data.sections
+                .filter(section => section.tab === tab);
+        },
         setOriginal() {
             this.original = JSON.stringify(this.formData);
+        },
+        show() {
+            const { show } = this.state.data.actions;
+
+            this.$emit('show');
+
+            this.$router.push({
+                name: show.route,
+                params: this.state.data.routeParams,
+            });
+        },
+        submit() {
+            this.state.loading = true;
+            const params = { ...this.submitData, _params: this.params };
+
+            axios[this.state.data.method](this.submitPath, params)
+                .then(({ data }) => {
+                    this.$emit('submit', data);
+                    this.setOriginal();
+
+                    if (data.redirect) {
+                        this.$nextTick(() => this.$router.push({
+                            name: data.redirect,
+                            params: { ...data.param, ...this.state.data.routeParams },
+                        }));
+                    }
+                }).catch(error => {
+                    this.$emit('error', error);
+                    const { status, data } = error.response;
+
+                    if (status === 422) {
+                        this.errors.set(data.errors);
+                        this.$nextTick(this.focusError);
+                    } else {
+                        this.errorHandler(error);
+                    }
+                }).finally(() => (this.state.loading = false));
+        },
+        tabs() {
+            if (!this.state.data.tabs) {
+                return [];
+            }
+
+            const reducer = (tabs, section) => {
+                if (!tabs.includes(section.tab) && !section.hidden) {
+                    tabs.push(section.tab);
+                }
+
+                return tabs;
+            };
+
+            return this.state.data.sections.reduce(reducer, []);
+        },
+        transformNested(data, key) {
+            const segments = key.split('.');
+            let node = data;
+
+            do {
+                const attribute = segments.shift();
+
+                if (!(attribute in node)) {
+                    node[attribute] = segments.length === 0
+                        ? this.formData[key]
+                        : {};
+                }
+
+                node = node[attribute];
+            } while (segments.length > 0);
         },
         undo() {
             this.fill(JSON.parse(this.original));
             this.$emit('undo');
-        },
-        dirty() {
-            return !this.disableState && this.original
-                && JSON.stringify(this.formData) !== this.original;
-        },
-        hideTab(tab) {
-            this.sections(tab).forEach((section) => (this.hideSection(section, false)));
-            this.$forceUpdate();
-        },
-        showTab(tab) {
-            this.sections(tab).forEach((section) => (this.showSection(section, false)));
-            this.$forceUpdate();
-        },
-        hideSection(section, forceUpdate = true) {
-            section.hidden = true;
-
-            if (forceUpdate) {
-                this.$forceUpdate();
-            }
-        },
-        showSection(section, forceUpdate = true) {
-            section.hidden = false;
-
-            if (forceUpdate) {
-                this.$forceUpdate();
-            }
         },
         hideField(fieldName, forceUpdate = true) {
             this.field(fieldName).meta.hidden = true;
@@ -363,9 +337,27 @@ export default {
                 this.$forceUpdate();
             }
         },
-        postable(field) {
-            return field.meta.content !== 'encrypt'
-                || field.value !== field.meta.initialValue;
+        hideSection(section, forceUpdate = true) {
+            section.hidden = true;
+
+            if (forceUpdate) {
+                this.$forceUpdate();
+            }
+        },
+        showSection(section, forceUpdate = true) {
+            section.hidden = false;
+
+            if (forceUpdate) {
+                this.$forceUpdate();
+            }
+        },
+        hideTab(tab) {
+            this.sections(tab).forEach(section => (this.hideSection(section, false)));
+            this.$forceUpdate();
+        },
+        showTab(tab) {
+            this.sections(tab).forEach(section => (this.showSection(section, false)));
+            this.$forceUpdate();
         },
     },
 
