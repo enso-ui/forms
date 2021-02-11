@@ -17,7 +17,7 @@
                     v-if="section.columns === 'slot'"/>
                 <form-section :key="index"
                     :section="section"
-                    v-else-if="hasVisibleFields(section)">
+                    v-else-if="!section.hidden">
                     <template v-for="field in sectionCustomFields(section)"
                         v-slot:[field.name]>
                         <slot :name="field.name"
@@ -39,8 +39,8 @@ export default {
     components: { Tabs, Tab, FormSection },
 
     inject: [
-        'errorCount', 'fieldBindings', 'hasVisibleFields',
-        'i18n', 'sections', 'sectionCustomFields', 'tabs',
+        'errorCount', 'fieldBindings', 'sectionCustomFields',
+        'i18n', 'sections', 'tabs',
     ],
 };
 </script>
