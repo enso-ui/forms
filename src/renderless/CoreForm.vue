@@ -280,12 +280,8 @@ export default {
         routeParam(param) {
             return this.state.data.routeParams[param];
         },
-        hasVisibleFields(section) {
-            return section.slot || section.fields
-                .some(field => !field.meta.hidden);
-        },
         isSectionVisible(section) {
-            return !section?.hidden && this.hasVisibleFields(section);
+            return !section.hidden;
         },
         focusError() {
             const firstError = this.$el.querySelector('.help.is-danger');
