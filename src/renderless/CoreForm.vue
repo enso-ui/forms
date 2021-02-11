@@ -83,7 +83,6 @@ export default {
 
     provide() {
         return {
-            fieldChunks: this.fieldChunks,
             create: this.create,
             customFields: this.customFields,
             customSections: this.customSections,
@@ -356,24 +355,6 @@ export default {
         postable(field) {
             return field.meta.content !== 'encrypt'
                 || field.value !== field.meta.initialValue;
-        },
-        fieldChunks(section) {
-            if (section.columns === 'custom') {
-                return [section.fields];
-            }
-
-            const count = Math.ceil(section.fields.length / section.columns);
-            const chunks = [];
-
-            for (let chunk = 0; chunk < count; chunk++) {
-                chunks.push([]);
-                for (let field = 0; field < section.columns; field++) {
-                    chunks[chunk][field] = section.fields[chunk * section.columns + field]
-                        ?? { name: `dummy-${field}`, dummy: true };
-                }
-            }
-
-            return chunks;
         },
     },
 
