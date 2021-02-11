@@ -99,7 +99,6 @@ export default {
             fieldBindings: this.fieldBindings,
             fieldType: this.fieldType,
             focusError: this.focusError,
-            isSectionVisible: this.isSectionVisible,
             i18n: this.i18n,
             locale: this.locale,
             params: this.params,
@@ -244,7 +243,7 @@ export default {
         tabs() {
             return this.state.data.tabs
                 ? this.state.data.sections.reduce((tabs, section) => {
-                    if (!tabs.includes(section.tab) && this.isSectionVisible(section)) {
+                    if (!tabs.includes(section.tab) && !section.hidden) {
                         tabs.push(section.tab);
                     }
                     return tabs;
@@ -279,9 +278,6 @@ export default {
         },
         routeParam(param) {
             return this.state.data.routeParams[param];
-        },
-        isSectionVisible(section) {
-            return !section.hidden;
         },
         focusError() {
             const firstError = this.$el.querySelector('.help.is-danger');
