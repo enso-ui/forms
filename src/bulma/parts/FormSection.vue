@@ -11,10 +11,10 @@
                 v-for="column in columns"
                 :class="cssClass(row, column)"
                 :key="index(row, column)">
-                <template v-if="index(row, column) < section.fields.length">
-                    <slot :name="section.fields[index(row, column)].name"
-                        v-if="section.fields[index(row, column)].meta.custom"/>
-                    <form-field :field="section.fields[index(row, column)]"
+                <template v-if="index(row, column) < fields.length">
+                    <slot :name="fields[index(row, column)].name"
+                        v-if="fields[index(row, column)].meta.custom"/>
+                    <form-field :field="fields[index(row, column)]"
                         v-on="$listeners"
                         v-else/>
                 </template>
@@ -43,29 +43,33 @@ export default {
 
     computed: {
         columns() {
-            const { columns, fields } = this.section;
+            const { columns } = this.section;
 
-            return columns === 'custom' ? fields.length : columns;
+            return columns === 'custom' ? this.fields.length : columns;
+        },
+        fields() {
+            return this.section.fields
+                .filter(({ meta: { hidden } }) => hidden !== true);
         },
         rows() {
-            const { columns, fields } = this.section;
+            const { columns } = this.section;
 
-            return columns === 'custom' ? 1 : Math.ceil(fields.length / columns);
+            return columns === 'custom' ? 1 : Math.ceil(this.fields.length / columns);
         },
     },
 
     methods: {
         cssClass(row, column) {
-            const { columns, fields } = this.section;
+            const { columns } = this.section;
 
             return columns === 'custom'
-                ? `is-${fields[this.index(row, column)].column}`
+                ? `is-${this.fields[this.index(row, column)].column}`
                 : null;
         },
         index(row, column) {
             return (row - 1) * this.columns + column - 1;
         },
-    }
+    },
 };
 </script>
 
