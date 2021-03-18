@@ -21,7 +21,7 @@
         </div>
         <div class="level-right">
             <div class="level-item"
-                v-if="errors.any()">
+                v-if="state.data.clearErrorsControl && errors.any()">
                 <a class="button is-small is-bold is-danger"
                     @click="errors.empty()">
                     <span>
