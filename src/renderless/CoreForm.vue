@@ -171,7 +171,7 @@ export default {
         fetch() {
             this.state.loading = true;
 
-            axios.get(this.path, { params: this.params })
+            return axios.get(this.path, { params: this.params })
                 .then(({ data }) => {
                     this.state.data = data.form;
                     this.setOriginal();
@@ -264,10 +264,12 @@ export default {
         submit() {
             this.state.loading = true;
             const params = { ...this.submitData, _params: this.params };
+            this.$emit('submitting');
 
             axios[this.state.data.method](this.submitPath, params)
                 .then(({ data }) => {
                     this.$emit('submit', data);
+                    this.$emit('submitted');
                     this.setOriginal();
 
                     if (data.redirect) {
