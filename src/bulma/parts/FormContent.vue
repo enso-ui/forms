@@ -32,9 +32,10 @@
                 </form-section>
             </template>
             <form-actions class="has-margin-top-large"
-                v-on="$listeners">
+                v-on="$listeners"
+                v-if="!state.data.autosave">
                 <template v-for="actions in ['actions-right', 'actions-left']"
-                          v-slot:[actions]>
+                    v-slot:[actions]>
                     <slot :name="actions"/>
                 </template>
             </form-actions>
