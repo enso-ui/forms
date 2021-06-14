@@ -217,7 +217,7 @@ export default {
             case 'wysiwyg':
                 return 'wysiwyg-field';
             default:
-                throw new Error(`Misconfigured field "${this.field.name}"`);
+                throw new Error(`Misconfigured field "${field.name}"`);
             }
         },
         fill(data) {
