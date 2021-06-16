@@ -108,6 +108,7 @@ export default {
             tabbed: this.tabbed,
             tabs: this.tabs,
             undo: this.undo,
+            visibleSection: this.visibleSection,
         };
     },
 
@@ -352,6 +353,13 @@ export default {
             if (forceUpdate) {
                 this.$forceUpdate();
             }
+        },
+        visibleSection(section) {
+            return !section?.meta?.hidden && this.hasVisibleFields(section);
+        },
+        hasVisibleFields(section) {
+            return section.slot || section.fields
+                .some(field => !field.meta.hidden);
         },
         hideTab(tab) {
             this.sections(tab).forEach(section => (this.hideSection(section, false)));
