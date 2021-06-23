@@ -4,7 +4,7 @@
             :title="i18n(section.title)"
             :placement="state.data.dividerTitlePlacement"
             v-if="section.divider"/>
-        <div class="columns has-margin-bottom-large is-multiline"
+        <div class="columns mb-3 is-multiline"
             v-for="row in rows"
             :key="`${section.id}-${row}`">
             <div class="column"

@@ -31,7 +31,7 @@
                     </template>
                 </form-section>
             </template>
-            <form-actions class="has-margin-top-large"
+            <form-actions class="mt-3"
                 v-on="$listeners"
                 v-if="!state.data.autosave">
                 <template v-for="actions in ['actions-right', 'actions-left']"
