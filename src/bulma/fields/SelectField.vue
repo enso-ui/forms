@@ -5,6 +5,7 @@
         :params="params"
         :pivot-params="pivotParams"
         :custom-params="customParams"
+        :error-handler="errorHandler"
         v-bind="field.meta"
         v-on="$listeners"
         @fetch="field.meta.options = $event"
@@ -19,6 +20,8 @@ export default {
     name: 'SelectField',
 
     components: { VueSelect },
+
+    inject: ['errorHandler'],
 
     props: {
         errors: {

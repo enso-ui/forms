@@ -1,8 +1,8 @@
 <template>
-    <vue-form :error-handler="errorHandler"
-        :i18n="i18n"
+    <vue-form :i18n="i18n"
         :locale="lang"
         :path="path"
+        :error-handler="errorHandler"
         :disable-state="disableState"
         v-bind="$attrs"
         v-on="$listeners"

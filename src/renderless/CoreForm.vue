@@ -93,6 +93,7 @@ export default {
             destroy: this.destroy,
             dirty: this.dirty,
             errorCount: this.errorCount,
+            errorHandler: this.errorHandler,
             errors: this.errors,
             fieldBindings: this.fieldBindings,
             fieldType: this.fieldType,
