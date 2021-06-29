@@ -79,6 +79,7 @@ export default {
     methods: {
         autosave() {
             if (this.state.data.autosave) {
+                this.errors.empty();
                 this.submit();
             }
         },
