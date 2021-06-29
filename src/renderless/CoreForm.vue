@@ -31,7 +31,7 @@ export default {
             type: String,
             required: true,
         },
-        routeErrorHandler: {
+        routerErrorHandler: {
             type: Function,
             default: error => {
                 throw error;
@@ -130,7 +130,7 @@ export default {
             this.$router.push({
                 name: this.state.data.actions.create.route,
                 params: this.state.data.routeParams,
-            }).catch(this.routeErrorHandler);
+            }).catch(this.routerErrorHandler);
         },
         customFields() {
             return this.state.data.sections
@@ -157,7 +157,7 @@ export default {
                         this.$router.push({
                             name: data.redirect,
                             params: this.state.data.routeParams,
-                        }).catch(this.routeErrorHandler);
+                        }).catch(this.routerErrorHandler);
                     }
                 }).catch(this.errorHandler)
                 .finally(() => (this.state.loading = false));
@@ -267,7 +267,7 @@ export default {
             this.$router.push({
                 name: show.route,
                 params: this.state.data.routeParams,
-            }).catch(this.routeErrorHandler);
+            }).catch(this.routerErrorHandler);
         },
         submit() {
             this.state.loading = true;
@@ -284,7 +284,7 @@ export default {
                         this.$nextTick(() => this.$router.push({
                             name: data.redirect,
                             params: { ...data.param, ...this.state.data.routeParams },
-                        }).catch(this.routeErrorHandler));
+                        }).catch(this.routerErrorHandler));
                     }
                 }).catch(error => {
                     this.$emit('error', error);
