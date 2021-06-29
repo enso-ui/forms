@@ -3,6 +3,7 @@
         :locale="lang"
         :path="path"
         :error-handler="errorHandler"
+        :router-error-handler="routerErrorHandler"
         :disable-state="disableState"
         v-bind="$attrs"
         v-on="$listeners"
@@ -36,7 +37,7 @@ export default {
 
     components: { VueForm },
 
-    inject: ['errorHandler', 'i18n', 'route', 'toastr'],
+    inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'],
 
     props: {
         path: {
@@ -182,7 +183,7 @@ export default {
         },
         success(data) {
             if (data.message) {
-                this.toastr.success(data.message)
+                this.toastr.success(data.message);
             }
         },
     },
