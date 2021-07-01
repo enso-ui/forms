@@ -1,7 +1,7 @@
 <template>
-    <date-field time-only
-        v-on="$listeners"
-        v-bind="$attrs"/>
+    <date-field v-bind="$attrs"
+        time-only
+        v-on="$listeners"/>
 </template>
 
 <script>

@@ -1,11 +1,11 @@
 <template>
-    <vue-form :i18n="i18n"
+    <vue-form v-bind="$attrs"
+        :i18n="i18n"
         :locale="lang"
         :path="path"
         :error-handler="errorHandler"
         :router-error-handler="routerErrorHandler"
         :disable-state="disableState"
-        v-bind="$attrs"
         v-on="$listeners"
         @submit="success"
         @destroy="success"

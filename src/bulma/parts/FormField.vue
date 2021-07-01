@@ -11,11 +11,11 @@
             </span>
         </label>
         <component :is="fieldType(field)"
+            v-bind="$attrs"
             :field="field"
             :errors="errors"
             :i18n="i18n"
             :locale="locale"
-            v-bind="$attrs"
             @changed="autosave"
             v-on="$listeners"
             ref="field"/>

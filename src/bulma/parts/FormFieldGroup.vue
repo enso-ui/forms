@@ -15,13 +15,13 @@
         <div :class="['field', { 'has-addons': hasAddons }, { 'is-grouped': isGrouped }]">
             <slot name="left"/>
             <div class="control is-expanded">
-                <component :class="{ 'is-fullwidth': hasAddons }"
-                    :is="fieldType(field)"
+                <component :is="fieldType(field)"
+                    :class="{ 'is-fullwidth': hasAddons }"
+                    v-bind="$attrs"
                     :field="field"
                     :errors="errors"
                     :i18n="i18n"
                     :locale="locale"
-                    v-bind="$attrs"
                     @changed="autosave"
                     v-on="$listeners"
                     ref="field"/>
