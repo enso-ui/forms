@@ -1,8 +1,8 @@
 <template>
     <div :class="['control', { 'has-icons-right': errors.has(field.name) }]">
         <money :class="['input', { 'is-danger': errors.has(field.name) }]"
-            v-model="field.value"
             v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
+            v-model="field.value"
             v-on="$listeners"
             @input="errors.clear(field.name); $emit('changed')"/>
             <error-icon v-if="errors.has(field.name)"/>

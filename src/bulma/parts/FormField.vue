@@ -10,8 +10,8 @@
                     size="xs"/>
             </span>
         </label>
-        <component :is="fieldType(field)"
-            v-bind="$attrs"
+        <component v-bind="$attrs"
+            :is="fieldType(field)"
             :field="field"
             :errors="errors"
             :i18n="i18n"

@@ -1,7 +1,7 @@
 <template>
-    <wysiwyg v-model="field.value"
+    <wysiwyg v-bind="field.meta"
+        v-model="field.value"
         :api-key="field.meta.apiKey"
-        v-bind="field.meta"
         :plugins="field.meta.plugins"
         :toolbar="field.meta.toolbar"
         :has-error="errors.has(field.name)"

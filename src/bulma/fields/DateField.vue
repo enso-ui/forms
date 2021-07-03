@@ -1,10 +1,10 @@
 <template>
-    <datepicker v-model="field.value"
+    <datepicker v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
+        v-model="field.value"
         :alt-input="!!field.meta.altFormat"
         :is-danger="errors.has(field.name)"
         :locale="locale"
         :time-only="timeOnly"
-        v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
         v-on="$listeners"
         @input="errors.clear(field.name); $emit('changed')"
         ref="datepicker"/>
@@ -44,7 +44,7 @@ export default {
     methods: {
         clear() {
             this.$refs.datepicker.clear();
-        }
-    }
+        },
+    },
 };
 </script>

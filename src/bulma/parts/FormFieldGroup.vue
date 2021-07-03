@@ -15,9 +15,9 @@
         <div :class="['field', { 'has-addons': hasAddons }, { 'is-grouped': isGrouped }]">
             <slot name="left"/>
             <div class="control is-expanded">
-                <component :is="fieldType(field)"
-                    :class="{ 'is-fullwidth': hasAddons }"
+                <component :class="{ 'is-fullwidth': hasAddons }"
                     v-bind="$attrs"
+                    :is="fieldType(field)"
                     :field="field"
                     :errors="errors"
                     :i18n="i18n"
