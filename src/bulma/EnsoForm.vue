@@ -154,32 +154,31 @@ export default {
         },
         fill(state) {
             return this.ready
-                ? this.$refs.form.fill(state)
-                : null;
+                && this.$refs.form.fill(state);
         },
         setOriginal() {
             return this.ready
                 && this.$refs.form.setOriginal();
         },
+        undo() {
+            return this.ready
+                && this.$refs.form.undo();
+        },
         hideTab(tab) {
             return this.ready
-                ? this.$refs.form.hideTab(tab)
-                : null;
+                && this.$refs.form.hideTab(tab);
         },
         showTab(tab) {
             return this.ready
-                ? this.$refs.form.showTab(tab)
-                : null;
+                && this.$refs.form.showTab(tab);
         },
         hideField(field) {
             return this.ready
-                ? this.$refs.form.hideField(field)
-                : null;
+                && this.$refs.form.hideField(field);
         },
         showField(field) {
             return this.ready
-                ? this.$refs.form.showField(field)
-                : null;
+                && this.$refs.form.showField(field);
         },
         success(data) {
             if (data.message) {

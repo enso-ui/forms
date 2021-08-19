@@ -97,33 +97,31 @@ export default {
         },
         fill(state) {
             return this.ready
-                ? this.$refs.coreForm.fill(state)
-                : null;
+                && this.$refs.coreForm.fill(state);
         },
         setOriginal() {
             return this.ready
-                ? this.$refs.coreForm.setOriginal()
-                : null;
+                && this.$refs.coreForm.setOriginal();
+        },
+        undo() {
+            return this.ready
+                && this.$refs.coreForm.undo();
         },
         hideTab(tab) {
             return this.ready
-                ? this.$refs.coreForm.hideTab(tab)
-                : null;
+                && this.$refs.coreForm.hideTab(tab);
         },
         showTab(tab) {
             return this.ready
-                ? this.$refs.coreForm.showTab(tab)
-                : null;
+                && this.$refs.coreForm.showTab(tab);
         },
         hideField(field) {
             return this.ready
-                ? this.$refs.coreForm.hideField(field)
-                : null;
+                && this.$refs.coreForm.hideField(field);
         },
         showField(field) {
             return this.ready
-                ? this.$refs.coreForm.showField(field)
-                : null;
+                && this.$refs.coreForm.showField(field);
         },
     },
 };
