@@ -3,23 +3,23 @@
         v-on="$listeners"
         @ready="ready = true"
         ref="coreForm">
-        <template v-slot:default
+        <template #:default
             v-if="ready">
             <form-content v-on="$listeners">
                 <template v-for="field in customFields"
-                    v-slot:[field.name]="props">
+                    #[field.name]="props">
                     <slot :name="field.name"
                         v-bind="props">
                         <form-field v-bind="props"/>
                     </slot>
                 </template>
                 <template v-for="section in customSections"
-                    v-slot:[section.slot]="props">
+                    #[section.slot]="props">
                     <slot :name="section.slot"
                         v-bind="props"/>
                 </template>
                 <template v-for="actions in ['actions-right', 'actions-left']"
-                          v-slot:[actions]>
+                          #[actions]>
                     <slot :name="actions"/>
                 </template>
             </form-content>
