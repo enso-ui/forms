@@ -3,15 +3,14 @@
         <form-header/>
         <form class="is-marginless"
             @submit.prevent>
-            <form-tabs v-on="$listeners"
-                v-if="state.data.tabs">
+            <form-tabs         v-if="state.data.tabs">
                 <template v-for="field in customFields()"
-                    v-slot:[field.name]>
+                    #[field.name]>
                     <slot :name="field.name"
                         v-bind="fieldBindings(field)"/>
                 </template>
                 <template v-for="section in customSections()"
-                    v-slot:[section.slot]>
+                    #[section.slot]>
                     <slot :name="section.slot"
                         :section="section"/>
                 </template>
@@ -25,17 +24,16 @@
                     :section="section"
                     v-else-if="visibleSection(section)">
                     <template v-for="field in sectionCustomFields(section)"
-                        v-slot:[field.name]>
+                        #[field.name]>
                         <slot :name="field.name"
                             v-bind="fieldBindings(field)"/>
                     </template>
                 </form-section>
             </template>
             <form-actions class="mt-3"
-                v-on="$listeners"
                 v-if="!state.data.autosave">
                 <template v-for="actions in ['actions-right', 'actions-left']"
-                    v-slot:[actions]>
+                    #[actions]>
                     <slot :name="actions"/>
                 </template>
             </form-actions>

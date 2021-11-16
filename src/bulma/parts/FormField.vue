@@ -17,7 +17,6 @@
             :i18n="i18n"
             :locale="locale"
             @changed="autosave"
-            v-on="$listeners"
             ref="field"/>
         <p class="help is-danger"
             v-if="errors.has(field.name)">

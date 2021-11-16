@@ -5,24 +5,23 @@
         :path="path"
         :error-handler="errorHandler"
         :router-error-handler="routerErrorHandler"
-        :disable-state="disableState"
-        v-on="$listeners"
+        :disable-state="disableState"   
         @submit="success"
         @destroy="success"
         @ready="init"
         ref="form">
         <template v-for="field in customFields"
-            v-slot:[field.name]="props">
+            #[field.name]="props">
             <slot :name="field.name"
                 v-bind="props"/>
         </template>
         <template v-for="section in customSections"
-            v-slot:[section.slot]="props">
+            #[section.slot]="props">
             <slot :name="section.slot"
                 v-bind="props"/>
         </template>
         <template v-for="actions in ['actions-right', 'actions-left']"
-            v-slot:[actions]>
+            #[actions]>
             <slot :name="actions"/>
         </template>
     </vue-form>

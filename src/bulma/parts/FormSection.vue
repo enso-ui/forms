@@ -15,7 +15,6 @@
                     <slot :name="fields[index(row, column)].name"
                         v-if="fields[index(row, column)].meta.custom"/>
                     <form-field :field="fields[index(row, column)]"
-                        v-on="$listeners"
                         v-else/>
                 </template>
             </div>

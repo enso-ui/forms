@@ -23,7 +23,6 @@
                     :i18n="i18n"
                     :locale="locale"
                     @changed="autosave"
-                    v-on="$listeners"
                     ref="field"/>
             </div>
             <slot name="right"/>

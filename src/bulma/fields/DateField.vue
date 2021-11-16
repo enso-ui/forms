@@ -4,8 +4,7 @@
         :alt-input="!!field.meta.altFormat"
         :is-danger="errors.has(field.name)"
         :locale="locale"
-        :time-only="timeOnly"
-        v-on="$listeners"
+        :time-only="timeOnly"   
         @input="errors.clear(field.name); $emit('changed')"
         ref="datepicker"/>
 </template>

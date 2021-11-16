@@ -1,11 +1,10 @@
 <template>
     <core-form v-bind="$attrs"
-        v-on="$listeners"
         @ready="ready = true"
         ref="coreForm">
-        <template #:default
+        <template #default
             v-if="ready">
-            <form-content v-on="$listeners">
+            <form-content>
                 <template v-for="field in customFields"
                     #[field.name]="props">
                     <slot :name="field.name"

@@ -4,8 +4,7 @@
         :api-key="field.meta.apiKey"
         :plugins="field.meta.plugins"
         :toolbar="field.meta.toolbar"
-        :has-error="errors.has(field.name)"
-        v-on="$listeners"
+        :has-error="errors.has(field.name)"   
         @input="errors.clear(field.name); $emit('changed')"/>
 </template>
 

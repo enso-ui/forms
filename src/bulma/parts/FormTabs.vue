@@ -1,7 +1,6 @@
 <template>
-    <tabs class="form-tabs"
-        v-on="$listeners">
-        <template #:label="{ tab }">
+    <tabs class="form-tabs"   >
+        <template #label="{ tab }">
             {{ i18n(tab) }}
             <span class="tag is-danger is-small error-count"
                 v-if="errorCount(tab)">
