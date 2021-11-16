@@ -28,6 +28,7 @@
 
 <script>
 import { debounce } from 'lodash';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { VTooltip } from 'v-tooltip';
@@ -48,13 +49,14 @@ export default {
     directives: { tooltip: VTooltip },
 
     components: {
-        SwitchField,
+        Fa,
+        DateField,
         InputField,
         MoneyField,
+        SwitchField,
         SelectField,
-        DateField,
-        TimeField,
         TextareaField,
+        TimeField,
         WysiwygField,
     },
 

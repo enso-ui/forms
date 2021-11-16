@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
@@ -16,6 +17,8 @@ library.add(faEye, faEyeSlash);
 
 export default {
     name: 'RevealPassword',
+
+    components: { Fa },
 
     props: {
         meta: {

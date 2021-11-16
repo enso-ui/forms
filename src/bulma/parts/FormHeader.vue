@@ -12,10 +12,14 @@
 </template>
 
 <script>
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
+
 export default {
     name: 'FormHeader',
 
     inject: ['state', 'i18n'],
+
+    components: { Fa }
 };
 </script>
 
