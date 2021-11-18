@@ -1,5 +1,5 @@
 <template>
-    <modal v-bind="$attrs"   >
+    <modal v-bind="$attrs">
         <div class="box">
             <h5 class="subtitle is-5">
                 {{ i18n(message) }}

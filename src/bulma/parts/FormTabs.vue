@@ -1,5 +1,5 @@
 <template>
-    <tabs class="form-tabs"   >
+    <tabs class="form-tabs">
         <template #label="{ tab }">
             {{ i18n(tab) }}
             <span class="tag is-danger is-small error-count"
