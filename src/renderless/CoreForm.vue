@@ -280,7 +280,9 @@ export default {
                     this.$emit('submitted');
                     this.setOriginal();
 
-                    if (data.redirect) {
+                    if (data.reload) {
+                        this.fetch();
+                    } else if (data.redirect) {
                         this.$nextTick(() => this.$router.push({
                             name: data.redirect,
                             params: { ...data.param, ...this.state.data.routeParams },
