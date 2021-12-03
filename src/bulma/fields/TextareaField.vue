@@ -25,6 +25,8 @@ export default {
             required: true,
         },
     },
+
+    emits: ['changed'],
 };
 </script>
 

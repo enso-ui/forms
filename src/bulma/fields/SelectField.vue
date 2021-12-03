@@ -6,7 +6,7 @@
         :params="params"
         :pivot-params="pivotParams"
         :custom-params="customParams"
-        :error-handler="errorHandler"   
+        :error-handler="errorHandler"
         @fetch="field.meta.options = $event"
         @input="errors.clear(field.name); $emit('changed')"
         ref="select"/>
@@ -48,6 +48,8 @@ export default {
             default: () => ({}),
         },
     },
+
+    emits: ['changed'],
 
     computed: {
         selection() {

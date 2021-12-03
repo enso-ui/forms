@@ -45,6 +45,8 @@ export default {
         },
     },
 
+    emits: ['close', 'commit'],
+
     mounted() {
         this.$el.querySelector('.button.is-danger').focus();
     },

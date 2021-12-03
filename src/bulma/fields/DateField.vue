@@ -4,7 +4,7 @@
         :alt-input="!!field.meta.altFormat"
         :is-danger="errors.has(field.name)"
         :locale="locale"
-        :time-only="timeOnly"   
+        :time-only="timeOnly"
         @input="errors.clear(field.name); $emit('changed')"
         ref="datepicker"/>
 </template>
@@ -39,6 +39,8 @@ export default {
             default: false,
         },
     },
+
+    emits: ['changed'],
 
     methods: {
         clear() {

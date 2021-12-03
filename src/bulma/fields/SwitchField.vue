@@ -1,7 +1,7 @@
 <template>
     <vue-switch class="is-large is-info"
         v-model="field.value"
-        :disabled="field.meta.disabled || field.meta.readonly"   
+        :disabled="field.meta.disabled || field.meta.readonly"
         @input="errors.clear(field.name); $emit('changed')"/>
 </template>
 
@@ -23,6 +23,8 @@ export default {
             required: true,
         },
     },
+
+    emits: ['changed'],
 };
 </script>
 

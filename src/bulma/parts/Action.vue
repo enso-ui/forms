@@ -44,5 +44,7 @@ export default {
             validator: v => ['a', 'button'].includes(v),
         },
     },
+
+    emits: ['click'],
 };
 </script>

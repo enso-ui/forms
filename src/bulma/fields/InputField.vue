@@ -42,6 +42,8 @@ export default {
         },
     },
 
+    emits: ['changed'],
+
     data: v => ({
         password: v.field.meta.content === 'password',
     }),

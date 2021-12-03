@@ -4,7 +4,7 @@
         :api-key="field.meta.apiKey"
         :plugins="field.meta.plugins"
         :toolbar="field.meta.toolbar"
-        :has-error="errors.has(field.name)"   
+        :has-error="errors.has(field.name)"
         @input="errors.clear(field.name); $emit('changed')"/>
 </template>
 
@@ -24,5 +24,7 @@ export default {
             required: true,
         },
     },
+
+    emits: ['changed'],
 };
 </script>

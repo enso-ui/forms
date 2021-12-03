@@ -43,6 +43,11 @@ export default {
         },
     },
 
+    emits: [
+        'create', 'destroy', 'error', 'loaded', 'ready', 'show', 'submitting',
+        'submit', 'submitted', 'template-fetch-error', 'undo'
+    ],
+
     data: () => ({
         errors: new Errors(),
         original: null,
