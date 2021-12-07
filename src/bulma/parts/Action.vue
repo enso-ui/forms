@@ -2,7 +2,7 @@
     <div class="level-item">
         <component :is="tag"
             :class="['button', { 'is-loading': loading }, button.class]"
-            :disabled="disabled"
+            :disabled="disabled || null"
             @click="$emit('click')">
             <span class="is-hidden-mobile">
                 {{ i18n(button.label) }}

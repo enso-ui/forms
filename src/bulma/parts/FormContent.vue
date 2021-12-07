@@ -3,7 +3,7 @@
         <form-header/>
         <form class="is-marginless"
             @submit.prevent>
-            <form-tabs         v-if="state.data.tabs">
+            <form-tabs v-if="state.data?.tabs">
                 <template v-for="field in customFields()"
                     #[field.name]>
                     <slot :name="field.name"

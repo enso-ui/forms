@@ -48,6 +48,8 @@ export default {
         'submit', 'submitted', 'template-fetch-error', 'undo'
     ],
 
+    inheritAttrs: false,
+
     data: () => ({
         errors: new Errors(),
         original: null,
@@ -237,7 +239,9 @@ export default {
             Object.keys(data).forEach(key => (this.field(key).value = data[key]));
         },
         focusError() {
-            const firstError = this.$el.querySelector('.help.is-danger');
+            const el = this.$parent.$refs.coreForm.$el.nextElementSibling;
+
+            const firstError = el.querySelector('.help.is-danger');
 
             if (firstError) {
                 firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -384,7 +388,7 @@ export default {
     },
 
     render() {
-        return this.$slots.default;
+        return this.$slots.default && this.$slots.default();
     },
 };
 </script>

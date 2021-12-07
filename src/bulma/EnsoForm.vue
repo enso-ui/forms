@@ -5,7 +5,7 @@
         :path="path"
         :error-handler="errorHandler"
         :router-error-handler="routerErrorHandler"
-        :disable-state="disableState"   
+        :disable-state="disableState"
         @submit="success"
         @destroy="success"
         @ready="init"
@@ -39,12 +39,6 @@ export default {
     inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'],
 
     props: {
-        path: {
-            type: String,
-            default() {
-                return this.route(this.$route.name, this.$route.params, false);
-            },
-        },
         disableState: {
             type: Boolean,
             default: false,
@@ -87,6 +81,10 @@ export default {
             return this.ready
                 ? this.$refs.form.errors
                 : null;
+        },
+        path() {
+            return this.$attrs.path
+                ?? this.route(this.$route.name, this.$route.params, false);
         },
     },
 
