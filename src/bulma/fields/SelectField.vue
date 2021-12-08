@@ -8,7 +8,7 @@
         :custom-params="customParams"
         :error-handler="errorHandler"
         @fetch="field.meta.options = $event"
-        @input="errors.clear(field.name); $emit('changed')"
+        @update:modelValue="errors.clear(field.name); $emit('changed')"
         ref="select"/>
 </template>
 

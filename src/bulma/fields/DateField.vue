@@ -5,7 +5,7 @@
         :is-danger="errors.has(field.name)"
         :locale="locale"
         :time-only="timeOnly"
-        @input="errors.clear(field.name); $emit('changed')"
+        @update:modelValue="errors.clear(field.name); $emit('changed')"
         ref="datepicker"/>
 </template>
 

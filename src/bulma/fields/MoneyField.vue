@@ -3,7 +3,7 @@
         <money :class="['input', { 'is-danger': errors.has(field.name) }]"
             v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
             v-model="field.value"
-            @input="errors.clear(field.name); $emit('changed')"/>
+            @update:modelValue="errors.clear(field.name); $emit('changed')"/>
             <error-icon v-if="errors.has(field.name)"/>
     </div>
 </template>
