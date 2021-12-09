@@ -1,44 +1,42 @@
 <template>
-    <div>
-        <form-header/>
-        <form class="is-marginless"
-            @submit.prevent>
-            <form-tabs v-if="state.data?.tabs">
-                <template v-for="field in customFields()"
+    <form-header/>
+    <form class="is-marginless"
+        @submit.prevent>
+        <form-tabs v-if="state.data?.tabs">
+            <template v-for="field in customFields()"
+                #[field.name]>
+                <slot :name="field.name"
+                    v-bind="fieldBindings(field)"/>
+            </template>
+            <template v-for="section in customSections()"
+                #[section.slot]>
+                <slot :name="section.slot"
+                    :section="section"/>
+            </template>
+        </form-tabs>
+        <template v-for="(section, index) in state.data.sections"
+            v-else>
+            <slot :name="section.slot"
+                :section="section"
+                v-if="section.columns === 'slot'"/>
+            <form-section :key="index"
+                :section="section"
+                v-else-if="visibleSection(section)">
+                <template v-for="field in sectionCustomFields(section)"
                     #[field.name]>
                     <slot :name="field.name"
                         v-bind="fieldBindings(field)"/>
                 </template>
-                <template v-for="section in customSections()"
-                    #[section.slot]>
-                    <slot :name="section.slot"
-                        :section="section"/>
-                </template>
-            </form-tabs>
-            <template v-for="(section, index) in state.data.sections"
-                v-else>
-                <slot :name="section.slot"
-                    :section="section"
-                    v-if="section.columns === 'slot'"/>
-                <form-section :key="index"
-                    :section="section"
-                    v-else-if="visibleSection(section)">
-                    <template v-for="field in sectionCustomFields(section)"
-                        #[field.name]>
-                        <slot :name="field.name"
-                            v-bind="fieldBindings(field)"/>
-                    </template>
-                </form-section>
+            </form-section>
+        </template>
+        <form-actions class="mt-3"
+            v-if="!state.data.autosave">
+            <template v-for="actions in ['actions-right', 'actions-left']"
+                #[actions]>
+                <slot :name="actions"/>
             </template>
-            <form-actions class="mt-3"
-                v-if="!state.data.autosave">
-                <template v-for="actions in ['actions-right', 'actions-left']"
-                    #[actions]>
-                    <slot :name="actions"/>
-                </template>
-            </form-actions>
-        </form>
-    </div>
+        </form-actions>
+    </form>
 </template>
 
 <script>

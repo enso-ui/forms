@@ -239,12 +239,12 @@ export default {
             Object.keys(data).forEach(key => (this.field(key).value = data[key]));
         },
         focusError() {
-            const el = this.$parent.$refs.coreForm.$el.nextElementSibling;
+            const firstError = this.$parent.$el.querySelector('.help.is-danger');
 
-            const firstError = el.querySelector('.help.is-danger');
+            console.log(firstError);
 
             if (firstError) {
-                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstError.scrollIntoView({block: 'center'});
             }
         },
         param(param) {
