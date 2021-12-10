@@ -5,7 +5,7 @@
             ref="coreForm">
                 <template #default
                     v-if="ready">
-                    <form-content :class="$attrs.class">
+                    <form-content>
                         <template v-for="field in customFields"
                             #[field.name]="props">
                             <slot :name="field.name"
