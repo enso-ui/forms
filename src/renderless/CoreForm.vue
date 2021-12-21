@@ -241,8 +241,6 @@ export default {
         focusError() {
             const firstError = this.$parent.$el.querySelector('.help.is-danger');
 
-            console.log(firstError);
-
             if (firstError) {
                 firstError.scrollIntoView({block: 'center'});
             }

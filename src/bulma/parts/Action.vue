@@ -1,6 +1,7 @@
 <template>
     <div class="level-item">
-        <component :is="tag"
+        <component :type="type"
+            :is="tag"
             :class="['button', { 'is-loading': loading }, button.class]"
             :disabled="disabled || null"
             @click="$emit('click')">
@@ -46,5 +47,13 @@ export default {
     },
 
     emits: ['click'],
+
+    computed: {
+        type() {
+            return this.tag === 'button'
+                ? 'button'
+                : null;
+        }
+    }
 };
 </script>

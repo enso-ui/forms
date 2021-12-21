@@ -117,6 +117,7 @@ export default {
     methods: {
         ...mapMutations('bookmarks', ['updateState']),
         init() {
+            console.log('e f init')
             this.ready = true;
 
             if (this.disableState || !this.bookmarks) {
