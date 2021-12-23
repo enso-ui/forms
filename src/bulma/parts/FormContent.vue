@@ -53,8 +53,8 @@ export default {
     },
 
     inject: [
-        'state', 'fieldBindings', 'customSections', 'customFields',
-        'sectionCustomFields', 'visibleSection',
+        'customSections', 'customFields', 'fieldBindings',
+        'state', 'sectionCustomFields', 'visibleSection',
     ],
 };
 </script>

@@ -14,6 +14,7 @@
             :is="fieldType(field)"
             :field="field"
             :errors="errors"
+            :http="http"
             :i18n="i18n"
             :locale="locale"
             @changed="autosave"
@@ -61,7 +62,7 @@ export default {
         WysiwygField,
     },
 
-    inject: ['fieldType', 'errors', 'i18n', 'locale', 'state', 'submit'],
+    inject: ['fieldType', 'errors', 'http', 'i18n', 'locale', 'state', 'submit'],
 
     props: {
         field: {

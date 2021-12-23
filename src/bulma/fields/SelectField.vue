@@ -2,6 +2,7 @@
     <vue-select v-bind="field.meta"
         v-model="field.value"
         :has-error="errors.has(field.name)"
+        :http="http"
         :i18n="i18n"
         :params="params"
         :pivot-params="pivotParams"
@@ -30,6 +31,10 @@ export default {
         field: {
             type: Object,
             required: true,
+        },
+        http: {
+            default: null,
+            type: Function,
         },
         i18n: {
             type: Function,

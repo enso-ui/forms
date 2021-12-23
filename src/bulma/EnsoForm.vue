@@ -1,5 +1,6 @@
 <template>
     <vue-form v-bind="$attrs"
+        :http="http"
         :i18n="i18n"
         :locale="lang"
         :path="path"
@@ -36,7 +37,7 @@ export default {
 
     components: { VueForm },
 
-    inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'],
+    inject: ['errorHandler', 'http', 'i18n', 'route', 'routerErrorHandler', 'toastr'],
 
     props: {
         disableState: {
@@ -117,7 +118,6 @@ export default {
     methods: {
         ...mapMutations('bookmarks', ['updateState']),
         init() {
-            console.log('e f init')
             this.ready = true;
 
             if (this.disableState || !this.bookmarks) {

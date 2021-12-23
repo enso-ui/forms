@@ -15,6 +15,10 @@ export default {
                 throw error;
             },
         },
+        http: {
+            required: true,
+            type: Function,
+        },
         i18n: {
             type: Function,
             default: key => key,
@@ -111,6 +115,7 @@ export default {
             fieldBindings: this.fieldBindings,
             fieldType: this.fieldType,
             focusError: this.focusError,
+            http: this.http,
             i18n: this.i18n,
             locale: this.locale,
             params: this.params,
@@ -156,7 +161,7 @@ export default {
             this.modal = false;
             this.state.loading = true;
 
-            axios.delete(this.state.data.actions.destroy.path)
+            this.http.delete(this.state.data.actions.destroy.path)
                 .then(({ data }) => {
                     this.$emit('destroy', data);
 
@@ -186,7 +191,7 @@ export default {
         fetch() {
             this.state.loading = true;
 
-            return axios.get(this.path, { params: this.params })
+            return this.http.get(this.path, { params: this.params })
                 .then(({ data }) => {
                     this.state.data = data.form;
                     this.setOriginal();
@@ -281,7 +286,7 @@ export default {
             const params = { ...this.submitData, _params: this.params };
             this.$emit('submitting');
 
-            axios[this.state.data.method](this.submitPath, params)
+            this.http[this.state.data.method](this.submitPath, params)
                 .then(({ data }) => {
                     this.$emit('submit', data);
                     this.$emit('submitted');
