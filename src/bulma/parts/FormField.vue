@@ -1,7 +1,7 @@
 <template>
     <div class="field">
         <label class="label"
-            v-if="state.data.labels">
+            v-if="state.data.labels && field.label">
             {{ i18n(field.label) }}
             <span class="icon is-small has-text-info"
                 v-tooltip="i18n(field.meta.tooltip)"

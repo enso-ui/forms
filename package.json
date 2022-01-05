@@ -41,7 +41,7 @@
     "@fortawesome/vue-fontawesome": "3.0.0-5",
     "bulma": "^0.9.0",
     "lodash": "^4.17.10",
-    "v-tooltip": "4.0.0-beta.2",
+    "v-tooltip": "^4.0.0-beta.2",
     "vue": "^3.0",
     "vuex": "^4.0.0"
   },
