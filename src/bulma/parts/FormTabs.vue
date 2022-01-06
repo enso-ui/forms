@@ -10,6 +10,7 @@
         <tab keep-alive
             :id="tab"
             :key="tab"
+            v-bind="$attrs"
             v-for="tab in tabs()">
             <template v-for="(section, index) in sections(tab)">
                 <slot :name="section.slot"
