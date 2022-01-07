@@ -1,5 +1,6 @@
 <template>
-    <div class="vue-form">
+    <div class="vue-form"
+        :class="$attrs.class">
         <core-form v-bind="$attrs"
             @ready="ready = true"
             ref="coreForm">
@@ -37,6 +38,8 @@ export default {
     name: 'VueForm',
 
     components: { CoreForm, FormContent, FormField },
+
+    inheritAttrs: false,
 
     data: () => ({
         ready: false,

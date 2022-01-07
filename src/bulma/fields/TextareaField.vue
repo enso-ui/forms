@@ -4,7 +4,7 @@
             :class="[{ 'is-danger': errors.has(field.name) }, { 'fixed': !field.meta.resize }]"
             v-model="field.value"
             v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
-            @update:modelValue="errors.clear(field.name); $emit('changed')"/>
+            @update:model-value="errors.clear(field.name); $emit('changed')"/>
         <error-icon v-if="errors.has(field.name)"/>
     </div>
 </template>

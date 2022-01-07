@@ -1,5 +1,5 @@
 <template>
-    <modal v-bind="$attrs">
+    <modal>
         <template #default="{ close }">
             <div class="box">
                 <h5 class="subtitle is-5">

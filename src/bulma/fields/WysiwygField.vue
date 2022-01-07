@@ -5,7 +5,7 @@
         :plugins="field.meta.plugins"
         :toolbar="field.meta.toolbar"
         :has-error="errors.has(field.name)"
-        @update:modelValue="errors.clear(field.name); $emit('changed')"/>
+        @update:model-value="errors.clear(field.name); $emit('changed')"/>
 </template>
 
 <script>

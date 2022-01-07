@@ -1,5 +1,6 @@
 <template>
-    <div class="field">
+    <div class="field"
+        :class="$attrs.class">
         <label class="label"
             v-if="state.data.labels && field.label">
             {{ i18n(field.label) }}
@@ -63,6 +64,8 @@ export default {
     },
 
     inject: ['fieldType', 'errors', 'http', 'i18n', 'locale', 'state', 'submit'],
+
+    inheritAttrs: false,
 
     props: {
         field: {

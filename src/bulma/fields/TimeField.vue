@@ -1,5 +1,5 @@
 <template>
-    <date-field v-bind="$attrs"
+    <date-field
         time-only/>
 </template>
 

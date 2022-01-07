@@ -1,5 +1,6 @@
 <template>
-    <div class="form-field">
+    <div class="form-field"
+        :class="$attrs.class">
         <div class="field">
             <label class="label"
                 v-if="state.data.labels">
@@ -71,6 +72,8 @@ export default {
     },
 
     inject: ['fieldType', 'errors', 'i18n', 'locale', 'state', 'submit'],
+
+    inheritAttrs: false,
 
     props: {
         field: {

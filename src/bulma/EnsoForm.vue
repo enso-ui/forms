@@ -1,5 +1,5 @@
 <template>
-    <vue-form v-bind="$attrs"
+    <vue-form
         :http="http"
         :i18n="i18n"
         :locale="lang"

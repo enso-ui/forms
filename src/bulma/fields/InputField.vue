@@ -6,7 +6,7 @@
             :type="field.meta.content"
             @focus="$emit('focus', $event)"
             @blur="$emit('focus', $event)"
-            @update:modelValue="errors.clear(field.name); $emit('changed')"
+            @update:model-value="errors.clear(field.name); $emit('changed')"
             v-if="field.meta.content === 'number'">
         <input :class="['input', { 'is-danger': errors.has(field.name) }]"
             v-model="field.value"
@@ -14,7 +14,7 @@
             :type="type"
             @focus="$emit('focus', $event)"
             @blur="$emit('focus', $event)"
-            @update:modelValue="errors.clear(field.name); $emit('changed')"
+            @update:model-value="errors.clear(field.name); $emit('changed')"
             v-else>
         <reveal-password :meta="field.meta"
             v-if="reveal"/>

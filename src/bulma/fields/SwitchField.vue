@@ -2,7 +2,7 @@
     <vue-switch class="is-large is-info"
         v-model="field.value"
         :disabled="field.meta.disabled || field.meta.readonly"
-        @update:modelValue="errors.clear(field.name); $emit('changed')"/>
+        @update:model-value="errors.clear(field.name); $emit('changed')"/>
 </template>
 
 <script>
