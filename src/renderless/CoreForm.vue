@@ -4,6 +4,37 @@ import Errors from '@enso-ui/laravel-validation';
 export default {
     name: 'CoreForm',
 
+    provide() {
+        return {
+            create: this.create,
+            customFields: this.customFields,
+            customSections: this.customSections,
+            destroy: this.destroy,
+            dirty: this.dirty,
+            errorCount: this.errorCount,
+            errorHandler: this.errorHandler,
+            errors: this.errors,
+            fieldBindings: this.fieldBindings,
+            fieldType: this.fieldType,
+            focusError: this.focusError,
+            http: this.http,
+            i18n: this.i18n,
+            locale: this.locale,
+            params: this.params,
+            sectionCustomFields: this.sectionCustomFields,
+            sections: this.sections,
+            show: this.show,
+            state: this.state,
+            submit: this.submit,
+            tabbed: this.tabbed,
+            tabs: this.tabs,
+            undo: this.undo,
+            visibleSection: this.visibleSection,
+        };
+    },
+
+    inheritAttrs: false,
+
     props: {
         disableState: {
             type: Boolean,
@@ -49,10 +80,8 @@ export default {
 
     emits: [
         'create', 'destroy', 'error', 'loaded', 'ready', 'show', 'submitting',
-        'submit', 'submitted', 'template-fetch-error', 'undo'
+        'submit', 'submitted', 'template-fetch-error', 'undo',
     ],
-
-    inheritAttrs: false,
 
     data: () => ({
         errors: new Errors(),
@@ -100,35 +129,6 @@ export default {
 
     watch: {
         path: 'fetch',
-    },
-
-    provide() {
-        return {
-            create: this.create,
-            customFields: this.customFields,
-            customSections: this.customSections,
-            destroy: this.destroy,
-            dirty: this.dirty,
-            errorCount: this.errorCount,
-            errorHandler: this.errorHandler,
-            errors: this.errors,
-            fieldBindings: this.fieldBindings,
-            fieldType: this.fieldType,
-            focusError: this.focusError,
-            http: this.http,
-            i18n: this.i18n,
-            locale: this.locale,
-            params: this.params,
-            sectionCustomFields: this.sectionCustomFields,
-            sections: this.sections,
-            show: this.show,
-            state: this.state,
-            submit: this.submit,
-            tabbed: this.tabbed,
-            tabs: this.tabs,
-            undo: this.undo,
-            visibleSection: this.visibleSection,
-        };
     },
 
     created() {
@@ -247,7 +247,7 @@ export default {
             const firstError = this.$parent.$el.querySelector('.help.is-danger');
 
             if (firstError) {
-                firstError.scrollIntoView({block: 'center'});
+                firstError.scrollIntoView({ block: 'center' });
             }
         },
         param(param) {

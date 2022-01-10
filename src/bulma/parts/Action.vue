@@ -22,9 +22,9 @@ import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 export default {
     name: 'Action',
 
-    inject: ['i18n'],
-
     components: { Fa },
+
+    inject: ['i18n'],
 
     props: {
         button: {
@@ -53,7 +53,7 @@ export default {
             return this.tag === 'button'
                 ? 'button'
                 : null;
-        }
-    }
+        },
+    },
 };
 </script>

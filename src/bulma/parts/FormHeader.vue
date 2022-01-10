@@ -17,9 +17,9 @@ import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 export default {
     name: 'FormHeader',
 
-    inject: ['state', 'i18n'],
+    components: { Fa },
 
-    components: { Fa }
+    inject: ['state', 'i18n'],
 };
 </script>
 

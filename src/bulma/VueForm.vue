@@ -7,9 +7,9 @@
                 <template #default
                     v-if="ready">
                     <form-content>
-                        <template v-for="field in customFields"
-                            #[field.name]="props">
-                            <slot :name="field.name"
+                        <template v-for="customField in customFields"
+                            #[customField.name]="props">
+                            <slot :name="customField.name"
                                 v-bind="props">
                                 <form-field v-bind="props"/>
                             </slot>
