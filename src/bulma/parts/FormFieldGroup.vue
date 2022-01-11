@@ -1,5 +1,6 @@
 <template>
-    <div class="form-field">
+    <div class="form-field"
+        :class="$attrs.class">
         <div class="field">
             <label class="label"
                 v-if="state.data.labels">
@@ -23,7 +24,6 @@
                     :i18n="i18n"
                     :locale="locale"
                     @changed="autosave"
-                    v-on="$listeners"
                     ref="field"/>
             </div>
             <slot name="right"/>
@@ -37,10 +37,12 @@
 </template>
 
 <script>
+import 'v-tooltip/dist/v-tooltip.css';
+import { VTooltip } from 'v-tooltip';
 import { debounce } from 'lodash';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-import { VTooltip } from 'v-tooltip';
 import SwitchField from '../fields/SwitchField.vue';
 import InputField from '../fields/InputField.vue';
 import MoneyField from '../fields/MoneyField.vue';
@@ -58,17 +60,20 @@ export default {
     directives: { tooltip: VTooltip },
 
     components: {
-        SwitchField,
+        Fa,
         InputField,
+        DateField,
         MoneyField,
         SelectField,
-        DateField,
-        TimeField,
+        SwitchField,
         TextareaField,
+        TimeField,
         WysiwygField,
     },
 
     inject: ['fieldType', 'errors', 'i18n', 'locale', 'state', 'submit'],
+
+    inheritAttrs: false,
 
     props: {
         field: {

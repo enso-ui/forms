@@ -4,6 +4,37 @@ import Errors from '@enso-ui/laravel-validation';
 export default {
     name: 'CoreForm',
 
+    provide() {
+        return {
+            create: this.create,
+            customFields: this.customFields,
+            customSections: this.customSections,
+            destroy: this.destroy,
+            dirty: this.dirty,
+            errorCount: this.errorCount,
+            errorHandler: this.errorHandler,
+            errors: this.errors,
+            fieldBindings: this.fieldBindings,
+            fieldType: this.fieldType,
+            focusError: this.focusError,
+            http: this.http,
+            i18n: this.i18n,
+            locale: this.locale,
+            params: this.params,
+            sectionCustomFields: this.sectionCustomFields,
+            sections: this.sections,
+            show: this.show,
+            state: this.state,
+            submit: this.submit,
+            tabbed: this.tabbed,
+            tabs: this.tabs,
+            undo: this.undo,
+            visibleSection: this.visibleSection,
+        };
+    },
+
+    inheritAttrs: false,
+
     props: {
         disableState: {
             type: Boolean,
@@ -14,6 +45,10 @@ export default {
             default: error => {
                 throw error;
             },
+        },
+        http: {
+            required: true,
+            type: Function,
         },
         i18n: {
             type: Function,
@@ -42,6 +77,11 @@ export default {
             default: null,
         },
     },
+
+    emits: [
+        'create', 'destroy', 'error', 'loaded', 'ready', 'show', 'submitting',
+        'submit', 'submitted', 'template-fetch-error', 'undo',
+    ],
 
     data: () => ({
         errors: new Errors(),
@@ -91,34 +131,6 @@ export default {
         path: 'fetch',
     },
 
-    provide() {
-        return {
-            create: this.create,
-            customFields: this.customFields,
-            customSections: this.customSections,
-            destroy: this.destroy,
-            dirty: this.dirty,
-            errorCount: this.errorCount,
-            errorHandler: this.errorHandler,
-            errors: this.errors,
-            fieldBindings: this.fieldBindings,
-            fieldType: this.fieldType,
-            focusError: this.focusError,
-            i18n: this.i18n,
-            locale: this.locale,
-            params: this.params,
-            sectionCustomFields: this.sectionCustomFields,
-            sections: this.sections,
-            show: this.show,
-            state: this.state,
-            submit: this.submit,
-            tabbed: this.tabbed,
-            tabs: this.tabs,
-            undo: this.undo,
-            visibleSection: this.visibleSection,
-        };
-    },
-
     created() {
         this.init();
     },
@@ -149,7 +161,7 @@ export default {
             this.modal = false;
             this.state.loading = true;
 
-            axios.delete(this.state.data.actions.destroy.path)
+            this.http.delete(this.state.data.actions.destroy.path)
                 .then(({ data }) => {
                     this.$emit('destroy', data);
 
@@ -179,7 +191,7 @@ export default {
         fetch() {
             this.state.loading = true;
 
-            return axios.get(this.path, { params: this.params })
+            return this.http.get(this.path, { params: this.params })
                 .then(({ data }) => {
                     this.state.data = data.form;
                     this.setOriginal();
@@ -232,10 +244,10 @@ export default {
             Object.keys(data).forEach(key => (this.field(key).value = data[key]));
         },
         focusError() {
-            const firstError = this.$el.querySelector('.help.is-danger');
+            const firstError = this.$parent.$el.querySelector('.help.is-danger');
 
             if (firstError) {
-                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstError.scrollIntoView({ block: 'center' });
             }
         },
         param(param) {
@@ -274,7 +286,7 @@ export default {
             const params = { ...this.submitData, _params: this.params };
             this.$emit('submitting');
 
-            axios[this.state.data.method](this.submitPath, params)
+            this.http[this.state.data.method](this.submitPath, params)
                 .then(({ data }) => {
                     this.$emit('submit', data);
                     this.$emit('submitted');
@@ -381,7 +393,7 @@ export default {
     },
 
     render() {
-        return this.$slots.default;
+        return this.$slots.default && this.$slots.default();
     },
 };
 </script>

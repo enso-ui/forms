@@ -4,15 +4,17 @@
             v-model.number="field.value"
             v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
             :type="field.meta.content"
-            v-on="$listeners"
-            @input="errors.clear(field.name); $emit('changed')"
+            @focus="$emit('focus', $event)"
+            @blur="$emit('focus', $event)"
+            @update:model-value="errors.clear(field.name); $emit('changed')"
             v-if="field.meta.content === 'number'">
         <input :class="['input', { 'is-danger': errors.has(field.name) }]"
             v-model="field.value"
             v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
             :type="type"
-            v-on="$listeners"
-            @input="errors.clear(field.name); $emit('changed')"
+            @focus="$emit('focus', $event)"
+            @blur="$emit('focus', $event)"
+            @update:model-value="errors.clear(field.name); $emit('changed')"
             v-else>
         <reveal-password :meta="field.meta"
             v-if="reveal"/>
@@ -43,6 +45,8 @@ export default {
             required: true,
         },
     },
+
+    emits: ['blur', 'changed', 'focus'],
 
     data: v => ({
         password: v.field.meta.content === 'password',

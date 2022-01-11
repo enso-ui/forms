@@ -5,8 +5,7 @@
         :plugins="field.meta.plugins"
         :toolbar="field.meta.toolbar"
         :has-error="errors.has(field.name)"
-        v-on="$listeners"
-        @input="errors.clear(field.name); $emit('changed')"/>
+        @update:model-value="errors.clear(field.name); $emit('changed')"/>
 </template>
 
 <script>
@@ -25,5 +24,7 @@ export default {
             required: true,
         },
     },
+
+    emits: ['changed'],
 };
 </script>

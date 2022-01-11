@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faTrashAlt, faEye, faPlus, faCheck, faArrowLeft, faTimes, faUndo,
@@ -78,7 +79,7 @@ library.add(faTrashAlt, faEye, faPlus, faCheck, faArrowLeft, faTimes, faUndo);
 export default {
     name: 'FormActions',
 
-    components: { Action, Confirmation },
+    components: { Action, Confirmation, Fa },
 
     inject: ['state', 'dirty', 'errors', 'undo', 'i18n', 'submit', 'show', 'create', 'destroy'],
 

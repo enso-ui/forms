@@ -2,14 +2,14 @@
     <vue-select v-bind="field.meta"
         v-model="field.value"
         :has-error="errors.has(field.name)"
+        :http="http"
         :i18n="i18n"
         :params="params"
         :pivot-params="pivotParams"
         :custom-params="customParams"
         :error-handler="errorHandler"
-        v-on="$listeners"
         @fetch="field.meta.options = $event"
-        @input="errors.clear(field.name); $emit('changed')"
+        @update:model-value="errors.clear(field.name); $emit('changed')"
         ref="select"/>
 </template>
 
@@ -32,6 +32,10 @@ export default {
             type: Object,
             required: true,
         },
+        http: {
+            default: null,
+            type: Function,
+        },
         i18n: {
             type: Function,
             required: true,
@@ -49,6 +53,8 @@ export default {
             default: () => ({}),
         },
     },
+
+    emits: ['changed'],
 
     computed: {
         selection() {

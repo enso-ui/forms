@@ -1,7 +1,6 @@
 <template>
-    <tabs class="form-tabs"
-        v-on="$listeners">
-        <template v-slot:label="{ tab }">
+    <tabs class="form-tabs">
+        <template #label="{ tab }">
             {{ i18n(tab) }}
             <span class="tag is-danger is-small error-count"
                 v-if="errorCount(tab)">
@@ -11,6 +10,7 @@
         <tab keep-alive
             :id="tab"
             :key="tab"
+            v-bind="$attrs"
             v-for="tab in tabs()">
             <template v-for="(section, index) in sections(tab)">
                 <slot :name="section.slot"
@@ -19,7 +19,7 @@
                     :section="section"
                     v-else-if="visibleSection(section)">
                     <template v-for="field in sectionCustomFields(section)"
-                        v-slot:[field.name]>
+                        #[field.name]>
                         <slot :name="field.name"
                             v-bind="fieldBindings(field)"/>
                     </template>

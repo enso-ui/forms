@@ -1,28 +1,28 @@
 <template>
-    <vue-form v-bind="$attrs"
+    <vue-form
+        :http="http"
         :i18n="i18n"
         :locale="lang"
         :path="path"
         :error-handler="errorHandler"
         :router-error-handler="routerErrorHandler"
         :disable-state="disableState"
-        v-on="$listeners"
         @submit="success"
         @destroy="success"
         @ready="init"
         ref="form">
-        <template v-for="field in customFields"
-            v-slot:[field.name]="props">
-            <slot :name="field.name"
+        <template v-for="customField in customFields"
+            #[customField.name]="props">
+            <slot :name="customField.name"
                 v-bind="props"/>
         </template>
         <template v-for="section in customSections"
-            v-slot:[section.slot]="props">
+            #[section.slot]="props">
             <slot :name="section.slot"
                 v-bind="props"/>
         </template>
         <template v-for="actions in ['actions-right', 'actions-left']"
-            v-slot:[actions]>
+            #[actions]>
             <slot :name="actions"/>
         </template>
     </vue-form>
@@ -37,15 +37,9 @@ export default {
 
     components: { VueForm },
 
-    inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'],
+    inject: ['errorHandler', 'http', 'i18n', 'route', 'routerErrorHandler', 'toastr'],
 
     props: {
-        path: {
-            type: String,
-            default() {
-                return this.route(this.$route.name, this.$route.params, false);
-            },
-        },
         disableState: {
             type: Boolean,
             default: false,
@@ -88,6 +82,10 @@ export default {
             return this.ready
                 ? this.$refs.form.errors
                 : null;
+        },
+        path() {
+            return this.$attrs.path
+                ?? this.route(this.$route.name, this.$route.params, false);
         },
     },
 

@@ -1,5 +1,6 @@
 <template>
-    <div class="section-wrapper">
+    <div class="section-wrapper"
+        :class="$attrs.class">
         <divider class="mt-5 mb-5"
             :title="i18n(section.title)"
             :placement="state.data.dividerTitlePlacement"
@@ -15,7 +16,7 @@
                     <slot :name="fields[index(row, column)].name"
                         v-if="fields[index(row, column)].meta.custom"/>
                     <form-field :field="fields[index(row, column)]"
-                        v-on="$listeners"
+                        v-bind="$attrs"
                         v-else/>
                 </template>
             </div>
@@ -33,6 +34,8 @@ export default {
     components: { FormField, Divider },
 
     inject: ['state', 'i18n'],
+
+    inheritAttrs: false,
 
     props: {
         section: {

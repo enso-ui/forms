@@ -3,8 +3,7 @@
         <money :class="['input', { 'is-danger': errors.has(field.name) }]"
             v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
             v-model="field.value"
-            v-on="$listeners"
-            @input="errors.clear(field.name); $emit('changed')"/>
+            @update:model-value="errors.clear(field.name); $emit('changed')"/>
             <error-icon v-if="errors.has(field.name)"/>
     </div>
 </template>
@@ -32,5 +31,7 @@ export default {
             required: true,
         },
     },
+
+    emits: ['changed'],
 };
 </script>

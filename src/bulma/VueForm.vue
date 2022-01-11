@@ -1,30 +1,32 @@
 <template>
-    <core-form v-bind="$attrs"
-        v-on="$listeners"
-        @ready="ready = true"
-        ref="coreForm">
-        <template v-slot:default
-            v-if="ready">
-            <form-content v-on="$listeners">
-                <template v-for="field in customFields"
-                    v-slot:[field.name]="props">
-                    <slot :name="field.name"
-                        v-bind="props">
-                        <form-field v-bind="props"/>
-                    </slot>
+    <div class="vue-form"
+        :class="$attrs.class">
+        <core-form v-bind="$attrs"
+            @ready="ready = true"
+            ref="coreForm">
+                <template #default
+                    v-if="ready">
+                    <form-content>
+                        <template v-for="customField in customFields"
+                            #[customField.name]="props">
+                            <slot :name="customField.name"
+                                v-bind="props">
+                                <form-field v-bind="props"/>
+                            </slot>
+                        </template>
+                        <template v-for="section in customSections"
+                            #[section.slot]="props">
+                            <slot :name="section.slot"
+                                v-bind="props"/>
+                        </template>
+                        <template v-for="actions in ['actions-right', 'actions-left']"
+                            #[actions]>
+                            <slot :name="actions"/>
+                        </template>
+                    </form-content>
                 </template>
-                <template v-for="section in customSections"
-                    v-slot:[section.slot]="props">
-                    <slot :name="section.slot"
-                        v-bind="props"/>
-                </template>
-                <template v-for="actions in ['actions-right', 'actions-left']"
-                          v-slot:[actions]>
-                    <slot :name="actions"/>
-                </template>
-            </form-content>
-        </template>
-    </core-form>
+        </core-form>
+    </div>
 </template>
 
 <script>
@@ -36,6 +38,8 @@ export default {
     name: 'VueForm',
 
     components: { CoreForm, FormContent, FormField },
+
+    inheritAttrs: false,
 
     data: () => ({
         ready: false,

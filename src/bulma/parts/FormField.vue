@@ -1,7 +1,8 @@
 <template>
-    <div class="field">
+    <div class="field"
+        :class="$attrs.class">
         <label class="label"
-            v-if="state.data.labels">
+            v-if="state.data.labels && field.label">
             {{ i18n(field.label) }}
             <span class="icon is-small has-text-info"
                 v-tooltip="i18n(field.meta.tooltip)"
@@ -14,10 +15,10 @@
             :is="fieldType(field)"
             :field="field"
             :errors="errors"
+            :http="http"
             :i18n="i18n"
             :locale="locale"
             @changed="autosave"
-            v-on="$listeners"
             ref="field"/>
         <p class="help is-danger"
             v-if="errors.has(field.name)">
@@ -28,10 +29,12 @@
 </template>
 
 <script>
+import 'v-tooltip/dist/v-tooltip.css';
+import { VTooltip } from 'v-tooltip';
 import { debounce } from 'lodash';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-import { VTooltip } from 'v-tooltip';
 import SwitchField from '../fields/SwitchField.vue';
 import InputField from '../fields/InputField.vue';
 import MoneyField from '../fields/MoneyField.vue';
@@ -49,17 +52,20 @@ export default {
     directives: { tooltip: VTooltip },
 
     components: {
-        SwitchField,
+        Fa,
+        DateField,
         InputField,
         MoneyField,
+        SwitchField,
         SelectField,
-        DateField,
-        TimeField,
         TextareaField,
+        TimeField,
         WysiwygField,
     },
 
-    inject: ['fieldType', 'errors', 'i18n', 'locale', 'state', 'submit'],
+    inject: ['fieldType', 'errors', 'http', 'i18n', 'locale', 'state', 'submit'],
+
+    inheritAttrs: false,
 
     props: {
         field: {
