@@ -12,12 +12,12 @@
                         <div class="level-item">
                             <button class="button is-outlined"
                                 @click="close">
-                                {{ i18n("Cancel") }}
+                                {{ i18n(negativeButtonText) }}
                             </button>
                             <button class="button is-danger ml-1"
                                 @click="$emit('commit'); close();"
                                 v-focus>
-                                {{ i18n("Yes") }}
+                                {{ i18n(positiveButtonText) }}
                             </button>
                         </div>
                     </div>
@@ -44,6 +44,14 @@ export default {
         message: {
             type: String,
             default: null,
+        },
+        negativeButtonText: {
+            type: String,
+            default: "Cancel",
+        },
+        positiveButtonText: {
+            type: String,
+            default: "Yes",
         },
     },
 
