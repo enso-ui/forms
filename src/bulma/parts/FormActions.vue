@@ -4,19 +4,19 @@
             <action tag="a"
                 :button="actions.back.button"
                 @click="$router.go(-1)"
-                v-if="actions.back"/>
+                v-if="visible('back')"/>
             <action tag="a"
                 :button="actions.destroy.button"
                 @click="confirmation = true"
-                v-if="actions.destroy && !actions.destroy.forbidden"/>
+                v-if="visibleAndAllowed('destroy')"/>
             <action tag="a"
                 :button="actions.show.button"
                 @click="show()"
-                v-if="actions.show && !actions.show.forbidden"/>
+                v-if="visibleAndAllowed('show')"/>
             <action tag="a"
                 :button="actions.create.button"
                 @click="create()"
-                v-if="actions.create && !actions.create.forbidden"/>
+                v-if="visibleAndAllowed('create')"/>
             <slot name="actions-left"/>
         </div>
         <div class="level-right">
@@ -50,13 +50,13 @@
                 :disabled="errors.any()"
                 :loading="state.loading"
                 @click="submit()"
-                v-if="actions.store && !actions.store.forbidden && !state.data.autosave"/>
+                v-if="visibleAndAllowed('store') && !state.data.autosave"/>
             <action tag="button"
                 :button="actions.update.button"
                 :disabled="errors.any()"
                 :loading="state.loading"
                 @click="submit()"
-                v-else-if="actions.update && !actions.update.forbidden && !state.data.autosave"/>
+                v-else-if="visibleAndAllowed('update') && !state.data.autosave"/>
         </div>
         <confirmation :message="actions.destroy.button.message"
             @close="confirmation = false"
@@ -92,5 +92,15 @@ export default {
             return this.state.data.actions;
         },
     },
+
+    methods: {
+        visible(action) {
+            return this.actions[action]
+                && !this.actions[action].hidden;
+        },
+        visibleAndAllowed(action) {
+            return this.visible(action) && !this.actions[action].forbidden;
+        }
+    }
 };
 </script>
