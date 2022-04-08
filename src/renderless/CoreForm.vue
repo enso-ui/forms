@@ -72,6 +72,10 @@ export default {
                 throw error;
             },
         },
+        submitPath: {
+            type: String,
+            default: null,
+        },
         template: {
             type: Object,
             default: null,
@@ -120,7 +124,11 @@ export default {
                     return data;
                 }, {});
         },
-        submitPath() {
+        getSubmitPath() {
+            if(this.submitPath) {
+                return this.submitPath;
+            }
+            
             return this.state.data && this.state.data.method === 'post'
                 ? this.state.data.actions.store.path
                 : this.state.data.actions.update.path;
@@ -286,7 +294,7 @@ export default {
             const params = { ...this.submitData, _params: this.params };
             this.$emit('submitting');
 
-            this.http[this.state.data.method](this.submitPath, params)
+            return this.http[this.state.data.method](this.getSubmitPath, params)
                 .then(({ data }) => {
                     this.$emit('submit', data);
                     this.$emit('submitted');
