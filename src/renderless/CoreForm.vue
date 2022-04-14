@@ -5,31 +5,16 @@ export default {
     name: 'CoreForm',
 
     provide() {
+        const {
+            create, customFields, customSections, destroy, dirty, disableState, errorCount, errorHandler,
+            errors, fieldBindings, fieldType, focusError, http, i18n, locale, params, sectionCustomFields,
+            sections, show, state, submit, tabbed, tabs, undo, visibleSection
+        } = this;
+
         return {
-            create: this.create,
-            customFields: this.customFields,
-            customSections: this.customSections,
-            destroy: this.destroy,
-            dirty: this.dirty,
-            errorCount: this.errorCount,
-            errorHandler: this.errorHandler,
-            errors: this.errors,
-            fieldBindings: this.fieldBindings,
-            fieldType: this.fieldType,
-            focusError: this.focusError,
-            http: this.http,
-            i18n: this.i18n,
-            locale: this.locale,
-            params: this.params,
-            sectionCustomFields: this.sectionCustomFields,
-            sections: this.sections,
-            show: this.show,
-            state: this.state,
-            submit: this.submit,
-            tabbed: this.tabbed,
-            tabs: this.tabs,
-            undo: this.undo,
-            visibleSection: this.visibleSection,
+            create, customFields, customSections, destroy, dirty, disableState, errorCount, errorHandler,
+            errors, fieldBindings, fieldType, focusError, http, i18n, locale, params, sectionCustomFields,
+            sections, show, state, submit, tabbed, tabs, undo, visibleSection
         };
     },
 
@@ -162,8 +147,18 @@ export default {
                 .filter(({ columns }) => columns === 'slot');
         },
         dirty() {
-            return !this.disableState && this.original
+            return this.original
                 && JSON.stringify(this.formData) !== this.original;
+        },
+        dirtyFields() {
+            if (!this.original) {
+                return [];
+            }
+
+            const original = JSON.parse(this.original);
+
+            return Object.keys(original)
+                .filter(key => original[key] !== this.formData[key]);
         },
         destroy() {
             this.modal = false;

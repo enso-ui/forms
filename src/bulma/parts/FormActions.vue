@@ -33,7 +33,7 @@
                 </a>
             </div>
             <div class="level-item"
-                v-else-if="dirty()">
+                v-else-if="dirty() && !disableState">
                 <a class="button is-small is-bold is-warning"
                     @click="undo()">
                     <span>
@@ -81,7 +81,10 @@ export default {
 
     components: { Action, Confirmation, Fa },
 
-    inject: ['state', 'dirty', 'errors', 'undo', 'i18n', 'submit', 'show', 'create', 'destroy'],
+    inject: [
+        'state', 'dirty', 'disableState', 'errors', 'undo',
+        'i18n', 'submit', 'show', 'create', 'destroy'
+    ],
 
     data: () => ({
         confirmation: false,
