@@ -157,8 +157,11 @@ export default {
 
             const original = JSON.parse(this.original);
 
-            return Object.keys(original)
-                .filter(key => original[key] !== this.formData[key]);
+            const dirty = key => Array.isArray(original[key])
+                ? JSON.stringify(original[key]) !== JSON.stringify(this.formData[key])
+                : `${original[key]}` !== `${this.formData[key]}`;
+
+            return Object.keys(original).filter(dirty);
         },
         destroy() {
             this.modal = false;
