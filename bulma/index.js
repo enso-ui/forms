@@ -10,8 +10,9 @@ import SelectField from '../src/bulma/fields/SelectField.vue';
 import SwitchField from '../src/bulma/fields/SwitchField.vue';
 import TextareaField from '../src/bulma/fields/TextareaField.vue';
 import TimeField from '../src/bulma/fields/TimeField.vue';
+import Confirmation from '../src/bulma/parts/Confirmation.vue';
 
 export {
     VueForm, EnsoForm, FormField, FormFieldGroup, Action, DateField, InputField,
-    MoneyField, SelectField, SwitchField, TextareaField, TimeField,
+    MoneyField, SelectField, SwitchField, TextareaField, TimeField, Confirmation,
 };
