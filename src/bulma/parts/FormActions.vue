@@ -1,5 +1,38 @@
 <template>
-    <div class="actions level is-mobile">
+    <div v-if="confirmation">
+        <p class="subtitle is-6 animate__animated animate__flash mb-2">
+            {{ i18n(actions.destroy.button.message) }}
+        </p>
+        <div class="level is-mobile">
+            <div class="level-left"/>
+            <div class="level-left">
+                <div class="level-item">
+                    <a class="button is-warning"
+                        @click="confirmation = false">
+                        <span>
+                            {{ i18n('Cancel') }}
+                        </span>
+                        <span class="icon">
+                            <fa icon="times"/>
+                        </span>
+                    </a>
+                </div>
+                <div class="level-item">
+                    <a class="button is-danger"
+                        @click="confirmation = false; destroy()">
+                        <span>
+                            {{ i18n(actions.destroy.button.label) }}
+                        </span>
+                        <span class="icon">
+                            <fa icon="check"/>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="actions level is-mobile"
+        v-else>
         <div class="level-left">
             <action tag="a"
                 :button="actions.back.button"
@@ -58,10 +91,6 @@
                 @click="submit()"
                 v-else-if="actions.update && !actions.update.forbidden && !state.data.autosave"/>
         </div>
-        <confirmation :message="actions.destroy.button.message"
-            @close="confirmation = false"
-            @commit="confirmation = false; destroy()"
-            v-if="confirmation && actions.destroy"/>
     </div>
 </template>
 
@@ -72,14 +101,13 @@ import {
     faTrashAlt, faEye, faPlus, faCheck, faArrowLeft, faTimes, faUndo,
 } from '@fortawesome/free-solid-svg-icons';
 import Action from './Action.vue';
-import Confirmation from './Confirmation.vue';
 
 library.add(faTrashAlt, faEye, faPlus, faCheck, faArrowLeft, faTimes, faUndo);
 
 export default {
     name: 'FormActions',
 
-    components: { Action, Confirmation, Fa },
+    components: { Action, Fa },
 
     inject: [
         'state', 'dirty', 'disableState', 'errors', 'undo',
