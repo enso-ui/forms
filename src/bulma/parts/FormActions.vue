@@ -45,13 +45,13 @@
                 </a>
             </div>
             <slot name="actions-right"/>
-            <action tag="button"
+            <action tag="a"
                 :button="actions.store.button"
                 :disabled="errors.any()"
                 :loading="state.loading"
                 @click="submit()"
                 v-if="actions.store && !actions.store.forbidden && !state.data.autosave"/>
-            <action tag="button"
+            <action tag="a"
                 :button="actions.update.button"
                 :disabled="errors.any()"
                 :loading="state.loading"
