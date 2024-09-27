@@ -1,5 +1,9 @@
 <template>
-    <div class="actions level is-mobile">
+    <confirmation v-if="confirmation"
+        @cancel="confirmation = false"
+        @confirm="confirmation = false; destroy()"/>
+    <div class="actions level is-mobile"
+        v-else>
         <div class="level-left">
             <action tag="a"
                 :button="actions.back.button"
@@ -33,7 +37,7 @@
                 </a>
             </div>
             <div class="level-item"
-                v-else-if="dirty()">
+                v-else-if="dirty() && !disableState">
                 <a class="button is-small is-bold is-warning"
                     @click="undo()">
                     <span>
@@ -45,23 +49,19 @@
                 </a>
             </div>
             <slot name="actions-right"/>
-            <action tag="button"
+            <action tag="a"
                 :button="actions.store.button"
                 :disabled="errors.any()"
                 :loading="state.loading"
                 @click="submit()"
                 v-if="actions.store && !actions.store.forbidden && !state.data.autosave"/>
-            <action tag="button"
+            <action tag="a"
                 :button="actions.update.button"
                 :disabled="errors.any()"
                 :loading="state.loading"
                 @click="submit()"
                 v-else-if="actions.update && !actions.update.forbidden && !state.data.autosave"/>
         </div>
-        <confirmation :message="actions.destroy.button.message"
-            @close="confirmation = false"
-            @commit="confirmation = false; destroy()"
-            v-if="confirmation && actions.destroy"/>
     </div>
 </template>
 
@@ -81,7 +81,10 @@ export default {
 
     components: { Action, Confirmation, Fa },
 
-    inject: ['state', 'dirty', 'errors', 'undo', 'i18n', 'submit', 'show', 'create', 'destroy'],
+    inject: [
+        'state', 'dirty', 'disableState', 'errors', 'undo',
+        'i18n', 'submit', 'show', 'create', 'destroy'
+    ],
 
     data: () => ({
         confirmation: false,

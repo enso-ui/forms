@@ -78,6 +78,11 @@ export default {
                 ? this.$refs.form.dirty
                 : false;
         },
+        dirtyFields() {
+            return this.ready
+                ? this.$refs.form.dirtyFields
+                : false;
+        },
         errors() {
             return this.ready
                 ? this.$refs.form.errors

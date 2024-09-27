@@ -1,52 +1,63 @@
 <template>
-    <modal>
-        <template #default="{ close }">
-            <div class="box">
-                <h5 class="subtitle is-5">
-                    {{ i18n(message) }}
-                </h5>
-                <hr>
-                <div class="level">
-                    <div class="level-left"/>
-                    <div class="level-right">
-                        <div class="level-item">
-                            <button class="button is-outlined"
-                                @click="close">
-                                {{ i18n("Cancel") }}
-                            </button>
-                            <button class="button is-danger ml-1"
-                                @click="$emit('commit'); close();"
-                                v-focus>
-                                {{ i18n("Yes") }}
-                            </button>
-                        </div>
+    <div class="level mb-0">
+        <div class="level-left">
+            <p class="title is-6 animate__animated animate__flash mb-2">
+                {{ i18n(actions.destroy.button.message) }}
+            </p>
+        </div>
+        <div class="level-left">
+            <div class="level-item">
+                <div class="level is-mobile mb-0">
+                    <div class="level-item">
+                        <a class="button is-warning"
+                            @click="$emit('cancel')">
+                            <span class="is-hidden-mobile">
+                                {{ i18n('Cancel') }}
+                            </span>
+                            <span class="icon">
+                                <fa icon="times"/>
+                            </span>
+                            <span class="is-hidden"/>
+                        </a>
+                    </div>
+                    <div class="level-item">
+                        <a class="button is-danger"
+                            @click="$emit('confirm')">
+                            <span class="is-hidden-mobile">
+                                {{ i18n(actions.destroy.button.label) }}
+                            </span>
+                            <span class="icon">
+                                <fa icon="check"/>
+                            </span>
+                            <span class="is-hidden"/>
+                        </a>
                     </div>
                 </div>
             </div>
-        </template>
-    </modal>
+        </div>
+    </div>
 </template>
 
 <script>
-import { focus } from '@enso-ui/directives';
-import { Modal } from '@enso-ui/modal/bulma';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faCheck, faTimes);
 
 export default {
     name: 'Confirmation',
 
-    directives: { focus },
+    components: { Fa },
 
-    components: { Modal },
+    inject: ['i18n', 'state'],
 
-    inject: ['i18n'],
+    emits: ['cancel', 'confirm'],
 
-    props: {
-        message: {
-            type: String,
-            default: null,
+    computed: {
+        actions() {
+            return this.state.data.actions;
         },
     },
-
-    emits: ['commit'],
 };
 </script>

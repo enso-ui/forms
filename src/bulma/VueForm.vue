@@ -71,6 +71,11 @@ export default {
                 ? this.$refs.coreForm.dirty()
                 : false;
         },
+        dirtyFields() {
+            return this.ready
+                ? this.$refs.coreForm.dirtyFields()
+                : false;
+        },
         errors() {
             return this.ready
                 ? this.$refs.coreForm.errors
