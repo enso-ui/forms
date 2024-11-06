@@ -4,6 +4,7 @@
             v-model.number="field.value"
             v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
             :type="field.meta.content"
+            :tabindex="tabindex"
             @focus="$emit('focus', $event)"
             @blur="$emit('focus', $event)"
             @update:model-value="errors.clear(field.name); $emit('changed')"
@@ -12,6 +13,7 @@
             v-model="field.value"
             v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
             :type="type"
+            :tabindex="tabindex"
             @focus="$emit('focus', $event)"
             @blur="$emit('focus', $event)"
             @update:model-value="errors.clear(field.name); $emit('changed')"
@@ -43,6 +45,10 @@ export default {
         i18n: {
             type: Function,
             required: true,
+        },
+        tabindex: {
+            type: Number,
+            default: null,
         },
     },
 
