@@ -5,7 +5,8 @@
         :has-error="errors.has(field.name)"
         @update:model-value="errors.clear(field.name); emit('changed')"
         v-if="editing"/>
-    <div class="wysiwyg-preview has-background-white p-1"
+    <div class="wysiwyg-preview p-1"
+        :class="{'has-background-white': !!field.value }"
         v-else>
         <button class="button is-small is-outlined edit"
             @click="editing = true">
