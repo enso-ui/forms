@@ -288,6 +288,8 @@ export default {
             }).catch(this.routerErrorHandler);
         },
         submit() {
+            if(this.errors.any()) return;
+
             this.state.loading = true;
             const params = { ...this.submitData, _params: this.params };
             this.$emit('submitting');

@@ -53,13 +53,13 @@
                 :button="actions.store.button"
                 :disabled="errors.any()"
                 :loading="state.loading"
-                @click="submit()"
+                @click="!errors.any() && submit()"
                 v-if="actions.store && !actions.store.forbidden && !state.data.autosave"/>
             <action tag="a"
                 :button="actions.update.button"
                 :disabled="errors.any()"
                 :loading="state.loading"
-                @click="submit()"
+                @click="!errors.any() && submit()"
                 v-else-if="actions.update && !actions.update.forbidden && !state.data.autosave"/>
         </div>
     </div>
