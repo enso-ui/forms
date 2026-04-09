@@ -1,6 +1,6 @@
 <template>
     <form-header/>
-    <form class="is-marginless"
+    <form class="m-0"
         @submit.prevent>
         <form-tabs v-if="state.data?.tabs">
             <template v-for="field in customFields()"
@@ -58,15 +58,3 @@ export default {
     ],
 };
 </script>
-
-<style lang="scss">
-    .form-tabs {
-        position: relative;
-        z-index: 1;
-    }
-
-    .tag.error-count {
-        padding: 0.5em;
-        margin-left: 0.3em;
-    }
-</style>

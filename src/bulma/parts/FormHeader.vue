@@ -22,11 +22,3 @@ export default {
     inject: ['state', 'i18n'],
 };
 </script>
-
-<style lang="scss">
-    .title.form-title {
-        .icon {
-            vertical-align: text-bottom;
-        }
-    }
-</style>

@@ -9,7 +9,7 @@
                 {{ i18n(button.label) }}
             </span>
             <span class="icon">
-                <fa :icon="button.icon"/>
+                <fa :icon="icon"/>
             </span>
             <span class="is-hidden"/>
         </component>
@@ -18,6 +18,20 @@
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
+import {
+    faArrowLeft, faCheck, faEye, faPlus, faTrashCan, faXmark, faRotateLeft,
+} from '@fortawesome/free-solid-svg-icons';
+
+const iconMap = {
+    'arrow-left': faArrowLeft,
+    check: faCheck,
+    eye: faEye,
+    plus: faPlus,
+    'trash-alt': faTrashCan,
+    times: faXmark,
+    undo: faRotateLeft,
+    'rotate-left': faRotateLeft,
+};
 
 export default {
     name: 'Action',
@@ -49,6 +63,13 @@ export default {
     emits: ['click'],
 
     computed: {
+        icon() {
+            if (typeof this.button.icon !== 'string') {
+                return this.button.icon;
+            }
+
+            return iconMap[this.button.icon] ?? this.button.icon;
+        },
         type() {
             return this.tag === 'button'
                 ? 'button'

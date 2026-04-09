@@ -5,13 +5,16 @@
         :has-error="errors.has(field.name)"
         @update:model-value="errors.clear(field.name); emit('changed')"
         v-if="editing"/>
-    <div class="wysiwyg-preview p-1"
-        :class="{'has-background-white': !!field.value }"
+    <div class="wysiwyg-preview p-3"
+        :class="{ 'is-filled': !!field.value }"
         v-else>
-        <button class="button is-small is-outlined edit"
-            @click="editing = true">
-            {{ i18n('edit') }}
-        </button>
+        <div class="wysiwyg-preview__actions">
+            <button class="button"
+                type="button"
+                @click="editing = true">
+                {{ i18n('edit') }}
+            </button>
+        </div>
         <div class="preview"
             v-html="field.value"/>
     </div>
@@ -19,9 +22,7 @@
 
 <script setup>
 
-import {
-    defineEmits, defineProps, inject, ref,
-} from 'vue';
+import { defineEmits, defineProps, inject, ref } from 'vue';
 import Wysiwyg from '@enso-ui/wysiwyg/bulma';
 
 defineProps({
@@ -39,17 +40,30 @@ const editing = ref(false);
 
 </script>
 <style lang="scss">
-    .wysiwyg-preview {
-        max-height: 300px;
-        position: relative;
-        .button.edit {
-            position: absolute;
-            top: 0.3em;
-            right: 0.3em;
-        }
-        .preview {
-            max-height: 300px;
-            overflow-y: auto;
-        }
+.wysiwyg-preview {
+    background-color: var(--bulma-scheme-main);
+    border: 1px solid var(--bulma-border);
+    border-radius: 0.75rem;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-height: 300px;
+    min-height: 4.5rem;
+
+    &.is-filled {
+        background-color: var(--bulma-scheme-main);
     }
+
+    .wysiwyg-preview__actions {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .preview {
+        color: inherit;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+}
 </style>

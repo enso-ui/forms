@@ -29,8 +29,18 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { getActivePinia } from 'pinia';
 import VueForm from './VueForm.vue';
+
+const useStore = id => {
+    const store = getActivePinia()?._s?.get(id);
+
+    if (!store) {
+        throw new Error(`Missing Pinia store: ${id}`);
+    }
+
+    return store;
+};
 
 export default {
     name: 'EnsoForm',
@@ -51,8 +61,12 @@ export default {
     }),
 
     computed: {
-        ...mapGetters('preferences', ['lang', 'bookmarks']),
-        ...mapGetters('bookmarks', ['state']),
+        lang() {
+            return useStore('preferences').global.lang;
+        },
+        bookmarks() {
+            return useStore('preferences').global.bookmarks;
+        },
         customFields() {
             return this.ready
                 ? this.$refs.form.customFields
@@ -121,7 +135,12 @@ export default {
     },
 
     methods: {
-        ...mapMutations('bookmarks', ['updateState']),
+        state(bookmark) {
+            return useStore('bookmarks').stateByBookmark(bookmark);
+        },
+        updateState(payload) {
+            useStore('bookmarks').updateState(payload);
+        },
         init() {
             this.ready = true;
 
@@ -132,7 +151,7 @@ export default {
             const state = this.state(this.$route);
 
             if (state) {
-                this.fill(state);
+                this.$nextTick(() => this.fill(state));
             }
         },
         fetch() {

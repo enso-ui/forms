@@ -1,19 +1,16 @@
 <template>
-    <span class="icon reveal-password is-naked is-small is-right is-clickable has-text-info"
+    <span class="icon reveal-password is-naked is-small is-right is-clickable"
         @click="toggle">
-        <fa icon="eye"
+        <fa :icon="faEye"
             v-if="hidden"/>
-        <fa icon="eye-slash"
+        <fa :icon="faEyeSlash"
             v-else/>
     </span>
 </template>
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-
-library.add(faEye, faEyeSlash);
 
 export default {
     name: 'RevealPassword',
@@ -28,6 +25,8 @@ export default {
     },
 
     data: () => ({
+        faEye,
+        faEyeSlash,
         hidden: true,
     }),
 
@@ -39,9 +38,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-    .control.has-icons-right .icon.reveal-password {
-        pointer-events: all;
-    }
-</style>

@@ -15,7 +15,7 @@
                                 {{ i18n('Cancel') }}
                             </span>
                             <span class="icon">
-                                <fa icon="times"/>
+                                <fa :icon="faXmark"/>
                             </span>
                             <span class="is-hidden"/>
                         </a>
@@ -27,7 +27,7 @@
                                 {{ i18n(actions.destroy.button.label) }}
                             </span>
                             <span class="icon">
-                                <fa icon="check"/>
+                                <fa :icon="faCheck"/>
                             </span>
                             <span class="is-hidden"/>
                         </a>
@@ -40,10 +40,7 @@
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-
-library.add(faCheck, faTimes);
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default {
     name: 'Confirmation',
@@ -53,6 +50,11 @@ export default {
     inject: ['i18n', 'state'],
 
     emits: ['cancel', 'confirm'],
+
+    data: () => ({
+        faCheck,
+        faXmark,
+    }),
 
     computed: {
         actions() {

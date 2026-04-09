@@ -26,25 +26,25 @@
         <div class="level-right">
             <div class="level-item"
                 v-if="state.data.clearErrorsControl && errors.any()">
-                <a class="button is-small is-bold is-danger"
+                <a class="button is-danger has-text-weight-bold"
                     @click="errors.empty()">
                     <span>
                         {{ i18n('errors') }}
                     </span>
                     <span class="icon is-small">
-                        <fa icon="times"/>
+                        <fa :icon="faXmark"/>
                     </span>
                 </a>
             </div>
             <div class="level-item"
                 v-else-if="dirty() && !disableState">
-                <a class="button is-small is-bold is-warning"
+                <a class="button is-dark"
                     @click="undo()">
                     <span>
                         {{ i18n('changes') }}
                     </span>
                     <span class="icon is-small">
-                        <fa icon="undo"/>
+                        <fa :icon="faRotateLeft"/>
                     </span>
                 </a>
             </div>
@@ -67,14 +67,11 @@
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faTrashAlt, faEye, faPlus, faCheck, faArrowLeft, faTimes, faUndo,
+    faRotateLeft, faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import Action from './Action.vue';
 import Confirmation from './Confirmation.vue';
-
-library.add(faTrashAlt, faEye, faPlus, faCheck, faArrowLeft, faTimes, faUndo);
 
 export default {
     name: 'FormActions',
@@ -88,6 +85,8 @@ export default {
 
     data: () => ({
         confirmation: false,
+        faRotateLeft,
+        faXmark,
     }),
 
     computed: {

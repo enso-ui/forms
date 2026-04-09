@@ -4,10 +4,10 @@
         <label class="label"
             v-if="state.data.labels && field.label">
             {{ i18n(field.label) }}
-            <span class="icon is-small has-text-info"
+            <span class="icon is-small has-text-muted"
                 v-tooltip="i18n(field.meta.tooltip)"
                 v-if="field.meta.tooltip">
-                <fa icon="info-circle"
+                <fa :icon="faCircleInfo"
                     size="xs"/>
             </span>
         </label>
@@ -33,8 +33,7 @@ import 'v-tooltip/dist/v-tooltip.css';
 import { VTooltip } from 'v-tooltip';
 import { debounce } from 'lodash';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import SwitchField from '../fields/SwitchField.vue';
 import InputField from '../fields/InputField.vue';
 import MoneyField from '../fields/MoneyField.vue';
@@ -43,8 +42,6 @@ import TimeField from '../fields/TimeField.vue';
 import SelectField from '../fields/SelectField.vue';
 import TextareaField from '../fields/TextareaField.vue';
 import WysiwygField from '../fields/WysiwygField.vue';
-
-library.add(faInfoCircle);
 
 export default {
     name: 'FormField',
@@ -73,6 +70,10 @@ export default {
             required: true,
         },
     },
+
+    data: () => ({
+        faCircleInfo,
+    }),
 
     created() {
         this.autosave = debounce(this.autosave, this.state.data.debounce);
