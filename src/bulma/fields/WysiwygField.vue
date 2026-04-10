@@ -22,7 +22,7 @@
 
 <script setup>
 
-import { defineEmits, defineProps, inject, ref } from 'vue';
+import { inject, ref } from 'vue';
 import Wysiwyg from '@enso-ui/wysiwyg/bulma';
 
 defineProps({
