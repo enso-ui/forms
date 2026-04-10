@@ -1,11 +1,5 @@
 # Forms
 
-![NPM License](https://img.shields.io/npm/l/@enso-ui/forms.svg)
-![npm download](https://img.shields.io/npm/dm/@enso-ui/forms.svg)
-![GitHub top language](https://img.shields.io/github/languages/top/enso-ui/forms.svg)
-![GitHub issues](https://img.shields.io/github/issues/enso-ui/forms.svg)
-![npm version](https://img.shields.io/npm/v/@enso-ui/forms.svg)
-
 Vue Form Package
 
 ## Usage
@@ -28,4 +22,4 @@ Thank you to all the people who already contributed to Enso!
 
 ## License
 
-[ISC](https://opensource.org/licenses/ISC)
+[MIT](LICENSE)
