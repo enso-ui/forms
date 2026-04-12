@@ -11,7 +11,6 @@
             <span class="icon">
                 <fa :icon="icon"/>
             </span>
-            <span class="is-hidden"/>
         </component>
     </div>
 </template>

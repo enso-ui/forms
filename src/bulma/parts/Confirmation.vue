@@ -17,7 +17,6 @@
                             <span class="icon">
                                 <fa :icon="faXmark"/>
                             </span>
-                            <span class="is-hidden"/>
                         </a>
                     </div>
                     <div class="level-item">
@@ -29,7 +28,6 @@
                             <span class="icon">
                                 <fa :icon="faCheck"/>
                             </span>
-                            <span class="is-hidden"/>
                         </a>
                     </div>
                 </div>

@@ -26,9 +26,9 @@
         <div class="level-right">
             <div class="level-item"
                 v-if="state.data.clearErrorsControl && errors.any()">
-                <a class="button is-danger has-text-weight-bold"
+                <a class="button is-light has-text-weight-bold"
                     @click="errors.empty()">
-                    <span>
+                    <span class="is-hidden-mobile">
                         {{ i18n('errors') }}
                     </span>
                     <span class="icon is-small">
@@ -38,9 +38,9 @@
             </div>
             <div class="level-item"
                 v-else-if="dirty() && !disableState">
-                <a class="button is-dark"
+                <a class="button is-light"
                     @click="undo()">
-                    <span>
+                    <span class="is-hidden-mobile">
                         {{ i18n('changes') }}
                     </span>
                     <span class="icon is-small">
@@ -96,3 +96,13 @@ export default {
     },
 };
 </script>
+
+<style lang="scss">
+@media screen and (max-width: 769px) {
+    .actions.level.is-mobile,
+    .actions.level.is-mobile .level-left,
+    .actions.level.is-mobile .level-right {
+        gap: calc(var(--bulma-level-item-spacing) * 0.5);
+    }
+}
+</style>
