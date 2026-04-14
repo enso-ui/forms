@@ -135,3 +135,5 @@ export default {
     },
 };
 </script>
+
+<style lang="scss" src="./styles/form.scss"></style>
