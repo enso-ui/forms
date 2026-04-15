@@ -8,7 +8,8 @@
             <span class="is-hidden-mobile">
                 {{ i18n(button.label) }}
             </span>
-            <span class="icon">
+            <span class="icon"
+                v-if="!loading">
                 <fa :icon="icon"/>
             </span>
         </component>

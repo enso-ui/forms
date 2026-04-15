@@ -109,6 +109,9 @@ export default {
                     return data;
                 }, {});
         },
+        skeleton() {
+            return this.state.loading && !this.state.data;
+        },
         getSubmitPath() {
             if(this.submitPath) {
                 return this.submitPath;
@@ -403,7 +406,8 @@ export default {
     },
 
     render() {
-        return this.$slots.default && this.$slots.default();
+        return this.$slots.default && this.$slots
+            .default({ skeleton: this.skeleton });
     },
 };
 </script>

@@ -4,32 +4,36 @@
         <core-form v-bind="$attrs"
             @ready="ready = true"
             ref="coreForm">
-                <template #default
-                    v-if="ready">
-                    <form-content>
-                        <template v-for="customField in customFields"
-                            #[customField.name]="props">
-                            <slot :name="customField.name"
-                                v-bind="props">
-                                <form-field v-bind="props"/>
-                            </slot>
-                        </template>
-                        <template v-for="section in customSections"
-                            #[section.slot]="props">
-                            <slot :name="section.slot"
-                                v-bind="props"/>
-                        </template>
-                        <template v-for="actions in ['actions-right', 'actions-left']"
-                            #[actions]>
-                            <slot :name="actions"/>
-                        </template>
-                    </form-content>
+                <template #default="{ skeleton }">
+                    <Skeleton type="form"
+                        v-if="skeleton"/>
+                    <div v-else-if="ready">
+                        <form-content>
+                            <template v-for="customField in customFields"
+                                #[customField.name]="props">
+                                <slot :name="customField.name"
+                                    v-bind="props">
+                                    <form-field v-bind="props"/>
+                                </slot>
+                            </template>
+                            <template v-for="section in customSections"
+                                #[section.slot]="props">
+                                <slot :name="section.slot"
+                                    v-bind="props"/>
+                            </template>
+                            <template v-for="actions in ['actions-right', 'actions-left']"
+                                #[actions]>
+                                <slot :name="actions"/>
+                            </template>
+                        </form-content>
+                    </div>
                 </template>
         </core-form>
     </div>
 </template>
 
 <script>
+import { Skeleton } from '@enso-ui/loader/bulma';
 import CoreForm from '../renderless/CoreForm.vue';
 import FormContent from './parts/FormContent.vue';
 import FormField from './parts/FormField.vue';
@@ -37,7 +41,9 @@ import FormField from './parts/FormField.vue';
 export default {
     name: 'VueForm',
 
-    components: { CoreForm, FormContent, FormField },
+    components: {
+        CoreForm, FormContent, FormField, Skeleton,
+    },
 
     inheritAttrs: false,
 
