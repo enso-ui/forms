@@ -29,18 +29,9 @@
 </template>
 
 <script>
-import { getActivePinia } from 'pinia';
+import { bookmarks as useBookmarks } from '@enso-ui/bookmarks/src/pinia/bookmarks';
+import { preferences as usePreferences } from '@enso-ui/ui/src/pinia/preferences';
 import VueForm from './VueForm.vue';
-
-const useStore = id => {
-    const store = getActivePinia()?._s?.get(id);
-
-    if (!store) {
-        throw new Error(`Missing Pinia store: ${id}`);
-    }
-
-    return store;
-};
 
 export default {
     name: 'EnsoForm',
@@ -62,10 +53,10 @@ export default {
 
     computed: {
         lang() {
-            return useStore('preferences').global.lang;
+            return usePreferences().global.lang;
         },
         bookmarks() {
-            return useStore('preferences').global.bookmarks;
+            return usePreferences().global.bookmarks;
         },
         customFields() {
             return this.ready
@@ -136,10 +127,10 @@ export default {
 
     methods: {
         state(bookmark) {
-            return useStore('bookmarks').stateByBookmark(bookmark);
+            return useBookmarks().stateByBookmark(bookmark);
         },
         updateState(payload) {
-            useStore('bookmarks').updateState(payload);
+            useBookmarks().updateState(payload);
         },
         init() {
             this.ready = true;
