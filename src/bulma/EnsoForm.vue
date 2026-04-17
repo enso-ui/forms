@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import { bookmarks as useBookmarks } from '@enso-ui/bookmarks/src/pinia/bookmarks';
-import { preferences as usePreferences } from '@enso-ui/ui/src/pinia/preferences';
+import { bookmarks } from '@enso-ui/bookmarks/src/pinia/bookmarks';
+import { preferences } from '@enso-ui/ui/src/pinia/preferences';
 import VueForm from './VueForm.vue';
 
 export default {
@@ -53,10 +53,10 @@ export default {
 
     computed: {
         lang() {
-            return usePreferences().global.lang;
+            return preferences().global.lang;
         },
         bookmarks() {
-            return usePreferences().global.bookmarks;
+            return preferences().global.bookmarks;
         },
         customFields() {
             return this.ready
@@ -107,11 +107,11 @@ export default {
                 }
 
                 if (!this.dirty) {
-                    this.updateState({ bookmark: this.$route });
+                    bookmarks().updateState({ bookmark: this.$route });
                     return;
                 }
 
-                this.updateState({
+                bookmarks().updateState({
                     bookmark: this.$route,
                     data: JSON.parse(JSON.stringify(formData)),
                 });
@@ -120,18 +120,12 @@ export default {
         },
         dirty(dirty) {
             if (!this.disableState && !dirty && this.bookmarks) {
-                this.updateState({ bookmark: this.$route });
+                bookmarks().updateState({ bookmark: this.$route });
             }
         },
     },
 
     methods: {
-        state(bookmark) {
-            return useBookmarks().stateByBookmark(bookmark);
-        },
-        updateState(payload) {
-            useBookmarks().updateState(payload);
-        },
         init() {
             this.ready = true;
 
@@ -139,7 +133,7 @@ export default {
                 return;
             }
 
-            const state = this.state(this.$route);
+            const state = bookmarks().stateByBookmark(this.$route);
 
             if (state) {
                 this.$nextTick(() => this.fill(state));
