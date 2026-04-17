@@ -60,13 +60,6 @@
         color: var(--bulma-success);
     }
 
-    :is(.input, .textarea, .money.input),
-    .select select {
-        background-color: var(--bulma-input-background-color) !important;
-        border-color: var(--enso-surface-border) !important;
-        color: var(--bulma-text) !important;
-    }
-
     :is(.input, .textarea, .money.input):not(.is-danger):not(.is-warning):not(.is-success):hover,
     .select:not(.is-danger):not(.is-warning):not(.is-success) select:hover {
         border-color: var(--bulma-border-hover) !important;
