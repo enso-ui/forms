@@ -1,36 +1,32 @@
 <template>
-    <div class="level mb-0">
-        <div class="level-left">
-            <p class="title is-6 animate__animated animate__flash mb-2">
-                {{ i18n(actions.destroy.button.message) }}
-            </p>
-        </div>
+    <div class="level is-mobile mb-0">
         <div class="level-left">
             <div class="level-item">
-                <div class="level is-mobile mb-0">
-                    <div class="level-item">
-                        <a class="button is-warning"
-                            @click="$emit('cancel')">
-                            <span class="is-hidden-mobile">
-                                {{ i18n('Cancel') }}
-                            </span>
-                            <span class="icon">
-                                <fa :icon="faXmark"/>
-                            </span>
-                        </a>
-                    </div>
-                    <div class="level-item">
-                        <a class="button is-danger"
-                            @click="$emit('confirm')">
-                            <span class="is-hidden-mobile">
-                                {{ i18n(actions.destroy.button.label) }}
-                            </span>
-                            <span class="icon">
-                                <fa :icon="faCheck"/>
-                            </span>
-                        </a>
-                    </div>
-                </div>
+                <p class="title is-6 animate__animated animate__flash">
+                    {{ i18n(actions.destroy.button.message) }}
+                </p>
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item">    
+                <a class="button"
+                    @click="$emit('cancel')">
+                    <span class="is-hidden-mobile">
+                        {{ i18n('Cancel') }}
+                    </span>
+                    <span class="icon">
+                        <fa :icon="faXmark"/>
+                    </span>
+                </a>    
+                <a class="button is-dark ml-2"
+                    @click="$emit('confirm')">
+                    <span class="is-hidden-mobile">
+                        {{ i18n(actions.destroy.button.label) }}
+                    </span>
+                    <span class="icon">
+                        <fa :icon="faCheck"/>
+                    </span>
+                </a>
             </div>
         </div>
     </div>
