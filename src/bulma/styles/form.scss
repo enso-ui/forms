@@ -136,8 +136,9 @@
     }
 
     .field .vue-switch {
-        margin-top: 6px;
-        margin-bottom: 6px;
+        min-height: var(--bulma-control-height);
+        margin-top: 0;
+        margin-bottom: 0;
     }
 
     .box.is-shadowless {
