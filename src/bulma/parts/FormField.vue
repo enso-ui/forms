@@ -4,7 +4,7 @@
         <label class="label"
             v-if="state.data.labels && field.label">
             {{ i18n(field.label) }}
-            <span class="icon is-small has-text-muted"
+            <span class="icon is-small"
                 v-tooltip="i18n(field.meta.tooltip)"
                 v-if="field.meta.tooltip">
                 <fa :icon="faCircleInfo"
