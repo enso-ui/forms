@@ -53,59 +53,6 @@
         color: var(--bulma-success);
     }
 
-    :is(.input, .textarea, .money.input):not(.is-danger):not(.is-warning):not(.is-success):hover,
-    .select:not(.is-danger):not(.is-warning):not(.is-success) select:hover {
-        border-color: var(--bulma-border-hover) !important;
-    }
-
-    :is(.input, .textarea, .money.input):not(.is-danger):not(.is-warning):not(.is-success):focus,
-    :is(.input, .textarea, .money.input):not(.is-danger):not(.is-warning):not(.is-success):focus-visible,
-    :is(.input, .textarea, .money.input):not(.is-danger):not(.is-warning):not(.is-success).is-focused,
-    :is(.input, .textarea, .money.input):not(.is-danger):not(.is-warning):not(.is-success).is-active,
-    .select:not(.is-danger):not(.is-warning):not(.is-success) select:focus,
-    .select:not(.is-danger):not(.is-warning):not(.is-success) select:focus-visible,
-    .select:not(.is-danger):not(.is-warning):not(.is-success) select.is-focused,
-    .select:not(.is-danger):not(.is-warning):not(.is-success) select.is-active {
-        border-color: var(--bulma-border-active) !important;
-        box-shadow: none !important;
-    }
-
-    .money.input,
-    .flatpickr-input.input,
-    .dropdown.vue-dropdown .button.input {
-        min-height: var(--bulma-control-height);
-        height: var(--bulma-control-height);
-    }
-
-    :is(.input, .textarea)::placeholder {
-        color: var(--bulma-text-light) !important;
-        opacity: 1;
-    }
-
-    :is(.input, .textarea, .money.input, .flatpickr-input.input).is-danger,
-    .select.is-danger select,
-    .button.input.has-error,
-    .dropdown.vue-dropdown .button.input.has-error,
-    .vue-select .button.input.has-error {
-        border-color: var(--bulma-danger) !important;
-    }
-
-    :is(.input, .textarea, .money.input, .flatpickr-input.input).is-warning,
-    .select.is-warning select,
-    .button.input.has-warning,
-    .dropdown.vue-dropdown .button.input.has-warning,
-    .vue-select .button.input.has-warning {
-        border-color: var(--bulma-warning) !important;
-    }
-
-    :is(.input, .textarea, .money.input, .flatpickr-input.input).is-success,
-    .select.is-success select,
-    .button.input.is-successful,
-    .dropdown.vue-dropdown .button.input.is-successful,
-    .vue-select .button.input.is-successful {
-        border-color: var(--bulma-success) !important;
-    }
-
     .control.has-icons-left .icon,
     .control.has-icons-right .icon {
         color: var(--bulma-text-light);
