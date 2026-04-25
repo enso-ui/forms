@@ -17,7 +17,6 @@
         margin-left: 0.3em;
     }
 
-    .label,
     .title,
     .subtitle,
     strong,
@@ -27,7 +26,6 @@
         color: inherit;
     }
 
-    .label,
     .title,
     .subtitle,
     strong {
@@ -36,11 +34,6 @@
 
     .label {
         margin-bottom: 0.3rem;
-        color: var(--bulma-label-color);
-        font-size: var(--bulma-size-small);
-        font-weight: var(--bulma-label-weight);
-        line-height: normal;
-        letter-spacing: 0;
     }
 
     .help,
