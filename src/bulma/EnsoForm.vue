@@ -73,6 +73,11 @@ export default {
                 ? this.$refs.form.data
                 : [];
         },
+        loading() {
+            return this.ready
+                ? this.$refs.form.loading
+                : [];
+        },
         formData() {
             return this.ready
                 ? this.$refs.form.formData

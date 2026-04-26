@@ -67,6 +67,11 @@ export default {
                 ? this.$refs.coreForm.state.data
                 : [];
         },
+        loading() {
+            return this.ready
+                ? this.$refs.coreForm.state.loading
+                : [];
+        },
         formData() {
             return this.ready
                 ? this.$refs.coreForm.formData
