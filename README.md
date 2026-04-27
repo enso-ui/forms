@@ -1,7 +1,7 @@
 # Forms
 
 [![License](https://img.shields.io/badge/license-MIT-10b981.svg)](https://github.com/enso-ui/forms/blob/master/LICENSE)
-[![Stable](https://img.shields.io/badge/stable-4.1.10-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/forms)
+[![Stable](https://img.shields.io/badge/stable-4.1.17-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/forms)
 [![Downloads](https://img.shields.io/npm/dm/@enso-ui/forms.svg)](https://www.npmjs.com/package/@enso-ui/forms)
 [![Vue](https://img.shields.io/badge/vue-3.x-42b883.svg)](https://vuejs.org/)
 [![JavaScript](https://img.shields.io/badge/javascript-ES2020-f7df1e.svg)](https://developer.mozilla.org/docs/Web/JavaScript)

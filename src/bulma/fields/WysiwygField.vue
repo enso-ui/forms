@@ -22,8 +22,9 @@
 
 <script setup>
 
-import { inject, ref } from 'vue';
-import Wysiwyg from '@enso-ui/wysiwyg/bulma';
+import { defineAsyncComponent, inject, ref } from 'vue';
+
+const Wysiwyg = defineAsyncComponent(() => import('@enso-ui/wysiwyg/bulma'));
 
 defineProps({
     field: {
