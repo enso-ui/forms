@@ -3,7 +3,7 @@
         v-if="state.data.icon || state.data.title">
         <span class="icon"
             v-if="state.data.icon">
-            <fa :icon="state.data.icon"/>
+            <fa :icon="icon(state.data.icon)"/>
         </span>
         <span v-if="state.data.title">
             {{ i18n(state.data.title) }}
@@ -13,6 +13,7 @@
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
+import { icon } from './icon';
 
 export default {
     name: 'FormHeader',
@@ -20,5 +21,9 @@ export default {
     components: { Fa },
 
     inject: ['state', 'i18n'],
+
+    methods: {
+        icon,
+    },
 };
 </script>

@@ -18,20 +18,7 @@
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import {
-    faArrowLeft, faCheck, faEye, faPlus, faTrashCan, faXmark, faRotateLeft,
-} from '@fortawesome/free-solid-svg-icons';
-
-const iconMap = {
-    'arrow-left': faArrowLeft,
-    check: faCheck,
-    eye: faEye,
-    plus: faPlus,
-    'trash-alt': faTrashCan,
-    times: faXmark,
-    undo: faRotateLeft,
-    'rotate-left': faRotateLeft,
-};
+import { icon } from './icon';
 
 export default {
     name: 'Action',
@@ -64,11 +51,7 @@ export default {
 
     computed: {
         icon() {
-            if (typeof this.button.icon !== 'string') {
-                return this.button.icon;
-            }
-
-            return iconMap[this.button.icon] ?? this.button.icon;
+            return icon(this.button.icon);
         },
         type() {
             return this.tag === 'button'
