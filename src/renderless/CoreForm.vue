@@ -7,14 +7,14 @@ export default {
     provide() {
         const {
             create, customFields, customSections, destroy, dirty, disableState, errorCount, errorHandler,
-            errors, fieldBindings, fieldType, focusError, http, i18n, locale, params, sectionCustomFields,
-            sections, show, state, submit, tabbed, tabs, undo, visibleSection
+            errors, fieldBindings, fieldType, focusError, http, i18n, locale, params, routerErrorHandler,
+            sectionCustomFields, sections, show, state, submit, tabbed, tabs, undo, visibleSection
         } = this;
 
         return {
             create, customFields, customSections, destroy, dirty, disableState, errorCount, errorHandler,
-            errors, fieldBindings, fieldType, focusError, http, i18n, locale, params, sectionCustomFields,
-            sections, show, state, submit, tabbed, tabs, undo, visibleSection
+            errors, fieldBindings, fieldType, focusError, http, i18n, locale, params, routerErrorHandler,
+            sectionCustomFields, sections, show, state, submit, tabbed, tabs, undo, visibleSection
         };
     },
 
