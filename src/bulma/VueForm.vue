@@ -2,6 +2,7 @@
     <div class="vue-form"
         :class="$attrs.class">
         <core-form v-bind="$attrs"
+            :readonly="readonly"
             @ready="ready = true"
             ref="coreForm">
                 <template #default="{ skeleton }">
@@ -22,8 +23,9 @@
                                     v-bind="props"/>
                             </template>
                             <template v-for="actions in ['actions-right', 'actions-left']"
-                                #[actions]>
-                                <slot :name="actions"/>
+                                #[actions]="props">
+                                <slot :name="actions"
+                                    v-bind="props"/>
                             </template>
                         </form-content>
                     </div>
@@ -50,6 +52,13 @@ export default {
     data: () => ({
         ready: false,
     }),
+
+    props: {
+        readonly: {
+            type: Boolean,
+            default: false,
+        },
+    },
 
     computed: {
         customFields() {

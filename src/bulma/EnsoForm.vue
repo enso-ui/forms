@@ -7,6 +7,7 @@
         :error-handler="errorHandler"
         :router-error-handler="routerErrorHandler"
         :disable-state="disableState"
+        :readonly="readonly"
         @submit="success"
         @destroy="success"
         @ready="init"
@@ -22,8 +23,9 @@
                 v-bind="props"/>
         </template>
         <template v-for="actions in ['actions-right', 'actions-left']"
-            #[actions]>
-            <slot :name="actions"/>
+            #[actions]="props">
+            <slot :name="actions"
+                v-bind="props"/>
         </template>
     </vue-form>
 </template>
@@ -42,6 +44,10 @@ export default {
 
     props: {
         disableState: {
+            type: Boolean,
+            default: false,
+        },
+        readonly: {
             type: Boolean,
             default: false,
         },

@@ -1,5 +1,5 @@
 <template>
-    <vue-select v-bind="field.meta"
+    <vue-select v-bind="meta"
         v-model="field.value"
         :has-error="errors.has(field.name)"
         :http="http"
@@ -52,6 +52,10 @@ export default {
             type: Object,
             default: () => ({}),
         },
+        readonly: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     emits: ['changed'],
@@ -59,6 +63,12 @@ export default {
     computed: {
         selection() {
             return this.$refs.select.selection;
+        },
+        meta() {
+            return {
+                ...this.field.meta,
+                readonly: this.readonly || this.field.meta.readonly === true,
+            };
         },
     },
 

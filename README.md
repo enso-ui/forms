@@ -1,7 +1,7 @@
 # Forms
 
 [![License](https://img.shields.io/badge/license-MIT-10b981.svg)](https://github.com/enso-ui/forms/blob/master/LICENSE)
-[![Stable](https://img.shields.io/badge/stable-4.1.21-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/forms)
+[![Stable](https://img.shields.io/badge/stable-4.2.0-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/forms)
 [![Downloads](https://img.shields.io/npm/dm/@enso-ui/forms.svg)](https://www.npmjs.com/package/@enso-ui/forms)
 [![Vue](https://img.shields.io/badge/vue-3.x-42b883.svg)](https://vuejs.org/)
 [![JavaScript](https://img.shields.io/badge/javascript-ES2020-f7df1e.svg)](https://developer.mozilla.org/docs/Web/JavaScript)
@@ -34,6 +34,7 @@ yarn add @enso-ui/forms
 - supports standard field types such as input, select, money, date, time, switch, textarea, and wysiwyg
 - supports custom field slots and custom section slots
 - supports autosave, tabbed forms, undo, create/show/destroy actions, and redirect flows
+- supports form-level readonly mode from frontend props or the backend form contract
 - syncs backend-driven `EnsoForm` tabs with the route `tab` query param
 - exposes public helpers for filling values, reading dirty state, showing and hiding tabs, and manipulating fields
 
@@ -91,6 +92,9 @@ Responsibilities:
 - renders `FormContent`, default field slots, section slots, and action slots
 - proxies the public helper methods exposed by `CoreForm`
 
+Props:
+- `readonly: boolean = false`
+
 Public methods:
 - `fetch()`
 - `submit()`
@@ -134,6 +138,7 @@ Tabbed forms:
 
 Props:
 - `disableState: boolean = false`
+- `readonly: boolean = false`
 
 Public methods:
 - all methods exposed by `VueForm`
@@ -151,8 +156,15 @@ Props:
 - `params: object | null = null`
 - `path: string`
 - `routerErrorHandler: Function`
+- `readonly: boolean = false`
 - `submitPath: string | null = null`
 - `template: object | null = null`
+
+Readonly behavior:
+- frontend `readonly` and backend `template.readonly` are combined with field-level `field.meta.readonly`
+- readonly forms keep navigation actions such as back, show, and create visible
+- readonly forms hide store, update, and destroy actions
+- `submit()`, `destroy()`, and autosave do not mutate data while readonly
 
 Emits:
 - `create`
@@ -182,6 +194,7 @@ Provided helpers for descendants:
 - `focusError`
 - `http`
 - `i18n`
+- `isReadonly`
 - `locale`
 - `params`
 - `routerErrorHandler`

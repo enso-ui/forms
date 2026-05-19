@@ -11,13 +11,15 @@
             <template v-for="section in customSections()"
                 #[section.slot]>
                 <slot :name="section.slot"
-                    :section="section"/>
+                    :section="section"
+                    :readonly="isReadonly()"/>
             </template>
         </form-tabs>
         <template v-for="(section, index) in state.data.sections"
             v-else>
             <slot :name="section.slot"
                 :section="section"
+                :readonly="isReadonly()"
                 v-if="section.columns === 'slot'"/>
             <form-section :key="index"
                 :section="section"
@@ -33,7 +35,8 @@
             v-if="!state.data.autosave">
             <template v-for="actions in ['actions-right', 'actions-left']"
                 #[actions]>
-                <slot :name="actions"/>
+                <slot :name="actions"
+                    :readonly="isReadonly()"/>
             </template>
         </form-actions>
     </form>
@@ -54,7 +57,7 @@ export default {
 
     inject: [
         'customSections', 'customFields', 'fieldBindings',
-        'state', 'sectionCustomFields', 'visibleSection',
+        'isReadonly', 'state', 'sectionCustomFields', 'visibleSection',
     ],
 };
 </script>

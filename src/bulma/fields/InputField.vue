@@ -2,7 +2,7 @@
     <div :class="['control', { 'has-icons-right': errors.has(field.name) || password }]">
         <input :class="['input', { 'is-danger': errors.has(field.name) }]"
             v-model.number="field.value"
-            v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
+            v-bind="meta"
             :type="field.meta.content"
             :tabindex="tabindex"
             @focus="$emit('focus', $event)"
@@ -11,7 +11,7 @@
             v-if="field.meta.content === 'number'">
         <input :class="['input', { 'is-danger': errors.has(field.name) }]"
             v-model="field.value"
-            v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
+            v-bind="meta"
             :type="type"
             :tabindex="tabindex"
             @focus="$emit('focus', $event)"
@@ -46,6 +46,10 @@ export default {
             type: Function,
             required: true,
         },
+        readonly: {
+            type: Boolean,
+            default: false,
+        },
         tabindex: {
             type: Number,
             default: null,
@@ -59,6 +63,13 @@ export default {
     }),
 
     computed: {
+        meta() {
+            return {
+                ...this.field.meta,
+                placeholder: this.i18n(this.field.meta.placeholder),
+                readonly: this.readonly || this.field.meta.readonly === true,
+            };
+        },
         type() {
             return this.field.meta.content === 'encrypt'
                 ? 'password'

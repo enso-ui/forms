@@ -4,11 +4,12 @@
         :api-key="field.meta.apiKey"
         :has-error="errors.has(field.name)"
         @update:model-value="errors.clear(field.name); emit('changed')"
-        v-if="editing"/>
+        v-if="editing && !readonly && !field.meta.readonly"/>
     <div class="wysiwyg-preview p-3"
         :class="{ 'is-filled': !!field.value }"
         v-else>
-        <div class="wysiwyg-preview__actions">
+        <div class="wysiwyg-preview__actions"
+            v-if="!readonly && !field.meta.readonly">
             <button class="button"
                 type="button"
                 @click="editing = true">
@@ -30,6 +31,10 @@ defineProps({
     field: {
         type: Object,
         required: true,
+    },
+    readonly: {
+        type: Boolean,
+        default: false,
     },
 });
 

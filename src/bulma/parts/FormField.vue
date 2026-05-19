@@ -18,6 +18,7 @@
             :http="http"
             :i18n="i18n"
             :locale="locale"
+            :readonly="isReadonly(field)"
             @changed="autosave"
             ref="field"/>
         <p class="help is-danger"
@@ -60,7 +61,7 @@ export default {
         WysiwygField,
     },
 
-    inject: ['fieldType', 'errors', 'http', 'i18n', 'locale', 'state', 'submit'],
+    inject: ['fieldType', 'errors', 'http', 'i18n', 'isReadonly', 'locale', 'state', 'submit'],
 
     inheritAttrs: false,
 
@@ -85,7 +86,7 @@ export default {
 
     methods: {
         autosave() {
-            if (this.state.data.autosave) {
+            if (this.state.data.autosave && !this.isReadonly(this.field)) {
                 this.errors.empty();
                 this.submit();
             }

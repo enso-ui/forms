@@ -16,6 +16,7 @@
             v-for="tab in tabs()">
             <template v-for="(section, index) in sections(tab)">
                 <slot :name="section.slot"
+                    :readonly="isReadonly()"
                     v-if="section.columns === 'slot'"/>
                 <form-section :key="index"
                     :section="section"
@@ -40,21 +41,10 @@ export default {
 
     components: { Tabs, Tab, FormSection },
 
-    inject: {
-        errorCount: { from: 'errorCount' },
-        fieldBindings: { from: 'fieldBindings' },
-        i18n: { from: 'i18n' },
-        routerErrorHandler: {
-            from: 'routerErrorHandler',
-            default: error => {
-                throw error;
-            },
-        },
-        sectionCustomFields: { from: 'sectionCustomFields' },
-        sections: { from: 'sections' },
-        tabs: { from: 'tabs' },
-        visibleSection: { from: 'visibleSection' },
-    },
+    inject: [
+        'errorCount', 'fieldBindings', 'i18n', 'isReadonly', 'routerErrorHandler',
+        'sectionCustomFields', 'sections', 'tabs', 'visibleSection',
+    ],
 
     data: () => ({
         activeTab: null,

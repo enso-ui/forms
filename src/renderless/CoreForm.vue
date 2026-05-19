@@ -7,13 +7,13 @@ export default {
     provide() {
         const {
             create, customFields, customSections, destroy, dirty, disableState, errorCount, errorHandler,
-            errors, fieldBindings, fieldType, focusError, http, i18n, locale, params, routerErrorHandler,
+            errors, fieldBindings, fieldType, focusError, http, i18n, isReadonly, locale, params, routerErrorHandler,
             sectionCustomFields, sections, show, state, submit, tabbed, tabs, undo, visibleSection
         } = this;
 
         return {
             create, customFields, customSections, destroy, dirty, disableState, errorCount, errorHandler,
-            errors, fieldBindings, fieldType, focusError, http, i18n, locale, params, routerErrorHandler,
+            errors, fieldBindings, fieldType, focusError, http, i18n, isReadonly, locale, params, routerErrorHandler,
             sectionCustomFields, sections, show, state, submit, tabbed, tabs, undo, visibleSection
         };
     },
@@ -56,6 +56,10 @@ export default {
             default: error => {
                 throw error;
             },
+        },
+        readonly: {
+            type: Boolean,
+            default: false,
         },
         submitPath: {
             type: String,
@@ -167,6 +171,10 @@ export default {
             return Object.keys(original).filter(dirty);
         },
         destroy() {
+            if (this.isReadonly()) {
+                return;
+            }
+
             this.modal = false;
             this.state.loading = true;
 
@@ -220,6 +228,7 @@ export default {
                 field,
                 i18n: this.i18n,
                 locale: this.locale,
+                readonly: this.isReadonly(field),
             };
         },
         fieldType(field) {
@@ -262,6 +271,11 @@ export default {
         param(param) {
             return this.state.data.params[param];
         },
+        isReadonly(field = null) {
+            return this.readonly
+                || this.state.data?.readonly === true
+                || field?.meta?.readonly === true;
+        },
         postable(field) {
             return field.meta.content !== 'encrypt'
                 || field.value !== field.meta.initialValue;
@@ -291,7 +305,7 @@ export default {
             }).catch(this.routerErrorHandler);
         },
         submit() {
-            if(this.errors.any()) {
+            if (this.isReadonly() || this.errors.any()) {
                 return;
             }
 

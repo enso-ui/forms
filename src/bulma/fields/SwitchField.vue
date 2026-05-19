@@ -1,6 +1,6 @@
 <template>
     <vue-switch v-model="field.value"
-        :disabled="field.meta.disabled || field.meta.readonly"
+        :disabled="field.meta.disabled || readonly || field.meta.readonly"
         @update:model-value="errors.clear(field.name); $emit('changed')"/>
 </template>
 
@@ -20,6 +20,10 @@ export default {
         field: {
             type: Object,
             required: true,
+        },
+        readonly: {
+            type: Boolean,
+            default: false,
         },
     },
 

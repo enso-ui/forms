@@ -1,7 +1,7 @@
 <template>
     <div :class="['control', { 'has-icons-right': errors.has(field.name) }]">
         <money :class="['input', { 'is-danger': errors.has(field.name) }]"
-            v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
+            v-bind="meta"
             v-model="field.value"
             :tabindex="tabindex"
             @update:model-value="errors.clear(field.name); $emit('changed')"/>
@@ -31,6 +31,10 @@ export default {
             type: Function,
             required: true,
         },
+        readonly: {
+            type: Boolean,
+            default: false,
+        },
         tabindex: {
             type: Number,
             default: null,
@@ -38,5 +42,15 @@ export default {
     },
 
     emits: ['changed'],
+
+    computed: {
+        meta() {
+            return {
+                ...this.field.meta,
+                placeholder: this.i18n(this.field.meta.placeholder),
+                readonly: this.readonly || this.field.meta.readonly === true,
+            };
+        },
+    },
 };
 </script>

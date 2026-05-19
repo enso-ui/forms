@@ -12,7 +12,7 @@
             <action tag="a"
                 :button="actions.destroy.button"
                 @click="confirmation = true"
-                v-if="actions.destroy && !actions.destroy.forbidden"/>
+                v-if="actions.destroy && !actions.destroy.forbidden && !isReadonly()"/>
             <action tag="a"
                 :button="actions.show.button"
                 @click="show()"
@@ -54,13 +54,13 @@
                 :disabled="errors.any()"
                 :loading="state.loading"
                 @click="submit()"
-                v-if="actions.store && !actions.store.forbidden && !state.data.autosave"/>
+                v-if="actions.store && !actions.store.forbidden && !state.data.autosave && !isReadonly()"/>
             <action tag="a"
                 :button="actions.update.button"
                 :disabled="errors.any()"
                 :loading="state.loading"
                 @click="submit()"
-                v-else-if="actions.update && !actions.update.forbidden && !state.data.autosave"/>
+                v-else-if="actions.update && !actions.update.forbidden && !state.data.autosave && !isReadonly()"/>
         </div>
     </div>
 </template>
@@ -80,7 +80,7 @@ export default {
 
     inject: [
         'state', 'dirty', 'disableState', 'errors', 'undo',
-        'i18n', 'submit', 'show', 'create', 'destroy'
+        'i18n', 'isReadonly', 'submit', 'show', 'create', 'destroy'
     ],
 
     data: () => ({

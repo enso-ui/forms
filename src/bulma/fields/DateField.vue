@@ -1,5 +1,5 @@
 <template>
-    <datepicker v-bind="{ ...field.meta, placeholder: i18n(field.meta.placeholder) }"
+    <datepicker v-bind="meta"
         v-model="field.value"
         :alt-input="!!field.meta.altFormat"
         :is-danger="errors.has(field.name)"
@@ -34,6 +34,10 @@ export default {
             type: String,
             required: true,
         },
+        readonly: {
+            type: Boolean,
+            default: false,
+        },
         timeOnly: {
             type: Boolean,
             default: false,
@@ -41,6 +45,16 @@ export default {
     },
 
     emits: ['changed'],
+
+    computed: {
+        meta() {
+            return {
+                ...this.field.meta,
+                placeholder: this.i18n(this.field.meta.placeholder),
+                readonly: this.readonly || this.field.meta.readonly === true,
+            };
+        },
+    },
 
     methods: {
         clear() {
