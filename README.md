@@ -251,6 +251,8 @@ Wysiwyg fields use TinyMCE by default through `@enso-ui/wysiwyg`. Set `meta.edit
 }
 ```
 
+The forms package does not own the editor implementation; it passes the WYSIWYG field metadata to `@enso-ui/wysiwyg`.
+
 ### `FormField`
 
 Single-field wrapper that resolves the field component automatically.
@@ -433,6 +435,10 @@ These components are not exported from `bulma/index.js`, but they define the def
 ## Companion Backend Package
 
 - [`laravel-enso/forms`](https://docs.laravel-enso.com/backend/forms.html) [↗](https://github.com/laravel-enso/forms)
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## Depends On
 
