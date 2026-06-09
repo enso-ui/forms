@@ -10,7 +10,18 @@
         :error-handler="errorHandler"
         @fetch="field.meta.options = $event"
         @update:model-value="errors.clear(field.name); $emit('changed')"
-        ref="select"/>
+        ref="select">
+        <template v-if="$slots.selection"
+            #selection="props">
+            <slot name="selection"
+                v-bind="props"/>
+        </template>
+        <template v-if="$slots.option"
+            #option="props">
+            <slot name="option"
+                v-bind="props"/>
+        </template>
+    </vue-select>
 </template>
 
 <script>
