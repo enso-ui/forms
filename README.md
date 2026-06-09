@@ -32,6 +32,7 @@ yarn add @enso-ui/forms
 - renders full Enso forms from backend JSON templates
 - exposes `VueForm` and `EnsoForm` as the main public shells
 - supports standard field types such as input, select, money, date, time, switch, textarea, and wysiwyg
+- passes WYSIWYG editor options to `@enso-ui/wysiwyg`, including the optional Trix engine
 - supports custom field slots and custom section slots
 - supports autosave, tabbed forms, undo, create/show/destroy actions, and redirect flows
 - supports form-level readonly mode from frontend props or the backend form contract
@@ -238,6 +239,17 @@ Field type mapping:
 - `datepicker` -> `DateField`
 - `timepicker` -> `TimeField`
 - `wysiwyg` -> `WysiwygField`
+
+Wysiwyg fields use TinyMCE by default through `@enso-ui/wysiwyg`. Set `meta.editor` to `trix` to render the same field contract with that package's Trix engine:
+
+```json
+{
+  "meta": {
+    "type": "wysiwyg",
+    "editor": "trix"
+  }
+}
+```
 
 ### `FormField`
 
