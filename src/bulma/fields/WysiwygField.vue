@@ -8,6 +8,8 @@
     <div class="wysiwyg-preview p-3"
         :class="{ 'is-filled': !!field.value }"
         v-else>
+        <div class="preview"
+        v-html="field.value"/>
         <div class="wysiwyg-preview__actions"
             v-if="!readonly && !field.meta.readonly">
             <button class="button"
@@ -16,8 +18,6 @@
                 {{ i18n('edit') }}
             </button>
         </div>
-        <div class="preview"
-            v-html="field.value"/>
     </div>
 </template>
 
