@@ -4,7 +4,6 @@
             v-model.number="field.value"
             v-bind="meta"
             :type="field.meta.content"
-            :tabindex="tabindex"
             @focus="$emit('focus', $event)"
             @blur="$emit('focus', $event)"
             @update:model-value="errors.clear(field.name); $emit('changed')"
@@ -13,7 +12,6 @@
             v-model="field.value"
             v-bind="meta"
             :type="type"
-            :tabindex="tabindex"
             @focus="$emit('focus', $event)"
             @blur="$emit('focus', $event)"
             @update:model-value="errors.clear(field.name); $emit('changed')"
@@ -49,10 +47,6 @@ export default {
         readonly: {
             type: Boolean,
             default: false,
-        },
-        tabindex: {
-            type: Number,
-            default: null,
         },
     },
 

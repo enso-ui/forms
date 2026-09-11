@@ -1,7 +1,7 @@
 # Forms
 
 [![License](https://img.shields.io/badge/license-MIT-10b981.svg)](https://github.com/enso-ui/forms/blob/master/LICENSE)
-[![Stable](https://img.shields.io/badge/stable-4.2.0-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/forms)
+[![Stable](https://img.shields.io/badge/stable-5.0.0-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/forms)
 [![Downloads](https://img.shields.io/npm/dm/@enso-ui/forms.svg)](https://www.npmjs.com/package/@enso-ui/forms)
 [![Vue](https://img.shields.io/badge/vue-3.x-42b883.svg)](https://vuejs.org/)
 [![JavaScript](https://img.shields.io/badge/javascript-ES2020-f7df1e.svg)](https://developer.mozilla.org/docs/Web/JavaScript)
@@ -38,6 +38,13 @@ yarn add @enso-ui/forms
 - supports form-level readonly mode from frontend props or the backend form contract
 - syncs backend-driven `EnsoForm` tabs with the route `tab` query param
 - exposes public helpers for filling values, reading dirty state, showing and hiding tabs, and manipulating fields
+
+## Upgrading to 5.0.0
+
+Existing `input` fields with `content: checkbox` now render native checkboxes.
+Keep those definitions unchanged to adopt the checkbox appearance; choose `content: switch` explicitly for the existing VueSwitch control.
+Use `laravel-enso/forms` 10.0.0 or newer for switch boolean validation and the input-content allowlist.
+The dedicated `tabindex` props on `InputField` and `MoneyField` have been removed; fields use native tab navigation.
 
 ## Usage
 
@@ -79,6 +86,7 @@ Exported components:
 - `InputField`
 - `MoneyField`
 - `SelectField`
+- `CheckboxField`
 - `SwitchField`
 - `TextareaField`
 - `TimeField`
@@ -232,7 +240,8 @@ Public methods:
 
 Field type mapping:
 - `input + text|number|email|password|encrypt` -> `InputField`
-- `input + checkbox` -> `SwitchField`
+- `input + checkbox` -> `CheckboxField`
+- `input + switch` -> `SwitchField`
 - `input + money` -> `MoneyField`
 - `select` -> `SelectField`
 - `textarea` -> `TextareaField`
@@ -309,7 +318,6 @@ Props:
 - `errors: object`
 - `field: object`
 - `i18n: Function`
-- `tabindex: number | null = null`
 
 Emits:
 - `focus`
@@ -384,7 +392,6 @@ Props:
 - `errors: object`
 - `field: object`
 - `i18n: Function`
-- `tabindex: number | null = null`
 
 Emits:
 - `changed`
@@ -393,9 +400,30 @@ Behavior:
 - forwards backend money metadata to the `Money` component
 - renders `ErrorIcon` when validation fails
 
+### `CheckboxField`
+
+Native boolean checkbox renderer selected by `input + checkbox`.
+
+Props:
+- `errors: object`
+- `field: object`
+- `i18n: Function = key => key`
+- `readonly: boolean = false`
+
+Emits:
+- `focus`
+- `blur`
+- `changed`
+
+Behavior:
+- binds the boolean field value and clears validation errors on change
+- disables interaction for disabled or readonly fields and forms
+- preserves native keyboard navigation and exposes a translated accessible label
+- aligns with other form controls using Bulma control height and spacing
+
 ### `SwitchField`
 
-Boolean checkbox renderer built on top of `@enso-ui/switch`.
+Boolean toggle renderer built on top of `@enso-ui/switch`, selected by `input + switch`.
 
 Props:
 - `errors: object`

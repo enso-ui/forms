@@ -3,7 +3,6 @@
         <money :class="['input', { 'is-danger': errors.has(field.name) }]"
             v-bind="meta"
             v-model="field.value"
-            :tabindex="tabindex"
             @update:model-value="errors.clear(field.name); $emit('changed')"/>
             <error-icon v-if="errors.has(field.name)"/>
     </div>
@@ -34,10 +33,6 @@ export default {
         readonly: {
             type: Boolean,
             default: false,
-        },
-        tabindex: {
-            type: Number,
-            default: null,
         },
     },
 

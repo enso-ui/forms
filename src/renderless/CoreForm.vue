@@ -238,6 +238,8 @@ export default {
                 case 'text': case 'number': case 'email': case 'password': case 'encrypt':
                     return 'input-field';
                 case 'checkbox':
+                    return 'checkbox-field';
+                case 'switch':
                     return 'switch-field';
                 case 'money':
                     return 'money-field';

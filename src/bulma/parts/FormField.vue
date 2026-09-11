@@ -35,6 +35,7 @@ import { VTooltip } from 'v-tooltip';
 import { debounce } from 'lodash-es';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import CheckboxField from '../fields/CheckboxField.vue';
 import SwitchField from '../fields/SwitchField.vue';
 import InputField from '../fields/InputField.vue';
 import MoneyField from '../fields/MoneyField.vue';
@@ -50,6 +51,7 @@ export default {
     directives: { tooltip: VTooltip },
 
     components: {
+        CheckboxField,
         Fa,
         DateField,
         InputField,
